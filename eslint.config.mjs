@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Design mockup source files — not part of the Next.js app
+    "passion/**",
   ]),
 ]);
 
