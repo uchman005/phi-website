@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { TbArrowRight, TbChevronLeft, TbChevronRight } from "react-icons/tb";
+import Image from "next/image";
 import Link from "next/link";
 
 interface Slide {
@@ -11,7 +12,7 @@ interface Slide {
   description: string;
   primary: { label: string; href: string };
   secondary: { label: string; href: string };
-  imgVariant: "forest" | "terra" | "ochre" | "default";
+  image: string;
 }
 
 const slides: Slide[] = [
@@ -22,7 +23,7 @@ const slides: Slide[] = [
       "Passion of Hope International partners with local communities to build resilient, self-sustaining systems that address food security, education, health, and economic empowerment.",
     primary: { label: "Learn more", href: "/about" },
     secondary: { label: "Donate now", href: "/donate" },
-    imgVariant: "forest",
+    image: "/images/hero/hero-banner.jpg",
   },
   {
     tag: "Our approach",
@@ -31,7 +32,7 @@ const slides: Slide[] = [
       "We do not impose solutions. We listen, co-create, and walk alongside the people closest to the challenge — because lasting change must be theirs.",
     primary: { label: "Our story", href: "/about" },
     secondary: { label: "Our hubs", href: "/programs/hubs" },
-    imgVariant: "default",
+    image: "/images/hero/rural-youth-education.jpg",
   },
   {
     tag: "Feed Africa",
@@ -40,7 +41,7 @@ const slides: Slide[] = [
       "Kilimo Bunifu — innovative farming — trains smallholder farmers as scientists, applying agro-ecological principles to increase yields, restore soil, and feed families.",
     primary: { label: "Feed Africa program", href: "/programs/feed-africa" },
     secondary: { label: "Donate", href: "/donate" },
-    imgVariant: "terra",
+    image: "/images/hero/farm-to-fork.png",
   },
   {
     tag: "Our model",
@@ -49,7 +50,7 @@ const slides: Slide[] = [
       "PHI connects grassroots organisations, academic institutions, civil society, and government to align resources, share knowledge, and amplify community-led initiatives.",
     primary: { label: "Our partners", href: "/partners" },
     secondary: { label: "Think Global", href: "/programs/think-global" },
-    imgVariant: "ochre",
+    image: "/images/hero/ecosystem-revival.jpg",
   },
   {
     tag: "Holistic development",
@@ -58,7 +59,7 @@ const slides: Slide[] = [
       "True development heals the planet and its people simultaneously. Our programs integrate ecological restoration with skills training, entrepreneurship, and leadership.",
     primary: { label: "Impact areas", href: "/impact-areas" },
     secondary: { label: "Strategic goals", href: "/strategic-goals" },
-    imgVariant: "forest",
+    image: "/images/hero/sustainable-farming-drc.png",
   },
   {
     tag: "Impact",
@@ -67,20 +68,9 @@ const slides: Slide[] = [
       "From the Jiimarishe honey enterprise in Gilgil to our school adoption programme, every PHI initiative is measured by lasting, community-owned outcomes.",
     primary: { label: "Impact stories", href: "/impact" },
     secondary: { label: "Support our work", href: "/donate" },
-    imgVariant: "default",
+    image: "/images/programs/jiimarishe-network.jpg",
   },
 ];
-
-const bgGradients: Record<string, string> = {
-  forest:
-    "bg-gradient-to-br from-green-d via-green-dd to-green-ddd",
-  default:
-    "bg-gradient-to-br from-green via-green-d to-green-dd",
-  terra:
-    "bg-gradient-to-br from-terra-l via-terra to-terra-d",
-  ochre:
-    "bg-gradient-to-br from-ochre-l via-ochre to-[#b8820f]",
-};
 
 const easeOut: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
@@ -166,21 +156,19 @@ export default function HeroCarousel() {
                 </div>
               </div>
 
-              {/* Image placeholder */}
+              {/* Slide image */}
               <div
-                className={`hidden lg:block rounded-xl overflow-hidden aspect-[4/3] ${bgGradients[slide.imgVariant]} relative`}
+                className="hidden lg:block rounded-xl overflow-hidden aspect-[4/3] relative"
                 aria-hidden
               >
-                <div
-                  className="absolute inset-0 opacity-10"
-                  style={{
-                    backgroundImage:
-                      "repeating-linear-gradient(45deg, transparent, transparent 8px, rgba(255,255,255,0.4) 8px, rgba(255,255,255,0.4) 9px)",
-                  }}
+                <Image
+                  src={slide.image}
+                  alt={slide.title}
+                  fill
+                  className="object-cover"
+                  sizes="50vw"
+                  priority={index === 0}
                 />
-                <span className="absolute bottom-4 left-4 font-mono text-xs text-white/50 uppercase tracking-widest">
-                  PHI Field Photo
-                </span>
               </div>
             </div>
           </div>

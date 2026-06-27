@@ -1,5 +1,5 @@
+import Image from "next/image";
 import Link from "next/link";
-import { TbLeaf } from "react-icons/tb";
 import {
   FaLinkedin,
   FaFacebook,
@@ -12,7 +12,10 @@ const footerLinks = [
     heading: "About",
     links: [
       { label: "Our Story", href: "/about" },
-      { label: "Meet the Team", href: "/about#team" },
+      { label: "Meet the Team", href: "/team" },
+      { label: "Testimonials", href: "/testimonials" },
+      { label: "Blog", href: "/blog" },
+      { label: "Gallery", href: "/gallery" },
       { label: "Impact Areas", href: "/impact-areas" },
       { label: "Strategic Goals", href: "/strategic-goals" },
     ],
@@ -71,9 +74,13 @@ export default function Footer() {
               className="inline-flex items-center gap-2.5 mb-4"
               aria-label="Passion of Hope International — home"
             >
-              <span className="w-9 h-9 rounded-xl bg-gradient-to-br from-green to-green-d flex items-center justify-center shrink-0">
-                <TbLeaf className="text-white text-lg" aria-hidden />
-              </span>
+              <Image
+                src="/images/logos/phi-logo.jpeg"
+                alt=""
+                width={36}
+                height={36}
+                className="rounded-xl shrink-0 object-cover"
+              />
               <span className="font-sans font-semibold text-sm text-white leading-tight">
                 Passion of Hope International
                 <span className="block font-normal text-xs text-white/60">

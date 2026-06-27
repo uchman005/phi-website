@@ -1,7 +1,7 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import PageHero from "@/components/ui/PageHero";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
-import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
 import DarkCTA from "@/components/home/DarkCTA";
 import {
   TbTractor,
@@ -88,12 +88,15 @@ export default function FeedAfricaPage() {
               </div>
             </RevealOnScroll>
             <RevealOnScroll delay={0.1}>
-              <ImagePlaceholder
-                variant="forest"
-                label="Kilimo Bunifu Field"
-                aspectRatio="aspect-[4/3]"
-                className="rounded-xl"
-              />
+              <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
+                <Image
+                  src="/images/hero/rice-fields-uganda.jpg"
+                  alt="Kilimo Bunifu field — agro-ecological farming"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
             </RevealOnScroll>
           </div>
         </div>

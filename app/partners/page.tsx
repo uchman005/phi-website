@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import PageHero from "@/components/ui/PageHero";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
@@ -52,18 +53,15 @@ const categories = [
 ];
 
 const partners = [
-  "Egerton University",
-  "University of Nairobi",
-  "IITA Nigeria",
-  "FAO Kenya",
-  "Homa Bay County",
-  "South Kivu Administration",
-  "Maripha Women's Cooperative",
-  "Kenya Beekeepers Association",
-  "African Development Bank",
-  "Grassroots Kenya",
-  "DRC Agri-Network",
-  "M-Changa Foundation",
+  { name: "Organic Consumers Alliance", logo: "/images/logos/partners/organic-consumers-alliance.png" },
+  { name: "Running Water International, Kenya", logo: "/images/logos/partners/running-water-international.png" },
+  { name: "Songhaï Centre, Benin", logo: "/images/logos/partners/songhai-centre.png" },
+  { name: "International Network on Appropriate Technology", logo: "/images/logos/partners/inat.png" },
+  { name: "Green Belt Movement, Kenya", logo: "/images/logos/partners/green-belt-movement.jpeg" },
+  { name: "African Leadership University, Mauritius", logo: "/images/logos/partners/alu.png" },
+  { name: "Alchemy Inspiration, South Africa", logo: "/images/logos/partners/alchemy-inspiration.png" },
+  { name: "DHA East Africa", logo: "/images/logos/partners/dha-east-africa.jpg" },
+  { name: "WICCARE Africa", logo: "/images/logos/partners/wiccare-africa.jpg" },
 ];
 
 const grantCategories = [
@@ -138,11 +136,17 @@ export default function PartnersPage() {
           </RevealOnScroll>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {partners.map((partner, i) => (
-              <RevealOnScroll key={partner} delay={(i % 4) * 0.07}>
+              <RevealOnScroll key={partner.name} delay={(i % 4) * 0.07}>
                 <div className="bg-paper rounded-lg border border-line p-4 flex items-center justify-center min-h-[80px] hover:border-green-l hover:shadow-sm transition-all duration-200">
-                  <span className="font-sans text-sm text-ink-2 text-center leading-snug">
-                    {partner}
-                  </span>
+                  <div className="relative w-full h-12">
+                    <Image
+                      src={partner.logo}
+                      alt={partner.name}
+                      fill
+                      className="object-contain"
+                      sizes="150px"
+                    />
+                  </div>
                 </div>
               </RevealOnScroll>
             ))}

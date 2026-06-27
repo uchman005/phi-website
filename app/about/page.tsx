@@ -1,8 +1,10 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import PageHero from "@/components/ui/PageHero";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
-import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
+import Button from "@/components/ui/Button";
 import DarkCTA from "@/components/home/DarkCTA";
+import TeamCard from "@/components/team/TeamCard";
 import {
   TbBulb,
   TbScale,
@@ -85,32 +87,28 @@ const team = [
     name: "Mariam Olorundare",
     role: "Nigeria Hub CEO",
     location: "Maripha, Nigeria",
-    initials: "MO",
-    accent: "bg-terra text-white",
+    photo: "/images/people/team/mariam-olorundare.jpg",
     bio: "Mariam leads PHI's Nigeria operations, overseeing women's empowerment programmes and agro-ecological training across Maripha.",
   },
   {
     name: "Guillain Nabahya",
     role: "Board Chair",
     location: "Uvira, DRC",
-    initials: "GN",
-    accent: "bg-green text-white",
+    photo: "/images/people/team/guillain-nabahya.jpg",
     bio: "Guillain chairs the PHI board and anchors our DRC hub, bringing deep expertise in community governance and conflict-affected development.",
   },
   {
     name: "Mary Omega",
     role: "Kenya Hub Leader",
     location: "Kendu Bay, Kenya",
-    initials: "MO",
-    accent: "bg-ochre text-white",
+    photo: "/images/people/team/mary-omega.jpg",
     bio: "Mary leads the Kendu Bay hub, coordinating Jiimarishe enterprise scale-up and farmer training across the Lake Victoria region.",
   },
   {
-    name: "Victor",
+    name: "Victor Ibeto",
     role: "US Management",
     location: "Maryland, USA",
-    initials: "BV",
-    accent: "bg-green-d text-white",
+    photo: "/images/people/team/victor-ibeto.jpg",
     bio: "PHI's US-based leadership team manages operations, partnerships, fundraising, and the Chakula Bora knowledge network.",
   },
 ];
@@ -154,12 +152,15 @@ export default function AboutPage() {
               </div>
             </RevealOnScroll>
             <RevealOnScroll delay={0.1}>
-              <ImagePlaceholder
-                variant="forest"
-                label="PHI Field Work"
-                aspectRatio="aspect-[4/3]"
-                className="rounded-xl"
-              />
+              <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
+                <Image
+                  src="/images/field-work/about-story.jpg"
+                  alt="PHI field work — community farming in rural Africa"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
             </RevealOnScroll>
           </div>
         </div>
@@ -254,42 +255,25 @@ export default function AboutPage() {
       <section id="team" className="bg-paper py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-[1200px] mx-auto">
           <RevealOnScroll>
-            <h2 className="font-display text-2xl sm:text-3xl text-ink mb-2">
-              Meet the team
-            </h2>
-            <p className="text-ink-3 font-sans mb-10">
-              Leaders rooted in the communities they serve.
-            </p>
+            <div className="flex flex-wrap items-end justify-between gap-4 mb-10">
+              <div>
+                <h2 className="font-display text-2xl sm:text-3xl text-ink mb-2">
+                  Meet the team
+                </h2>
+                <p className="text-ink-3 font-sans">
+                  Leaders rooted in the communities they serve.
+                </p>
+              </div>
+              <Button variant="ghost" size="sm" href="/team">
+                View full team
+              </Button>
+            </div>
           </RevealOnScroll>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {team.map((member, i) => (
               <RevealOnScroll key={member.name} delay={i * 0.1}>
-                <article className="bg-cream rounded-lg overflow-hidden border border-line flex flex-col h-full">
-                  <div className="aspect-square flex items-center justify-center bg-gradient-to-br from-green-l to-green-ll">
-                    <div
-                      className={`w-20 h-20 rounded-full flex items-center justify-center font-sans font-bold text-2xl ${member.accent}`}
-                      aria-hidden
-                    >
-                      {member.initials}
-                    </div>
-                  </div>
-                  <div className="p-5 flex flex-col gap-2 flex-1">
-                    <h3 className="font-sans font-bold text-sm text-ink">
-                      {member.name}
-                    </h3>
-                    <p className="font-sans text-xs text-green font-semibold">
-                      {member.role}
-                    </p>
-                    <div className="flex items-center gap-1 text-xs text-ink-3">
-                      <TbMapPin className="shrink-0" aria-hidden />
-                      <span>{member.location}</span>
-                    </div>
-                    <p className="text-xs text-ink-2 leading-relaxed mt-1">
-                      {member.bio}
-                    </p>
-                  </div>
-                </article>
+                <TeamCard {...member} />
               </RevealOnScroll>
             ))}
           </div>

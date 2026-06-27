@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { TbLeaf, TbChevronDown, TbMenu2, TbX } from "react-icons/tb";
+import { TbChevronDown, TbMenu2, TbX } from "react-icons/tb";
 
 interface DropdownItem {
   label: string;
@@ -23,6 +24,8 @@ const navItems: NavItem[] = [
     label: "About",
     dropdown: [
       { label: "Our Story", href: "/about" },
+      { label: "Meet the Team", href: "/team" },
+      { label: "Testimonials", href: "/testimonials" },
       { label: "Strategic Goals", href: "/strategic-goals" },
       { label: "Partners", href: "/partners" },
     ],
@@ -36,7 +39,14 @@ const navItems: NavItem[] = [
       { label: "Our Hubs", href: "/programs/hubs" },
     ],
   },
-  { label: "Impact", href: "/impact" },
+  {
+    label: "Impact",
+    dropdown: [
+      { label: "Impact Stories", href: "/impact" },
+      { label: "Blog", href: "/blog" },
+      { label: "Gallery", href: "/gallery" },
+    ],
+  },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -98,9 +108,13 @@ export default function Navbar() {
           className="flex items-center gap-2.5 shrink-0"
           aria-label="Passion of Hope International — home"
         >
-          <span className="w-9 h-9 rounded-xl bg-gradient-to-br from-green to-green-dd flex items-center justify-center shrink-0">
-            <TbLeaf className="text-white text-lg" aria-hidden />
-          </span>
+          <Image
+            src="/images/logos/phi-logo.jpeg"
+            alt=""
+            width={36}
+            height={36}
+            className="rounded-xl shrink-0 object-cover"
+          />
           <span className="font-sans font-semibold text-sm text-ink leading-tight hidden sm:block">
             Passion of Hope International
             <span className="block font-normal text-xs text-ink-3">

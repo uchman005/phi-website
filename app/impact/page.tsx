@@ -1,8 +1,10 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import PageHero from "@/components/ui/PageHero";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
-import ImagePlaceholder from "@/components/ui/ImagePlaceholder";
 import DarkCTA from "@/components/home/DarkCTA";
+import BlogCard from "@/components/blog/BlogCard";
+import { blogPosts } from "@/lib/blog-posts";
 import { TbArrowRight } from "react-icons/tb";
 import Link from "next/link";
 
@@ -41,36 +43,6 @@ const metrics = [
     label: "Communities reached",
     sub: "Direct programme beneficiaries",
     accent: "bg-green-l text-green-d",
-  },
-];
-
-const blogPosts = [
-  {
-    tag: "Agriculture",
-    variant: "forest" as const,
-    date: "March 2024",
-    title: "How Kilimo Bunifu is restoring soil health in Kendu Bay",
-    excerpt:
-      "Three years after adopting agro-ecological methods, farmers in the PHI Kendu Bay hub are reporting 40% higher yields and dramatically lower input costs.",
-    href: "/impact",
-  },
-  {
-    tag: "Women's Empowerment",
-    variant: "terra" as const,
-    date: "January 2024",
-    title: "Mariam's entrepreneurship programme trains 120 women in Nigeria",
-    excerpt:
-      "The Maripha hub's women's enterprise cohort graduates 120 participants — each with a business plan, savings account, and market linkage.",
-    href: "/impact",
-  },
-  {
-    tag: "Education",
-    variant: "ochre" as const,
-    date: "November 2023",
-    title: "Adopt-a-School transforms learning in rural DRC",
-    excerpt:
-      "New classrooms, trained teachers, and learning materials — the Uvira hub's first Adopt-a-School partnership delivers results ahead of schedule.",
-    href: "/impact",
   },
 ];
 
@@ -116,12 +88,15 @@ export default function ImpactPage() {
           </RevealOnScroll>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <RevealOnScroll delay={0.05}>
-              <ImagePlaceholder
-                variant="forest"
-                label="Syprina Auma — Kendu Bay"
-                aspectRatio="aspect-[4/3]"
-                className="rounded-xl"
-              />
+              <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
+                <Image
+                  src="/images/people/testimonials/syprina-auma.jpg"
+                  alt="Syprina Auma — Kendu Bay"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
             </RevealOnScroll>
             <RevealOnScroll delay={0.1}>
               <div>
@@ -172,36 +147,15 @@ export default function ImpactPage() {
           </RevealOnScroll>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {blogPosts.map((post, i) => (
-              <RevealOnScroll key={post.title} delay={i * 0.1}>
-                <article className="bg-paper rounded-lg overflow-hidden border border-line hover:-translate-y-1 transition-transform duration-200 flex flex-col h-full">
-                  <ImagePlaceholder
-                    variant={post.variant}
-                    label={post.tag}
-                    aspectRatio="aspect-[16/9]"
-                  />
-                  <div className="p-6 flex flex-col gap-3 flex-1">
-                    <div className="flex items-center gap-2">
-                      <span className="font-mono text-[10px] text-green bg-green-ll px-2 py-0.5 rounded-pill">
-                        {post.tag}
-                      </span>
-                      <span className="text-xs text-ink-3 font-sans">
-                        {post.date}
-                      </span>
-                    </div>
-                    <h3 className="font-sans font-bold text-sm text-ink leading-snug">
-                      {post.title}
-                    </h3>
-                    <p className="text-xs text-ink-2 leading-relaxed flex-1">
-                      {post.excerpt}
-                    </p>
-                    <Link
-                      href={post.href}
-                      className="inline-flex items-center gap-1.5 text-xs font-sans font-semibold text-green hover:text-green-d transition-colors"
-                    >
-                      Read more <TbArrowRight aria-hidden />
-                    </Link>
-                  </div>
-                </article>
+              <RevealOnScroll key={post.slug} delay={i * 0.1}>
+                <BlogCard
+                  href={`/blog/${post.slug}`}
+                  thumbnail={post.thumbnail}
+                  tag={post.tag}
+                  date={post.date}
+                  title={post.title}
+                  excerpt={post.excerpt}
+                />
               </RevealOnScroll>
             ))}
           </div>
