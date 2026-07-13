@@ -9,7 +9,7 @@ const projects = [
     title: "Adopt a School",
     description:
       "Partnering with rural schools to improve infrastructure, provide learning materials, and train teachers — giving every child a fair start.",
-    href: "/impact-areas",
+    href: "/impact",
   },
   {
     label: "Enterprise",
@@ -17,7 +17,7 @@ const projects = [
     title: "Jiimarishe Honey Project",
     description:
       "A pilot apiculture enterprise in Gilgil, Kenya, that increased household income by 5× — now scaling across East Africa as a model for rural enterprise.",
-    href: "/programs/feed-africa",
+    href: "/programs/jiimarishe",
   },
   {
     label: "Community",

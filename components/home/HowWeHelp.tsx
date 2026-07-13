@@ -9,7 +9,7 @@ const cards = [
     title: "Heal the planet",
     description:
       "Engage in ecosystem revival through agro-ecological farming, reforestation, soil restoration, and sustainable water management — returning land to its productive best.",
-    cta: { label: "FEED Africa", href: "/programs/feed-africa" },
+    cta: { label: "Heal the planet", href: "/heal-the-planet" },
   },
   {
     icon: TbUsers,
@@ -17,7 +17,7 @@ const cards = [
     title: "Build capacity",
     description:
       "Educate, train, and empower community leaders, farmers, and entrepreneurs. When people have knowledge and agency, transformation is sustainable and self-propelling.",
-    cta: { label: "Our programs", href: "/impact-areas" },
+    cta: { label: "Build capacity", href: "/build-capacity" },
   },
 ];
 

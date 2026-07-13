@@ -57,7 +57,7 @@ const slides: Slide[] = [
     title: "Agro-ecology + human capacity",
     description:
       "True development regenerates the planet and its people simultaneously. Our programs integrate ecological restoration with skills training, entrepreneurship, and leadership.",
-    primary: { label: "Impact areas", href: "/impact-areas" },
+    primary: { label: "Impact areas", href: "/impact" },
     secondary: { label: "Strategic goals", href: "/strategic-goals" },
     image: "/images/hero/sustainable-farming-drc.png",
   },

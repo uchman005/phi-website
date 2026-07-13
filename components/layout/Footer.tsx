@@ -16,17 +16,19 @@ const footerLinks = [
       { label: "Testimonials", href: "/testimonials" },
       { label: "Blog", href: "/blog" },
       { label: "Gallery", href: "/gallery" },
-      { label: "Impact Areas", href: "/impact-areas" },
+      { label: "Impact", href: "/impact" },
       { label: "Strategic Goals", href: "/strategic-goals" },
     ],
   },
   {
     heading: "Programs",
     links: [
+      { label: "ChakulaBora Digital Network", href: "/programs/chakula-bora" },
+      { label: "Kilimo Bunifu Workshop", href: "/programs/kilimo-bunifu" },
       { label: "FEED Africa", href: "/programs/feed-africa" },
+      { label: "Jiimarishe Enterprise", href: "/programs/jiimarishe" },
       { label: "Think Global", href: "/programs/think-global" },
       { label: "Our Hubs", href: "/programs/hubs" },
-      { label: "Impact Stories", href: "/impact" },
     ],
   },
   {

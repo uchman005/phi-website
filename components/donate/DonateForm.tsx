@@ -43,7 +43,14 @@ const projects: Project[] = [
   {
     id: "kilimo-bunifu",
     name: "Kilimo Bunifu",
-    description: "Innovative agro-ecological farming — FEED Africa programme",
+    description: "Innovative agro-ecological farming — Workshop.",
+    accent: "border-terra",
+    iconBg: "bg-terra-l text-terra",
+  },
+  {
+    id: "FEED-Africa",
+    name: "FEED Africa",
+    description: "Integrates agro-ecological food systems that restore land, feed families, and build economic resilience.",
     accent: "border-terra",
     iconBg: "bg-terra-l text-terra",
   },
