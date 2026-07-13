@@ -33,7 +33,7 @@ const navItems: NavItem[] = [
   {
     label: "Programs",
     dropdown: [
-      { label: "Feed Africa", href: "/programs/feed-africa" },
+      { label: "FEED Africa", href: "/programs/feed-africa" },
       { label: "Impact Areas", href: "/impact-areas" },
       { label: "Think Global", href: "/programs/think-global" },
       { label: "Our Hubs", href: "/programs/hubs" },

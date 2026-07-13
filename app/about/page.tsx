@@ -27,7 +27,7 @@ const milestones = [
   {
     year: "Founded",
     location: "Maryland, USA",
-    text: "PHI incorporated as a US 501(c)(3), committing to community-led development over top-down aid.",
+    text: "FOUNDED Maryland, USA PHI incorporated as a US 501(c)(3), committing to community-led development in Africa, over top-down aid.",
   },
   {
     year: "First Hubs",
@@ -50,13 +50,13 @@ const beliefs = [
   {
     icon: TbBulb,
     title: "Vision",
-    text: "Resilient African communities leading their own development — food-sovereign, economically empowered, ecologically restored.",
+    text: "An empowered Africa with resilient and food sovereign communities.",
     accent: "bg-green-ll text-green",
   },
   {
     icon: TbPlant2,
     title: "Mission",
-    text: "To catalyze appropriate and sustainable development — equipping communities with tools, knowledge, and networks for self-sufficiency.",
+    text: "To invest in knowledge and people in rural communities, building climate-resilient, and sustainable food systems.",
     accent: "bg-terra-l text-terra",
   },
   {
@@ -85,31 +85,31 @@ const guides = [
 const team = [
   {
     name: "Mariam Olorundare",
-    role: "Nigeria Hub CEO",
-    location: "Maripha, Nigeria",
+    role: "Nigeria Hub Director",
+    location: "Maripha Farms, Nigeria",
     photo: "/images/people/team/mariam-olorundare.jpg",
-    bio: "Mariam leads PHI's Nigeria operations, overseeing women's empowerment programmes and agro-ecological training across Maripha.",
+    bio: "Mariam leads PHI's Nigeria hub, overseeing agro-ecological farm-to-fork production and training in Kwara State.",
   },
   {
     name: "Guillain Nabahya",
-    role: "Board Chair",
-    location: "Uvira, DRC",
+    role: "DRC Hub Director",
+    location: "Nabahya Food Institute, DRC",
     photo: "/images/people/team/guillain-nabahya.jpg",
-    bio: "Guillain chairs the PHI board and anchors our DRC hub, bringing deep expertise in community governance and conflict-affected development.",
+    bio: "Guillain leads PHI’s DRC hub, bringing deep expertise in clean-energy solutions and community-led development in Uviria and Lubumbashi.",
   },
   {
     name: "Mary Omega",
-    role: "Kenya Hub Leader",
-    location: "Kendu Bay, Kenya",
+    role: "Kenya Hub Director",
+    location: "Kamser Seka Widows, Kenya.",
     photo: "/images/people/team/mary-omega.jpg",
-    bio: "Mary leads the Kendu Bay hub, coordinating Jiimarishe enterprise scale-up and farmer training across the Lake Victoria region.",
+    bio: "Mary leads PHI’s Kendu Bay hub, coordinating chama groups of widows and youths into corporative enterprises in Homa Bay.",
   },
   {
     name: "Victor Ibeto",
-    role: "US Management",
+    role: "US Management COO",
     location: "Maryland, USA",
     photo: "/images/people/team/victor-ibeto.jpg",
-    bio: "PHI's US-based leadership team manages operations, partnerships, fundraising, and the Chakula Bora knowledge network.",
+    bio: "PHI's US-Africa leadership team manages operations, partnerships, fundraising, and the Chakula Bora Digital Network.",
   },
 ];
 

@@ -9,7 +9,7 @@ const cards = [
     title: "Heal the planet",
     description:
       "Engage in ecosystem revival through agro-ecological farming, reforestation, soil restoration, and sustainable water management — returning land to its productive best.",
-    cta: { label: "Feed Africa", href: "/programs/feed-africa" },
+    cta: { label: "FEED Africa", href: "/programs/feed-africa" },
   },
   {
     icon: TbUsers,

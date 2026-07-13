@@ -13,11 +13,11 @@ import {
 } from "react-icons/tb";
 
 export const metadata: Metadata = {
-  title: "Feed Africa",
+  title: "FEED Africa",
   description:
     "Kilimo Bunifu — PHI's innovative farming programme — trains smallholder farmers as scientists, building food sovereignty across rural Africa through agro-ecological methods.",
   openGraph: {
-    title: "Feed Africa | Passion of Hope International",
+    title: "FEED Africa | Passion of Hope International",
     description:
       "Kilimo Bunifu — innovative farming for food sovereignty across rural Africa.",
   },
@@ -56,10 +56,10 @@ export default function FeedAfricaPage() {
       <PageHero
         crumbs={[
           { label: "Programs", href: "/programs/feed-africa" },
-          { label: "Feed Africa" },
+          { label: "FEED Africa" },
         ]}
-        headline="Kilimo Bunifu — innovative farming"
-        sub="Agro-ecological methods that restore land, feed families, and build economic resilience — led by farmers, for farmers."
+        headline="The Farmers Entrepreneurship & Ecosystem Development (FEED) Africa Program."
+        sub="This program integrates agro-ecological food systems that restore land, feed families, and build economic resilience — led by farmers, agricultural value chain producers, and allied partners."
       />
 
       {/* The farmer as scientist */}
@@ -172,7 +172,7 @@ export default function FeedAfricaPage() {
       <DarkCTA
         headline="Feed a family. Fund a farmer."
         sub="$50 trains one farmer in Kilimo Bunifu methods — feeding their family and their community for years."
-        primary={{ label: "Donate to Feed Africa", href: "/donate" }}
+        primary={{ label: "Donate to FEED Africa", href: "/donate" }}
         secondary={{ label: "Impact stories", href: "/impact" }}
       />
     </>

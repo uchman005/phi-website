@@ -23,7 +23,7 @@ const footerLinks = [
   {
     heading: "Programs",
     links: [
-      { label: "Feed Africa", href: "/programs/feed-africa" },
+      { label: "FEED Africa", href: "/programs/feed-africa" },
       { label: "Think Global", href: "/programs/think-global" },
       { label: "Our Hubs", href: "/programs/hubs" },
       { label: "Impact Stories", href: "/impact" },

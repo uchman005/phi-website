@@ -20,7 +20,7 @@ const slides: Slide[] = [
     tag: "Who we are",
     title: "A US non-profit catalyzing rural Africa",
     description:
-      "Passion of Hope International partners with local communities to build resilient, self-sustaining systems that address food security, education, health, and economic empowerment.",
+      "Passion of Hope International partners with local communities to build resilient, self-sustaining systems that addresses poverty, food insecurity, and environmental decline.",
     primary: { label: "Learn more", href: "/about" },
     secondary: { label: "Donate now", href: "/donate" },
     image: "/images/hero/hero-banner.jpg",
@@ -35,11 +35,11 @@ const slides: Slide[] = [
     image: "/images/hero/rural-youth-education.jpg",
   },
   {
-    tag: "Feed Africa",
+    tag: "FEED Africa",
     title: "Food sovereignty, farm to fork",
     description:
-      "Kilimo Bunifu — innovative farming — trains smallholder farmers as scientists, applying agro-ecological principles to increase yields, restore soil, and feed families.",
-    primary: { label: "Feed Africa program", href: "/programs/feed-africa" },
+      "Kilimo Bunifu — innovative farming — trains smallholder farmers as scientists, applying agro-ecological principles to increase yields, restore soil, and feed communities.",
+    primary: { label: "FEED Africa program", href: "/programs/feed-africa" },
     secondary: { label: "Donate", href: "/donate" },
     image: "/images/hero/farm-to-fork.png",
   },
@@ -56,7 +56,7 @@ const slides: Slide[] = [
     tag: "Holistic development",
     title: "Agro-ecology + human capacity",
     description:
-      "True development heals the planet and its people simultaneously. Our programs integrate ecological restoration with skills training, entrepreneurship, and leadership.",
+      "True development regenerates the planet and its people simultaneously. Our programs integrate ecological restoration with skills training, entrepreneurship, and leadership.",
     primary: { label: "Impact areas", href: "/impact-areas" },
     secondary: { label: "Strategic goals", href: "/strategic-goals" },
     image: "/images/hero/sustainable-farming-drc.png",
