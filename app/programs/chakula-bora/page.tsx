@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import PageHero from "@/components/ui/PageHero";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import DarkCTA from "@/components/home/DarkCTA";
-import { TbNetwork, TbDeviceLaptop, TbUsersGroup, TbArrowRight } from "react-icons/tb";
+import { TbNetwork, TbDeviceLaptop, TbUsersGroup, TbArrowRight, TbExternalLink  } from "react-icons/tb";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -82,6 +82,16 @@ export default function ChakulaBoraPage() {
                 See our knowledge partners
                 <TbArrowRight aria-hidden />
               </Link>
+              <div>
+              <Link
+                href="https://www.chakulabora.net/"
+                target="_blank"
+                className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-green hover:text-green-d transition-colors"
+              >
+                Expore the network
+                <TbExternalLink aria-hidden />
+              </Link>
+              </div>
             </RevealOnScroll>
           </div>
         </div>
