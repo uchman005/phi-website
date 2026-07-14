@@ -91,35 +91,78 @@ export default function HealThePlanetPage() {
         </div>
       </section>
 
-      {/* Example — Mariam */}
+      {/* Examples — across our hubs */}
       <section className="bg-cream py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-[1200px] mx-auto max-w-3xl">
+        <div className="max-w-[1200px] mx-auto">
           <RevealOnScroll>
             <span className="inline-block font-mono text-xs text-green uppercase tracking-widest mb-3">
-              An example
+              Across our hubs
             </span>
-            <h2 className="font-display text-2xl sm:text-3xl text-ink mb-5">
-              Mariam&apos;s work in Nigeria
+            <h2 className="font-display text-2xl sm:text-3xl text-ink mb-2">
+              What healing the land looks like
             </h2>
-            <p className="text-ink-2 leading-relaxed mb-4">
-              At PHI&apos;s Nigeria hub in Maripha, Mariam Olorundare leads
-              agro-ecological training that puts these principles to work on real
-              plots — helping farmers rebuild their soil, manage water, and grow
-              food in ways that heal the land rather than deplete it.
+            <p className="text-ink-3 font-sans mb-10 max-w-2xl">
+              Each PHI hub puts these principles to work in its own context —
+              led from within the community.
             </p>
-            <p className="text-ink-2 leading-relaxed mb-8">
-              Her hub shows what ecosystem revival looks like in practice:
-              productive farms, restored ground, and communities that see land
-              stewardship as their own work — not something done to them.
-            </p>
+          </RevealOnScroll>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                name: "Guillain Nabahya",
+                hub: "DRC Hub",
+                href: "/programs/hubs/drc",
+                text: "In Uvira, Guillain turns agricultural waste into clean cooking fuel, rebuilds soils with organic inputs, and restores degraded land with native trees.",
+              },
+              {
+                name: "Mariam Olorundare",
+                hub: "Nigeria Hub",
+                href: "/programs/hubs/nigeria",
+                text: "At Maripha Farms in Kwara State, Mariam runs an integrated organic farm where nothing is wasted and biodiversity is restored across 15 acres.",
+              },
+              {
+                name: "Mary Omega",
+                hub: "Kenya Hub",
+                href: "/programs/hubs/kenya",
+                text: "Around Kendu Bay, Mary pairs rainwater harvesting with beekeeping and school water projects that protect ecosystems while lifting households.",
+              },
+            ].map((ex, i) => (
+              <RevealOnScroll key={ex.name} delay={(i % 3) * 0.1}>
+                <Link
+                  href={ex.href}
+                  className="group block bg-paper rounded-lg p-8 border border-line hover:border-green-l hover:-translate-y-1 transition-all duration-200 h-full"
+                >
+                  <span className="font-mono text-xs text-green uppercase tracking-widest">
+                    {ex.hub}
+                  </span>
+                  <h3 className="font-sans font-bold text-base text-ink mt-2 mb-3">
+                    {ex.name}
+                  </h3>
+                  <p className="text-sm text-ink-2 leading-relaxed mb-4">
+                    {ex.text}
+                  </p>
+                  <span className="inline-flex items-center gap-1 text-sm font-sans font-semibold text-green group-hover:text-green-d transition-colors">
+                    Explore hub
+                    <TbArrowRight
+                      className="group-hover:translate-x-0.5 transition-transform"
+                      aria-hidden
+                    />
+                  </span>
+                </Link>
+              </RevealOnScroll>
+            ))}
+          </div>
+
+          <div className="mt-10 text-center">
             <Link
               href="/programs/hubs"
               className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-green hover:text-green-d transition-colors"
             >
-              Meet our hubs
+              Meet all our hubs
               <TbArrowRight aria-hidden />
             </Link>
-          </RevealOnScroll>
+          </div>
         </div>
       </section>
 

@@ -91,34 +91,78 @@ export default function BuildCapacityPage() {
         </div>
       </section>
 
-      {/* Example — Mariam & secondary school students */}
+      {/* Examples — across our hubs */}
       <section className="bg-cream py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-[1200px] mx-auto max-w-3xl">
+        <div className="max-w-[1200px] mx-auto">
           <RevealOnScroll>
             <span className="inline-block font-mono text-xs text-green uppercase tracking-widest mb-3">
-              An example
+              Across our hubs
             </span>
-            <h2 className="font-display text-2xl sm:text-3xl text-ink mb-5">
-              Mariam &amp; the secondary-school students
+            <h2 className="font-display text-2xl sm:text-3xl text-ink mb-2">
+              Building capacity, community by community
             </h2>
-            <p className="text-ink-2 leading-relaxed mb-4">
-              At PHI&apos;s Nigeria hub, Mariam Olorundare works directly with
-              secondary-school students — introducing them to agro-ecology,
-              enterprise, and stewardship long before they leave the classroom.
+            <p className="text-ink-3 font-sans mb-10 max-w-2xl">
+              Every PHI hub grows local capacity in its own way — training the
+              people who will carry change forward.
             </p>
-            <p className="text-ink-2 leading-relaxed mb-8">
-              It is capacity-building at its most durable: young people who learn
-              to grow food, run a small enterprise, and think like problem-solvers
-              carry that knowledge into every community they go on to shape.
-            </p>
+          </RevealOnScroll>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                name: "Mariam Olorundare",
+                hub: "Nigeria Hub",
+                href: "/programs/hubs/nigeria",
+                text: "At Maripha Farms, Mariam develops young people — including secondary-school students — as agents of change, teaching agro-ecology and enterprise before they leave the classroom.",
+              },
+              {
+                name: "Guillain Nabahya",
+                hub: "DRC Hub",
+                href: "/programs/hubs/drc",
+                text: "In Uvira, Guillain runs ten farmer field schools and trains women farmers to produce their own organic inputs — knowledge that spreads farmer to farmer.",
+              },
+              {
+                name: "Mary Omega",
+                hub: "Kenya Hub",
+                href: "/programs/hubs/kenya",
+                text: "Around Kendu Bay, Mary builds women's enterprise and Chama savings groups, equipping members to invest collectively and lead their own livelihoods.",
+              },
+            ].map((ex, i) => (
+              <RevealOnScroll key={ex.name} delay={(i % 3) * 0.1}>
+                <Link
+                  href={ex.href}
+                  className="group block bg-paper rounded-lg p-8 border border-line hover:border-green-l hover:-translate-y-1 transition-all duration-200 h-full"
+                >
+                  <span className="font-mono text-xs text-green uppercase tracking-widest">
+                    {ex.hub}
+                  </span>
+                  <h3 className="font-sans font-bold text-base text-ink mt-2 mb-3">
+                    {ex.name}
+                  </h3>
+                  <p className="text-sm text-ink-2 leading-relaxed mb-4">
+                    {ex.text}
+                  </p>
+                  <span className="inline-flex items-center gap-1 text-sm font-sans font-semibold text-green group-hover:text-green-d transition-colors">
+                    Explore hub
+                    <TbArrowRight
+                      className="group-hover:translate-x-0.5 transition-transform"
+                      aria-hidden
+                    />
+                  </span>
+                </Link>
+              </RevealOnScroll>
+            ))}
+          </div>
+
+          <div className="mt-10 text-center">
             <Link
               href="/programs/hubs"
               className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-green hover:text-green-d transition-colors"
             >
-              Meet our hubs
+              Meet all our hubs
               <TbArrowRight aria-hidden />
             </Link>
-          </RevealOnScroll>
+          </div>
         </div>
       </section>
 
