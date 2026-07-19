@@ -67,11 +67,6 @@ const sections: { heading: string; members: TeamMember[] }[] = [
     heading: "Staff",
     members: [
       {
-        name: "Patricia Green",
-        role: "Marketing Coordinator",
-        photo: "/images/people/team/patricia-green.jpg",
-      },
-      {
         name: "Obiefuna Marcel Uchenna",
         role: "Web Developer, Passion of Hope International",
         photo: "/images/people/team/obiefuna-marcel-uchenna.jpg",
@@ -115,6 +110,11 @@ const sections: { heading: string; members: TeamMember[] }[] = [
         name: "Audrey Bracey Deegan",
         role: "Head of Business Development — Indian Ocean",
         photo: "/images/people/team/audrey-bracey-deegan.jpg",
+      },
+      {
+        name: "Patricia Green",
+        role: "Board Member",
+        photo: "/images/people/team/patricia-green.jpg",
       },
     ],
   },
