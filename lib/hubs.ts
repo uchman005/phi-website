@@ -9,12 +9,14 @@
 // gradient placeholder — drop in a real path under /public/images when you
 // have the photo. Everything below can be edited freely without touching the
 // page components; the schema is what the pages rely on.
+//
+// Hub photos live in /public/images/hubs/{drc,nigeria,kenya}/.
 // ---------------------------------------------------------------------------
 
 export type PlaceholderVariant = "default" | "terra" | "ochre" | "forest";
 
 export interface HubImage {
-  /** Path under /public (e.g. "/images/hubs/nigeria/farm-1.jpg"). Omit for a placeholder. */
+  /** Path under /public (e.g. "/images/hubs/nigeria/farm-gate.jpg"). Omit for a placeholder. */
   src?: string;
   /** Alt text — always fill this in, even for placeholders. */
   alt: string;
@@ -64,19 +66,6 @@ export interface Hub {
   projects: HubProject[];
 }
 
-// A small set of stand-in gallery images so every project page looks complete.
-// Replace these `src` values with real, hub-specific photos when available.
-function galleryPlaceholders(
-  labelPrefix: string,
-  variant: PlaceholderVariant
-): HubImage[] {
-  return [
-    { alt: `${labelPrefix} — photo 1`, label: "Add photo", variant },
-    { alt: `${labelPrefix} — photo 2`, label: "Add photo", variant },
-    { alt: `${labelPrefix} — photo 3`, label: "Add photo", variant },
-  ];
-}
-
 export const hubs: Hub[] = [
   // ---------------------------------------------------------------- DRC ----
   {
@@ -94,20 +83,21 @@ export const hubs: Hub[] = [
       alt: "Guillain Nabahya",
     },
     tagline:
-      "Regenerative agriculture and clean energy for food sovereignty in eastern Congo.",
+      "Clean energy and resilient food systems — cooking food without destroying trees.",
     description: [
-      "The Nabahya Food Institute (NFI) takes a holistic approach to natural-resource management — regenerative agriculture, clean energy, reforestation and conservation, and rural women's empowerment — in a region where food insecurity affects tens of millions of people.",
-      "From its base in Uvira, the hub turns agricultural waste into clean cooking fuel, rebuilds soils with organic inputs, restores degraded land with native trees, and organises women farmers into cooperatives that strengthen food sovereignty and market access.",
+      "The Nabahya Food Institute (NFI) is a non-profit based in the Democratic Republic of Congo that brings local farmers together in cooperatives — mitigating the cycle of poverty, starvation, and climate change while promoting access to clean energy and resilient food systems.",
+      "NFI is a grant award winner of the Water and Energy for Food Grand Challenge for Development (WE4F), an international initiative supported by Germany's BMZ, the European Union, the Netherlands, Norad, Sida, and USAID. Its field activities span regenerative agriculture, clean energy, reforestation and conservation, and rural women's empowerment.",
+      "The model is a circular economy: smallholder farmers supply crop residues and biomass as briquette raw material and receive payment — or briquettes — in return. Compared to charcoal and firewood, the innovation saves each farming family about $27 per month.",
     ],
     focus: [
       "Regenerative agriculture",
       "Clean energy",
-      "Reforestation",
-      "Women's cooperatives",
+      "Reforestation & conservation",
+      "Rural women's empowerment",
     ],
     heroImage: {
-      src: "/images/hero/sustainable-farming-drc.png",
-      alt: "Sustainable farming in the DRC",
+      src: "/images/hubs/drc/women-at-work.jpeg",
+      alt: "The NFI briquette production team in protective gear at the workshop in Uvira",
     },
     accent: "border-t-green",
     projects: [
@@ -116,69 +106,143 @@ export const hubs: Hub[] = [
         name: "Briquette Production",
         summary: "Clean cooking fuel made from agricultural waste.",
         baseImage: {
-          src: "/images/hero/sustainable-farming-drc.png",
-          alt: "Briquette production from agricultural waste",
+          src: "/images/hubs/drc/briquettes-production.jpeg",
+          alt: "Briquette production from agricultural waste at NFI",
         },
-        gallery: galleryPlaceholders("Briquette production", "forest"),
+        gallery: [
+          {
+            src: "/images/hubs/drc/briquettes-machines.jpg",
+            alt: "Briquette pressing machines",
+          },
+          {
+            src: "/images/hubs/drc/women-at-work.jpeg",
+            alt: "The briquette production team in protective gear",
+          },
+          {
+            src: "/images/hubs/drc/briquettes-1.jpeg",
+            alt: "Finished briquettes drying",
+          },
+          {
+            src: "/images/hubs/drc/briquettes-2.jpeg",
+            alt: "Briquettes ready for distribution",
+          },
+          {
+            src: "/images/hubs/drc/briquettes-4.jpg",
+            alt: "Briquette production in progress",
+          },
+          {
+            src: "/images/hubs/drc/selling-point.jpeg",
+            alt: "NFI briquette selling point — Briquettes Écologiques Nabahya",
+          },
+        ],
         description: [
-          "NFI manufactures sustainable cooking fuel from agricultural waste — crop residues, biomass, palm and coconut shells, and maize stalks — that would otherwise be burned or discarded.",
-          "The briquettes replace charcoal and firewood, lowering household energy costs while easing pressure on the region's forests. Since May 2023 the hub has produced over 460 tons of briquettes and avoided an estimated 937+ metric tons of CO₂ emissions.",
+          "NFI manufactures sustainable cooking fuel from agricultural waste — crop residues, biomass, dead leaves, palm shells, and maize stalks. The innovation brings a unique approach: cooking food without destroying trees.",
+          "Briquettes reduce household cooking energy expenses, avoid air pollution, protect natural resources, empower women, and help consumers save time and money — about $27 per month per family compared to charcoal and firewood.",
+          "To achieve a circular economy, smallholder farmers supply the raw materials to NFI and receive payment, or briquettes, in return. Ambassador sellers distribute the briquettes through local selling points like the one in Uvira.",
+        ],
+      },
+      {
+        slug: "clean-energy-cookers",
+        name: "Solar Cookers & Clean Stoves",
+        summary: "Box solar cookers and efficient stoves for smoke-free kitchens.",
+        baseImage: {
+          src: "/images/hubs/drc/solar-cookers.jpg",
+          alt: "Box solar cookers and clean cookstoves ready for distribution",
+        },
+        gallery: [
+          {
+            src: "/images/hubs/drc/solar-jikos.jpg",
+            alt: "Solar jikos lined up for distribution",
+          },
+          {
+            src: "/images/hubs/drc/solar-agwa-stove.jpg",
+            alt: "Box solar cooker and Agwa stove",
+          },
+        ],
+        description: [
+          "Alongside briquettes, NFI builds and distributes box solar cookers and efficient clean stoves — cutting fuel needs further and taking smoke out of the kitchen.",
+          "Together with briquettes, these technologies reduce deforestation pressure, lower household costs, and protect the health of the women and children who do most of the cooking.",
         ],
       },
       {
         slug: "bio-fertilizer",
         name: "Bio-fertilizer & Bio-pesticide",
-        summary: "Organic inputs that raise yields without chemicals.",
+        summary: "Briquette ash and biochar boosting yields by ~150%.",
         baseImage: {
-          src: "/images/gallery/gallery-05.jpg",
-          alt: "Organic bio-fertilizer preparation",
+          src: "/images/hubs/drc/beneficiaries-1.jpg",
+          alt: "Farmers with bio-fertilizer inputs",
         },
-        gallery: galleryPlaceholders("Bio-fertilizer", "forest"),
+        gallery: [
+          {
+            src: "/images/hubs/drc/beneficiaries-2.jpeg",
+            alt: "Beneficiary farmers with organic inputs",
+          },
+          {
+            src: "/images/hubs/drc/impact-luvungi.jpeg",
+            alt: "Communicating impact with farmers in Luvungi",
+          },
+        ],
         description: [
-          "Women farmers are trained to produce organic fertilizers and pesticides by combining briquette ashes with manure, biochar, and other local materials.",
-          "The result is healthier soil, lower input costs, and crop yield increases of roughly 150% — reducing dependence on imported chemical fertilizers.",
+          "NFI's briquettes also help farmers' yields: when briquette ashes are mixed with human urine, manure, and loaded biochar, crop yields increase by about 150% (p ≤ 0.05) compared to local practice on soil without biochar (60.4%).",
+          "Producing these organic fertilizers and pesticides locally cuts input costs and reduces dependence on imported chemical fertilizers — while keeping the whole value chain in the community.",
         ],
       },
       {
         slug: "farmer-field-schools",
         name: "Farmer Field Schools",
-        summary: "Hands-on learning in intercropping and recycling.",
+        summary: "Teaching biochar techniques to small-scale farmers.",
         baseImage: {
-          src: "/images/gallery/gallery-02.jpg",
-          alt: "Farmer field school session",
+          src: "/images/hubs/drc/field-school-lubarika.jpeg",
+          alt: "Farmer field school session at Lubarika",
         },
-        gallery: galleryPlaceholders("Farmer field schools", "forest"),
-        description: [
-          "Ten farmer field schools teach cooperative members intercropping techniques, recycling practices, and sustainable agriculture.",
-          "Members learn by doing — experimenting on their own plots and sharing results — so knowledge spreads through the community rather than flowing one way from experts to farmers.",
+        gallery: [
+          {
+            src: "/images/hubs/drc/field-school-1.jpg",
+            alt: "Farmer field school — champ école paysan",
+          },
+          {
+            src: "/images/hubs/drc/field-school-2.jpeg",
+            alt: "Farmers learning in the field",
+          },
+          {
+            src: "/images/hubs/drc/field-school-3.jpeg",
+            alt: "Farmer field school training session",
+          },
+          {
+            src: "/images/hubs/drc/beneficiaries-lubarika-1.jpeg",
+            alt: "Beneficiaries at Lubarika",
+          },
         ],
-      },
-      {
-        slug: "reforestation",
-        name: "Reforestation & Conservation",
-        summary: "Native trees restoring degraded land.",
-        baseImage: {
-          src: "/images/hero/ecosystem-revival.jpg",
-          alt: "Reforestation and tree planting",
-        },
-        gallery: galleryPlaceholders("Reforestation", "forest"),
         description: [
-          "NFI plants native tree species that provide organic nutrients and forage for livestock while restoring degraded ecosystems and creating community forests.",
-          "Since May 2023 the programme has restored more than 170 hectares of land through native tree planting.",
+          "NFI's farmer field schools (champs écoles paysans) teach small-scale farmers — the majority of them women — the techniques of using biochar and organic inputs to increase their agricultural yields.",
+          "Farmers learn by doing, on real plots at sites like Lubarika, so knowledge spreads farmer-to-farmer through the cooperatives rather than flowing one way from experts.",
         ],
       },
       {
         slug: "womens-cooperatives",
-        name: "Women's Cooperatives",
-        summary: "Organising women farmers for food sovereignty.",
+        name: "Rural Women's Empowerment",
+        summary: "Women leading production, cooperatives, and income.",
         baseImage: {
-          src: "/images/gallery/gallery-06.jpg",
-          alt: "Women's farming cooperative",
+          src: "/images/hubs/drc/beneficiaries-lubarika-2.jpeg",
+          alt: "Women beneficiaries at a field school in Lubarika",
         },
-        gallery: galleryPlaceholders("Women's cooperatives", "forest"),
+        gallery: [
+          {
+            src: "/images/hubs/drc/beneficiaries-lubarika-3.jpeg",
+            alt: "Beneficiaries gathered at Lubarika",
+          },
+          {
+            src: "/images/hubs/drc/women-at-work.jpeg",
+            alt: "Women on the briquette production line",
+          },
+          {
+            src: "/images/hubs/drc/briquettes-3.jpg",
+            alt: "Briquette production at the workshop",
+          },
+        ],
         description: [
-          "The hub helps small-scale farmers — predominantly women — form cooperatives that strengthen food sovereignty and improve access to markets.",
-          "Together with the hub's briquette, bio-fertilizer, and reforestation work, these cooperatives have reached an estimated 72,000 end-users.",
+          "Rural women's empowerment runs through everything NFI does: women make up the majority of the cooperative members, the field-school students, and the briquette production workforce.",
+          "By organising farmers into cooperatives and putting women at the centre of production and income, the hub strengthens food sovereignty while shifting who holds economic power in the community.",
         ],
       },
     ],
@@ -201,6 +265,8 @@ export const hubs: Hub[] = [
     },
     tagline:
       "A 15-acre demonstration farm proving regenerative agriculture can rebuild rural economies.",
+    // NOTE: Mariam is writing an updated story about her work at Maripha Farms.
+    // Replace these paragraphs with her text when it arrives.
     description: [
       "Maripha Farms is a 15-acre demonstration farm for integrated, organic agriculture in the Guinea Savannah of Kwara State — the transition zone between Nigeria's arid north and humid south.",
       "Modelled on the Songhai Institute's integrated approach, where nothing is wasted and biodiversity is restored, the hub develops young people as agents of change and works toward food sovereignty across Kwara State.",
@@ -212,8 +278,8 @@ export const hubs: Hub[] = [
       "Food sovereignty",
     ],
     heroImage: {
-      src: "/images/hero/rice-fields-uganda.jpg",
-      alt: "Integrated demonstration farm",
+      src: "/images/hubs/nigeria/farm-gate.jpg",
+      alt: "The gate of Maripha Farms in Kwara State",
     },
     accent: "border-t-terra",
     projects: [
@@ -222,55 +288,112 @@ export const hubs: Hub[] = [
         name: "Integrated Organic Demonstration Farm",
         summary: "A whole-system farm where nothing is wasted.",
         baseImage: {
-          src: "/images/hero/farm-to-fork.png",
-          alt: "Integrated organic demonstration farm",
+          src: "/images/hubs/nigeria/farm-gate.jpg",
+          alt: "The entrance gate of Maripha Farms",
         },
-        gallery: galleryPlaceholders("Demonstration farm", "terra"),
+        gallery: [
+          {
+            src: "/images/hubs/nigeria/produce-1.png",
+            alt: "Fresh habanero peppers harvested at Maripha Farms",
+          },
+          {
+            src: "/images/hubs/nigeria/produce-2.png",
+            alt: "Farm produce from Maripha Farms",
+          },
+          {
+            src: "/images/hubs/nigeria/produce-3.png",
+            alt: "Farm produce from Maripha Farms",
+          },
+          {
+            src: "/images/hubs/nigeria/produce-4.png",
+            alt: "Farm produce from Maripha Farms",
+          },
+          {
+            src: "/images/hubs/nigeria/produce-5.png",
+            alt: "Farm produce from Maripha Farms",
+          },
+          {
+            src: "/images/hubs/nigeria/produce-6.png",
+            alt: "Farm produce from Maripha Farms",
+          },
+          {
+            src: "/images/hubs/nigeria/produce-7.png",
+            alt: "Farm produce from Maripha Farms",
+          },
+        ],
         description: [
-          "The 15-acre farm cultivates a diverse mix of crops — rice, maize, millet, soya beans, groundnut, tomatoes, pepper, yam, sweet potatoes, cashew, palm, and cassava — alongside planned livestock including tilapia, chickens, goats, and rabbits.",
+          "The 15-acre farm cultivates a diverse mix of crops — rice, maize, millet, soya beans, groundnut, tomatoes, pepper, yam, sweet potatoes, cashew, palm, and cassava — alongside livestock including tilapia, chickens, goats, and rabbits.",
           "Following the Songhai model of integrated, regenerative agriculture, the farm experiments with azolla and black soldier fly larvae for feed production, closing loops so that the waste from one system becomes an input for the next.",
         ],
       },
       {
-        slug: "youth-agents-of-change",
-        name: "Youth as Agents of Change",
-        summary: "Equipping young people, including students, to lead.",
+        slug: "school-farm-tours",
+        name: "School Farm Tours",
+        summary: "Secondary-school students learning agriculture hands-on.",
         baseImage: {
-          src: "/images/hero/rural-youth-education.jpg",
-          alt: "Young people learning regenerative farming",
+          src: "/images/hubs/nigeria/school-tour-1.jpg",
+          alt: "Secondary-school students visiting Maripha Farms under the cashew trees",
         },
-        gallery: galleryPlaceholders("Youth development", "terra"),
+        gallery: [
+          {
+            src: "/images/hubs/nigeria/mef-1.jpeg",
+            alt: "Mariam showing students a rabbit during a farm tour",
+          },
+          {
+            src: "/images/hubs/nigeria/school-tour-2.jpg",
+            alt: "Students on a guided tour of the farm",
+          },
+          {
+            src: "/images/hubs/nigeria/school-tour-3.jpg",
+            alt: "Students exploring Maripha Farms",
+          },
+          {
+            src: "/images/hubs/nigeria/school-tour-4.jpg",
+            alt: "Students visiting the farm structures",
+          },
+          {
+            src: "/images/hubs/nigeria/school-tour-5.jpg",
+            alt: "School group touring the farm",
+          },
+          {
+            src: "/images/hubs/nigeria/school-tour-6.jpg",
+            alt: "Students during a farm tour",
+          },
+          {
+            src: "/images/hubs/nigeria/mef-2.jpeg",
+            alt: "Farm tour moment at Maripha Farms",
+          },
+          {
+            src: "/images/hubs/nigeria/mef-3.jpeg",
+            alt: "Farm tour moment at Maripha Farms",
+          },
+          {
+            src: "/images/hubs/nigeria/mef-4.jpeg",
+            alt: "Farm tour moment at Maripha Farms",
+          },
+        ],
         description: [
-          "The hub develops young people — including secondary-school students — as agents of change, introducing them to regenerative agriculture, enterprise, and stewardship before they leave the classroom.",
-          "The goal is to shift the trajectory of rural communities from deepening poverty toward a robust economic and ecological future, led by a generation that sees farming as opportunity rather than last resort.",
+          "Maripha Farms hosts secondary-school students for hands-on farm tours — walking the cashew orchards, meeting the livestock, and seeing integrated organic agriculture working as a living system.",
+          "The tours are part of the hub's mission to develop young people as agents of change: a generation that sees farming as science, enterprise, and opportunity — not a last resort.",
         ],
       },
       {
         slug: "value-addition",
-        name: "Value Addition — Maripha Cuisine",
-        summary: "Farm-to-table sourcing that adds value to harvests.",
+        name: "Value Addition — Maripha Farm Products",
+        summary: "Branded garri and catfish, from farm to table.",
         baseImage: {
-          src: "/images/programs/touching-lives.png",
-          alt: "Value addition and farm-to-table food",
+          src: "/images/hubs/nigeria/maripha-products.jpeg",
+          alt: "Maripha Farm branded products — Ijebu garri, yellow garri, and dried catfish",
         },
-        gallery: galleryPlaceholders("Value addition", "terra"),
-        description: [
-          "Through a partnership with Maripha Cuisine, the hub links the farm directly to the table — processing and adding value to harvests rather than selling raw produce at the lowest margin.",
-          "Value addition keeps more income in the community and demonstrates a viable, replicable business model for other smallholder farmers in the region.",
+        gallery: [
+          {
+            src: "/images/hubs/nigeria/outreach-children.jpg",
+            alt: "Mariam with children holding seedlings on the farm",
+          },
         ],
-      },
-      {
-        slug: "womens-regenerative-training",
-        name: "Women & Regenerative Training",
-        summary: "Training women farmers in regenerative methods.",
-        baseImage: {
-          src: "/images/gallery/gallery-03.jpeg",
-          alt: "Women in regenerative agriculture training",
-        },
-        gallery: galleryPlaceholders("Women's training", "terra"),
         description: [
-          "The hub trains women farmers in regenerative and organic methods that rebuild soil, cut input costs, and raise yields.",
-          "This project is an outline — replace this text and its images with the specific details, numbers, and photos from the Nigeria hub when you have them.",
+          "The hub processes its harvests into branded, 100% organic products — Ijebu garri, yellow garri, and packaged dried catfish — sold under the Maripha Farm label with Chakula Bora's people-planet-profit mark.",
+          "Through the partnership with Maripha Cuisine, the farm links directly to the table. Value addition keeps more income in the community and demonstrates a viable, replicable business model for smallholder farmers across the region.",
         ],
       },
     ],
@@ -279,76 +402,171 @@ export const hubs: Hub[] = [
   // -------------------------------------------------------------- KENYA ----
   {
     slug: "kenya",
-    name: "Kendu Bay Hub — KSWCSI",
+    name: "Kamser Seka Widows Community Support Initiative",
     shortName: "Kenya Hub",
     country: "Kenya",
     city: "Kendu Bay",
-    region: "Homa Bay & Nakuru Counties",
+    region: "Homa Bay County",
     flag: "🇰🇪",
     leader: "Mary Omega",
-    leaderRole: "Hub Leader; Founder & President, KSWCSI",
+    leaderRole: "Founder & Director, KSWCSI",
     leaderPhoto: {
       src: "/images/people/team/mary-omega.jpg",
       alt: "Mary Omega",
     },
-    tagline:
-      "Women-led enterprise, water, and beekeeping across Homa Bay and Nakuru.",
+    tagline: "Rebuilding hope, restoring dignity — women-led and community-rooted.",
     description: [
-      "The Kenya hub, led from Kendu Bay, combines rainwater harvesting, beekeeping, and school water projects to lift smallholder households — with women's economic empowerment and gender-based-violence activism at its centre.",
-      "A 2021 pilot with 20 farmers in Gilgil delivered up to a five-fold increase in income by pairing rainwater harvesting with beekeeping, and the model is now scaling across Homa Bay and Nakuru counties.",
+      "Kamser Seka Widows Community Support Initiative (KSWCSI) is a women-led, community-rooted organisation based in Kendu Bay, Homa Bay County. It works with widow chama groups, young mothers, youth, and vulnerable households to restore dignity, strengthen livelihoods, and build climate-resilient communities.",
+      "Communities in Kendu Bay face persistent poverty, environmental degradation, and economic marginalisation — with widows and youth most affected. Heavy reliance on charcoal and firewood drives deforestation, high fuel costs, and indoor air pollution that harms the health of women and children.",
+      "KSWCSI's work is grounded in a triple bottom line — People, Planet, and Productivity — ensuring every intervention improves lives, protects the environment, and generates income.",
+      "“Every widow, young mother, and vulnerable family deserves a second chance — to heal, to thrive, and to lead. Our mission is to nurture that journey.” — Mary Omega, Founder & Director",
     ],
     focus: [
-      "Jiimarishe apiculture",
-      "Clean water for schools",
-      "Women's enterprise",
-      "Chama savings",
+      "Widow chama groups",
+      "Clean cookstoves & briquettes",
+      "Sustainable agriculture",
+      "Youth & young mothers",
     ],
     heroImage: {
-      src: "/images/programs/jiimarishe-honey.jpg",
-      alt: "Jiimarishe honey project",
+      src: "/images/hubs/kenya/widows-cookstoves.jpg",
+      alt: "Widows' group gathered around clean cookstoves in Kendu Bay",
     },
     accent: "border-t-ochre",
     projects: [
       {
-        slug: "jiimarishe-honey",
-        name: "Jiimarishe Honey Project",
-        summary: "Rainwater harvesting paired with beekeeping.",
+        slug: "clean-cookstoves",
+        name: "Clean Cookstoves & Briquettes",
+        summary: "Climate-friendly jikos replacing charcoal and firewood.",
         baseImage: {
-          src: "/images/programs/jiimarishe-honey.jpg",
-          alt: "Jiimarishe honey project beehives",
+          src: "/images/hubs/kenya/widows-cookstoves.jpg",
+          alt: "Community members with climate-friendly cookstoves (jikos)",
         },
-        gallery: galleryPlaceholders("Jiimarishe honey", "ochre"),
+        gallery: [
+          {
+            src: "/images/hubs/kenya/community-1.jpg",
+            alt: "Community gathering in Kendu Bay",
+          },
+          {
+            src: "/images/hubs/kenya/widows-meeting-1.jpg",
+            alt: "Widows' group meeting",
+          },
+          {
+            src: "/images/hubs/kenya/widows-meeting-2.jpg",
+            alt: "Widows' group session in Kendu Bay",
+          },
+        ],
         description: [
-          "The Jiimarishe honey venture helps smallholder farmers combine rainwater harvesting with beekeeping to strengthen their financial position and the wellbeing of their families.",
-          "The 2021 Gilgil pilot with 20 farmers produced up to a five-fold increase in income — capturing rainwater for consumption and agriculture, with beekeeping adding a resilient second income stream.",
+          "Most households in Kendu Bay rely on charcoal and firewood for cooking — driving deforestation, high fuel costs, and indoor air pollution that causes respiratory and eye problems, especially for women and children.",
+          "Climate-friendly cookstoves (jikos) and briquettes offer a locally appropriate, low-cost, and scalable solution — addressing clean energy access, climate mitigation, and household health in one intervention, while creating income opportunities for the widows who make and sell them.",
         ],
       },
       {
-        slug: "clean-water-for-schools",
-        name: "Adopt-A-School & Clean Water",
-        summary: "Rainwater systems bringing safe water to schools.",
+        slug: "widow-chama-empowerment",
+        name: "Widow Chama Empowerment",
+        summary: "Skills, savings, and sustainable farming for widows.",
         baseImage: {
-          src: "/images/programs/adopt-a-school.jpeg",
-          alt: "Clean water project for schools",
+          src: "/images/hubs/kenya/composting-training.jpg",
+          alt: "Composting training with a widows' chama group",
         },
-        gallery: galleryPlaceholders("Clean water for schools", "ochre"),
+        gallery: [
+          {
+            src: "/images/hubs/kenya/widows-meeting-1.jpg",
+            alt: "Chama group gathered for training",
+          },
+          {
+            src: "/images/hubs/kenya/school-garden-1.jpg",
+            alt: "Vegetable plot cultivated by the group",
+          },
+          {
+            src: "/images/hubs/kenya/school-garden-5.jpg",
+            alt: "Community garden beds in Kendu Bay",
+          },
+        ],
         description: [
-          "Schools receive rainwater harvesting systems that provide clean, safe water for drinking and cooking, with greywater directed to school gardens.",
-          "Through a partnership with Running Water International, the Clean Water Project for Schools has reached 90 schools and more than 36,000 students in the Meru and Nakuru regions of Kenya, supported by partnerships with schools in the United States.",
+          "Unemployment and limited access to skills, capital, and markets trap many widows and youth in cycles of poverty — despite strong willingness to engage in income-generating work.",
+          "KSWCSI works through widow chama groups to build practical, marketable skills: composting, sustainable vegetable production, and group savings that turn willingness into stable livelihoods and restored dignity.",
         ],
       },
       {
-        slug: "chama-model",
-        name: "Chama Micro-Lending Model",
-        summary: "Savings groups investing in shared assets.",
+        slug: "chakula-bora-schools",
+        name: "Chakula Bora School Gardens",
+        summary: "Pupils growing good food at school.",
         baseImage: {
-          src: "/images/gallery/gallery-07.jpg",
-          alt: "Community savings group meeting",
+          src: "/images/hubs/kenya/school-garden-pupils-1.jpg",
+          alt: "Pupils preparing a school garden plot",
         },
-        gallery: galleryPlaceholders("Chama model", "ochre"),
+        gallery: [
+          {
+            src: "/images/hubs/kenya/school-garden-pupils-2.jpg",
+            alt: "Pupils working in the school garden",
+          },
+          {
+            src: "/images/hubs/kenya/school-garden-pupils-3.jpg",
+            alt: "Students tending garden beds",
+          },
+          {
+            src: "/images/hubs/kenya/school-garden-2.jpg",
+            alt: "School garden plot growing vegetables",
+          },
+          {
+            src: "/images/hubs/kenya/school-garden-3.jpg",
+            alt: "Young crops in the school garden",
+          },
+          {
+            src: "/images/hubs/kenya/school-garden-4.jpg",
+            alt: "School garden beds",
+          },
+          {
+            src: "/images/hubs/kenya/chakula-bora-schools.png",
+            alt: "Chakula Bora schools programme",
+          },
+        ],
         description: [
-          "The Chama model enables community members to form savings groups and collectively invest in productive assets — water tanks, beehives, and hand-washing stations — based on group approval.",
-          "By pooling savings and decisions, members build both financial resilience and the shared infrastructure their livelihoods depend on.",
+          "Through the Chakula Bora schools programme, pupils learn practical agro-ecology by growing good food on their own school plots — from preparing beds to harvest.",
+          "The gardens supply fresh vegetables and plant a generation-deep understanding that healthy food and healthy land go together.",
+        ],
+      },
+      {
+        slug: "world-food-day",
+        name: "World Food Day Showcases",
+        summary: "Celebrating local food systems at county events.",
+        baseImage: {
+          src: "/images/hubs/kenya/wfd-ks-1.jpg",
+          alt: "KSWCSI members showcasing produce at a World Food Day event",
+        },
+        gallery: [
+          {
+            src: "/images/hubs/kenya/wfd-schools-team.jpg",
+            alt: "The Chakula Bora schools team at World Food Day",
+          },
+          {
+            src: "/images/hubs/kenya/wfd-1.jpg",
+            alt: "World Food Day exhibition stand",
+          },
+          {
+            src: "/images/hubs/kenya/wfd-ks-2.jpg",
+            alt: "Members at the World Food Day showground",
+          },
+          {
+            src: "/images/hubs/kenya/wfd-ks-3.jpg",
+            alt: "World Food Day activities",
+          },
+          {
+            src: "/images/hubs/kenya/wfd-ks-4.jpg",
+            alt: "Produce display at World Food Day",
+          },
+          {
+            src: "/images/hubs/kenya/wfd-seka-1.jpg",
+            alt: "Kamser Seka members at World Food Day",
+          },
+          {
+            src: "/images/hubs/kenya/wfd-seka-2.jpg",
+            alt: "Kamser Seka group at the event",
+          },
+        ],
+        description: [
+          "KSWCSI brings its members — widows, youth, and school teams — to World Food Day celebrations at the Kendu Bay Showground and beyond, exhibiting produce and connecting with partners across the county.",
+          "For many members these events are a first public platform: a place to sell, to learn from other farmers, and to be recognised for the enterprise they have built.",
         ],
       },
     ],

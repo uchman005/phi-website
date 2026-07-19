@@ -4,6 +4,7 @@ import EquationBanner from "@/components/home/EquationBanner";
 import MissionVision from "@/components/home/MissionVision";
 import HowWeHelp from "@/components/home/HowWeHelp";
 import OurWork from "@/components/home/OurWork";
+import NakuruLegacy from "@/components/home/NakuruLegacy";
 import FinancialQuote from "@/components/home/FinancialQuote";
 import Testimonials from "@/components/home/Testimonials";
 import DarkCTA from "@/components/home/DarkCTA";
@@ -27,6 +28,7 @@ export default function HomePage() {
       <MissionVision />
       <HowWeHelp />
       <OurWork />
+      <NakuruLegacy />
       <FinancialQuote />
       <Testimonials />
       <DarkCTA />

@@ -125,7 +125,7 @@ export default function HealThePlanetPage() {
                 name: "Mary Omega",
                 hub: "Kenya Hub",
                 href: "/programs/hubs/kenya",
-                text: "Around Kendu Bay, Mary pairs rainwater harvesting with beekeeping and school water projects that protect ecosystems while lifting households.",
+                text: "In Kendu Bay, Mary's widow-led groups replace charcoal and firewood with clean cookstoves and briquettes — easing deforestation while protecting family health.",
               },
             ].map((ex, i) => (
               <RevealOnScroll key={ex.name} delay={(i % 3) * 0.1}>

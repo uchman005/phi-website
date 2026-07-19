@@ -125,7 +125,7 @@ export default function BuildCapacityPage() {
                 name: "Mary Omega",
                 hub: "Kenya Hub",
                 href: "/programs/hubs/kenya",
-                text: "Around Kendu Bay, Mary builds women's enterprise and Chama savings groups, equipping members to invest collectively and lead their own livelihoods.",
+                text: "In Kendu Bay, Mary equips widow chama groups and young mothers with practical skills — from composting to school gardens — that turn willingness into livelihoods.",
               },
             ].map((ex, i) => (
               <RevealOnScroll key={ex.name} delay={(i % 3) * 0.1}>
