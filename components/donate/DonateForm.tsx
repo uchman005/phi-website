@@ -2,66 +2,7 @@
 
 import { useState, type ChangeEvent } from "react";
 import { TbCheck, TbExternalLink } from "react-icons/tb";
-
-interface Project {
-  id: string;
-  name: string;
-  description: string;
-  accent: string;
-  iconBg: string;
-}
-
-const projects: Project[] = [
-  {
-    id: "jiimarishe",
-    name: "Jiimarishe Honey Project",
-    description: "Apiculture enterprise in Kenya — 5× income increase for farmers",
-    accent: "border-green",
-    iconBg: "bg-green-ll text-green",
-  },
-  {
-    id: "adopt-a-school",
-    name: "Adopt a School",
-    description: "Rural school infrastructure, teachers, and learning materials",
-    accent: "border-ochre",
-    iconBg: "bg-ochre-l text-ochre",
-  },
-  {
-    id: "clean-water",
-    name: "Clean Water Initiative",
-    description: "Bore-holes, rainwater harvesting, and water committee training",
-    accent: "border-blue-400",
-    iconBg: "bg-blue-50 text-blue-500",
-  },
-  {
-    id: "medical-care",
-    name: "Medical Care Access",
-    description: "Mobile health clinics and community health worker training",
-    accent: "border-red-400",
-    iconBg: "bg-red-50 text-red-500",
-  },
-  {
-    id: "kilimo-bunifu",
-    name: "Kilimo Bunifu",
-    description: "Innovative agro-ecological farming — Workshop.",
-    accent: "border-terra",
-    iconBg: "bg-terra-l text-terra",
-  },
-  {
-    id: "FEED-Africa",
-    name: "FEED Africa",
-    description: "Integrates agro-ecological food systems that restore land, feed families, and build economic resilience.",
-    accent: "border-terra",
-    iconBg: "bg-terra-l text-terra",
-  },
-  {
-    id: "general-fund",
-    name: "General Fund",
-    description: "Support wherever it is needed most across all programmes",
-    accent: "border-green-d",
-    iconBg: "bg-green-l text-green-d",
-  },
-];
+import { donationProjects as projects } from "@/lib/donation-projects";
 
 const presetAmounts = [25, 50, 100, 250];
 const frequencies = ["Once", "Monthly"];

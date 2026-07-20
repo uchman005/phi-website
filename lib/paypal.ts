@@ -117,6 +117,46 @@ export async function captureDonationOrder(orderID: string) {
   });
 }
 
+/** Fetch an order's current status — used to recover gracefully when a
+ * capture request races a duplicate (e.g. React StrictMode double-invoke,
+ * or a donor double-clicking) and PayPal reports ORDER_ALREADY_CAPTURED. */
+export async function getDonationOrder(orderID: string) {
+  return paypalFetch(`/v2/checkout/orders/${orderID}`, { method: "GET" });
+}
+
+// ------------------------------------------------------------- webhooks ----
+
+/**
+ * Verifies a PayPal webhook's signature via PayPal's own verification API —
+ * PayPal checks the transmission headers against the event body server-side,
+ * so we don't need to implement signature crypto ourselves. Requires
+ * PAYPAL_WEBHOOK_ID (see .env.local.example for how to obtain it).
+ */
+export async function verifyWebhookSignature(
+  headers: Headers,
+  event: unknown
+): Promise<boolean> {
+  const webhookId = process.env.PAYPAL_WEBHOOK_ID;
+  if (!webhookId) {
+    throw new Error("PAYPAL_WEBHOOK_ID is not configured");
+  }
+
+  const result = await paypalFetch("/v1/notifications/verify-webhook-signature", {
+    method: "POST",
+    body: {
+      auth_algo: headers.get("paypal-auth-algo"),
+      cert_url: headers.get("paypal-cert-url"),
+      transmission_id: headers.get("paypal-transmission-id"),
+      transmission_sig: headers.get("paypal-transmission-sig"),
+      transmission_time: headers.get("paypal-transmission-time"),
+      webhook_id: webhookId,
+      webhook_event: event,
+    },
+  });
+
+  return result.verification_status === "SUCCESS";
+}
+
 // ------------------------------------------------------------ monthly plan ----
 //
 // Monthly gifts use a single $1/month plan with quantity support: a $40/month
