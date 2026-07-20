@@ -1,0 +1,20 @@
+You need a PayPal Business account for the organization (upgrade the existing account at paypal.com if it's personal). Since PHI is a 501(c)(3), also apply for PayPal's charity confirmation (Account Settings → "Confirm charity status") — it lowers your fees to the nonprofit rate (~1.99% + $0.49 instead of ~2.89%).
+Go to developer.paypal.com and log in with that business account.
+Open Apps & Credentials. You'll see two tabs: Sandbox and Live.
+On the Sandbox tab, a "Default Application" already exists — click it and copy its Client ID and Secret into .env.local with PAYPAL_ENV=sandbox. Test the whole flow with the fake sandbox buyer account PayPal gives you (under Testing Tools → Sandbox Accounts).
+When testing looks good, switch to the Live tab, click Create App, name it (e.g. "PHI Website Donations"), copy the live Client ID and Secret into your hosting provider's environment variables, and set PAYPAL_ENV=live.
+One deployment note: the site now has API routes, so it needs Node hosting (Vercel, Netlify, etc.) rather than static-file-only hosting — any standard Next.js host handles this automatically. For production hardening later, I'd also recommend adding a PayPal webhook so failed/cancelled monthly subscriptions get reported to you — say the word and I'll add it. Nothing is committed yet.
+
+
+
+
+Webhook (app/api/paypal/webhook/route.ts): PayPal now has a real endpoint to report back events the donor's browser never sees — a monthly donor's card failing, a subscription getting cancelled or suspended, a completed capture later getting refunded or reversed. Every incoming event's signature is verified against PayPal's own verification API before anything is processed (rejects anything spoofed), then it's routed by event type. The subscription-lifecycle and capture-failure events go through a notifyOps() seam — right now that writes a structured log line to your hosting provider's logs, but it's the one place to wire up a real Slack or email alert later without touching the rest of the code.
+
+Setting up the webhook — same PayPal developer dashboard as before: open your app (Sandbox or Live tab — each needs its own webhook registered), scroll to Webhooks → Add Webhook, set the URL to https://yourdomain.com/api/paypal/webhook, and select the 9 event types listed in the newly updated .env.local.example. Save, copy the Webhook ID PayPal shows you, and set it as PAYPAL_WEBHOOK_ID.
+
+Hardening
+Idempotent capture: if a donor double-clicks or a network retry re-sends the same capture request, PayPal's "already captured" error is now caught and treated as a successful lookup instead of showing a scary error for a payment that actually succeeded.
+Server-side project validation: the donate form's project list moved to a shared lib/donation-projects.ts. The create-order route now resolves the project name itself from that allow-list — it no longer trusts whatever text a request claims the project is, closing off a way to inject arbitrary strings into PayPal order descriptions.
+Rate limiting: all three PayPal routes now cap requests per IP (10/minute) via lib/rate-limit.ts — an honest, best-effort in-memory limiter I've documented clearly: it protects per warm instance, not perfectly across a distributed serverless fleet. If you later need guaranteed cross-instance limiting, swapping in Upstash Redis is a one-file change.
+Security headers (site-wide, via next.config.ts): Content-Security-Policy scoped to allow only PayPal's domains plus your own origin, HSTS, X-Frame-Options, Referrer-Policy, and a locked-down Permissions-Policy. I left unsafe-inline in the CSP for scripts/styles — the JSON-LD structured data and Framer Motion both rely on inline execution — and documented in the config exactly why, plus that a nonce-based CSP is the natural next step if you want to close that gap later.
+Nothing here required guessing at credentials I don't have — the webhook's alerting hook is real and extensible, not a stubbed email service pretending to work. Nothing is committed yet.
