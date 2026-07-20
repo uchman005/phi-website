@@ -10,13 +10,16 @@ import Testimonials from "@/components/home/Testimonials";
 import DarkCTA from "@/components/home/DarkCTA";
 
 export const metadata: Metadata = {
-  title: "Passion of Hope International — Catalyzing Rural Africa",
+  title: {
+    absolute:
+      "Passion of Hope International — Donate to a 501(c)(3) Charity for Rural Africa",
+  },
   description:
-    "PHI is a US 501(c)(3) non-profit partnering with rural African communities to build food sovereignty, human capacity, and lasting, community-owned development.",
+    "A US 501(c)(3) nonprofit building food security, clean energy, and women's economic empowerment in Kenya, Nigeria, and the DRC. Tax-deductible donations — 100% of your gift reaches the mission.",
   openGraph: {
-    title: "Passion of Hope International",
+    title: "Passion of Hope International — Charity for Rural Africa",
     description:
-      "Catalyzing appropriate and sustainable development in rural Africa.",
+      "Food security, clean energy, and women's empowerment in Kenya, Nigeria, and the DRC. 100% of your donation reaches the mission.",
   },
 };
 

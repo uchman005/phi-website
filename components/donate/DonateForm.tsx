@@ -67,7 +67,12 @@ const presetAmounts = [25, 50, 100, 250];
 const frequencies = ["Once", "Monthly"];
 
 interface DonateFormProps {
-  onUpdate: (project: string, amount: number, frequency: string) => void;
+  onUpdate: (
+    projectId: string,
+    projectName: string,
+    amount: number,
+    frequency: string
+  ) => void;
 }
 
 export default function DonateForm({ onUpdate }: DonateFormProps) {
@@ -80,7 +85,7 @@ export default function DonateForm({ onUpdate }: DonateFormProps) {
   function selectProject(id: string) {
     setSelectedProject(id);
     const proj = projects.find((p) => p.id === id);
-    onUpdate(proj?.name ?? id, isCustom ? Number(customAmount) || 0 : selectedAmount, frequency);
+    onUpdate(id, proj?.name ?? id, isCustom ? Number(customAmount) || 0 : selectedAmount, frequency);
   }
 
   function selectAmount(amount: number) {
@@ -88,7 +93,7 @@ export default function DonateForm({ onUpdate }: DonateFormProps) {
     setIsCustom(false);
     setCustomAmount("");
     const proj = projects.find((p) => p.id === selectedProject);
-    onUpdate(proj?.name ?? selectedProject, amount, frequency);
+    onUpdate(selectedProject, proj?.name ?? selectedProject, amount, frequency);
   }
 
   function handleCustomChange(e: ChangeEvent<HTMLInputElement>) {
@@ -97,13 +102,13 @@ export default function DonateForm({ onUpdate }: DonateFormProps) {
     setIsCustom(true);
     setSelectedAmount(0);
     const proj = projects.find((p) => p.id === selectedProject);
-    onUpdate(proj?.name ?? selectedProject, Number(val) || 0, frequency);
+    onUpdate(selectedProject, proj?.name ?? selectedProject, Number(val) || 0, frequency);
   }
 
   function selectFrequency(f: string) {
     setFrequency(f);
     const proj = projects.find((p) => p.id === selectedProject);
-    onUpdate(proj?.name ?? selectedProject, isCustom ? Number(customAmount) || 0 : selectedAmount, f);
+    onUpdate(selectedProject, proj?.name ?? selectedProject, isCustom ? Number(customAmount) || 0 : selectedAmount, f);
   }
 
   return (
