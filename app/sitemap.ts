@@ -21,6 +21,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/programs/think-global", priority: 0.7 },
     { path: "/heal-the-planet", priority: 0.7 },
     { path: "/build-capacity", priority: 0.7 },
+    { path: "/leverage-connections", priority: 0.7 },
+    { path: "/legacy", priority: 0.6 },
     { path: "/team", priority: 0.6 },
     { path: "/testimonials", priority: 0.6 },
     { path: "/partners", priority: 0.6 },

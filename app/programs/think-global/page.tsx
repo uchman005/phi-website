@@ -4,9 +4,7 @@ import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import DarkCTA from "@/components/home/DarkCTA";
 import {
   TbNetwork,
-  TbMicrophone,
   TbTool,
-  TbBuildingStore,
   TbArrowRight,
 } from "react-icons/tb";
 import Link from "next/link";
@@ -30,13 +28,6 @@ const pillars = [
     description:
       "Chakula Bora digitally connects PHI's hubs, partner organisations, academic institutions, and community leaders — enabling real-time knowledge exchange across borders.",
   },
-  // {
-  //   icon: TbMicrophone,
-  //   accent: "bg-terra-l text-terra",
-  //   title: "Speaker Series",
-  //   description:
-  //     "Monthly virtual dialogues bringing together farmers, researchers, policymakers, and entrepreneurs to share innovations, challenge assumptions, and co-create solutions.",
-  // },
   {
     icon: TbTool,
     accent: "bg-ochre-l text-ochre",
@@ -44,13 +35,6 @@ const pillars = [
     description:
       "Hands-on training events — in-person and online — covering agro-ecology, enterprise development, data collection, and community governance for hub leaders and partners.",
   },
-  // {
-  //   icon: TbBuildingStore,
-  //   accent: "bg-green-l text-green-d",
-  //   title: "Jiimarishe Enterprise",
-  //   description:
-  //     "The flagship PHI enterprise model — a scalable, community-owned apiculture cooperative that generates income while restoring ecosystems through pollination and forest stewardship.",
-  // },
 ];
 
 export default function ThinkGlobalPage() {

@@ -18,21 +18,27 @@ interface PayPalWebhookEvent {
 }
 
 // PayPal expects a fast 2xx response to acknowledge receipt — it retries
-// on non-2xx or timeout, so we verify synchronously (one extra PayPal API
-// call) and then respond; no background queue needed at this volume.
+// on non-2xx or timeout, so we verify synchronously (local crypto check, no
+// external API call needed) and then respond; no background queue needed at
+// this volume.
 export async function POST(request: Request) {
+  // Read the raw body once — the signature covers these exact bytes, so it
+  // must be verified against this string, not a re-serialized JSON.stringify
+  // of the parsed object (which could differ in whitespace/key order).
+  const rawBody = await request.text();
+
   let event: PayPalWebhookEvent;
   try {
-    event = (await request.json()) as PayPalWebhookEvent;
+    event = JSON.parse(rawBody) as PayPalWebhookEvent;
   } catch {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
   let verified: boolean;
   try {
-    verified = await verifyWebhookSignature(request.headers, event);
+    verified = await verifyWebhookSignature(request.headers, rawBody);
   } catch (err) {
-    console.error("[paypal webhook] verification request failed:", err);
+    console.error("[paypal webhook] verification failed:", err);
     return NextResponse.json({ error: "Verification unavailable" }, { status: 400 });
   }
 

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import { TbShieldCheck, TbHeartFilled } from "react-icons/tb";
+import { MIN_DONATION_AMOUNT } from "@/lib/donation-projects";
 
 interface DonateSummaryProps {
   projectId: string;
@@ -127,7 +128,7 @@ export default function DonateSummary({
         // White card behind the buttons — PayPal renders dark text/buttons
         // that need a light backdrop for contrast.
         <div className="bg-white rounded-lg p-3">
-          {amount > 0 ? (
+          {amount >= MIN_DONATION_AMOUNT ? (
             <PayPalButtons
               forceReRender={[amount, projectId, frequency]}
               style={{ layout: "vertical", shape: "pill", label: "donate" }}
@@ -209,7 +210,7 @@ export default function DonateSummary({
             />
           ) : (
             <p className="font-sans text-xs text-ink-3 text-center py-2">
-              Enter an amount to continue
+              Minimum donation is ${MIN_DONATION_AMOUNT}
             </p>
           )}
         </div>

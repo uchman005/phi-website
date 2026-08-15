@@ -57,7 +57,7 @@ const partners = [
   { name: "Running Water International, Kenya", logo: "/images/logos/partners/running-water-international.png" },
   { name: "Songhaï Centre, Benin", logo: "/images/logos/partners/songhai-centre.png" },
   { name: "International Network on Appropriate Technology", logo: "/images/logos/partners/inat.png" },
-  { name: "Green Belt Movement, Kenya", logo: "/images/logos/partners/green-belt-movement.jpeg" },
+  // { name: "Green Belt Movement, Kenya", logo: "/images/logos/partners/green-belt-movement.jpeg" },
   { name: "African Leadership University, Mauritius", logo: "/images/logos/partners/alu.png" },
   { name: "Alchemy Inspiration, South Africa", logo: "/images/logos/partners/alchemy-inspiration.png" },
   { name: "DHA East Africa", logo: "/images/logos/partners/dha-east-africa.jpg" },
@@ -130,23 +130,30 @@ export default function PartnersPage() {
       <section className="bg-cream py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-[1200px] mx-auto">
           <RevealOnScroll>
-            <h2 className="font-display text-2xl sm:text-3xl text-ink mb-10">
+            <h2 className="font-display text-2xl sm:text-3xl text-ink mb-2">
               Our partners
             </h2>
+            <p className="text-ink-3 font-sans mb-10 max-w-xl">
+              Organisations we work alongside across research, water, land, and
+              knowledge networks.
+            </p>
           </RevealOnScroll>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
             {partners.map((partner, i) => (
               <RevealOnScroll key={partner.name} delay={(i % 4) * 0.07}>
-                <div className="bg-paper rounded-lg border border-line p-4 flex items-center justify-center min-h-[80px] hover:border-green-l hover:shadow-sm transition-all duration-200">
-                  <div className="relative w-full h-12">
+                <div className="group bg-paper rounded-xl border border-line p-6 flex flex-col items-center justify-center gap-4 min-h-[180px] h-full hover:border-green-l hover:shadow-md hover:-translate-y-1 transition-all duration-200">
+                  <div className="relative w-full h-24 sm:h-28">
                     <Image
                       src={partner.logo}
                       alt={partner.name}
                       fill
-                      className="object-contain"
-                      sizes="150px"
+                      className="object-cover"
+                      sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 22vw"
                     />
                   </div>
+                  <p className="font-sans text-xs text-ink-3 text-center leading-snug">
+                    {partner.name}
+                  </p>
                 </div>
               </RevealOnScroll>
             ))}

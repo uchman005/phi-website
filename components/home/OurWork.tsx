@@ -5,8 +5,8 @@ import Button from "@/components/ui/Button";
 const projects = [
   {
     label: "Education",
-    image: "/images/programs/adopt-a-school.jpeg",
-    title: "Adopt a School",
+    image: "/images/hubs/nigeria/mef-3.jpeg",
+    title: "Farmer Education",
     description:
       "Partnering with rural schools to improve infrastructure, provide learning materials, and train teachers — giving every child a fair start.",
     href: "/impact",
@@ -14,7 +14,7 @@ const projects = [
   {
     label: "Enterprise",
     image: "/images/programs/jiimarishe-honey.jpg",
-    title: "Jiimarishe Honey Project",
+    title: "Jiimarishe",
     description:
       "A pilot apiculture enterprise in Gilgil, Kenya, that increased household income by 5× — now scaling across East Africa as a model for rural enterprise.",
     href: "/programs/jiimarishe",
@@ -22,7 +22,7 @@ const projects = [
   {
     label: "Community",
     image: "/images/field-work/mission-team.jpeg",
-    title: "Touching Lives",
+    title: "Chakula Bora",
     description:
       "Holistic community interventions — clean water, health outreach, women's empowerment, and housing — addressing the intersecting dimensions of poverty.",
     href: "/impact",

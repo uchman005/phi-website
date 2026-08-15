@@ -20,7 +20,7 @@ const faqs = [
   },
   {
     q: "How much of my donation reaches the mission?",
-    a: "100%. All administrative costs are covered by our board and operational supporters, so every dollar you give goes directly to programs in Kenya, Nigeria, and the Democratic Republic of Congo.",
+    a: "Every gift to a programme or the General Fund goes straight to project costs in Kenya, Nigeria, and the Democratic Republic of Congo. Day-to-day administrative expenses are covered separately by our board and by Sustaining Supporters who choose to fund that overhead directly.",
   },
   {
     q: "Can I give monthly?",
@@ -28,7 +28,15 @@ const faqs = [
   },
   {
     q: "Can I choose which project my donation supports?",
-    a: "Yes. Select any project on the form — from the Jiimarishe Honey Project to clean water and school programs — and your gift will be directed to that work. The General Fund lets us apply your gift wherever the need is greatest.",
+    a: "Yes. Select any project on the form — from FEED Africa and Jiimarishe to Kilimo Bunifu Workshops and Chakula Bora School Clubs — and your gift will be directed to that work. The General Fund lets us apply your gift wherever the need is greatest.",
+  },
+  {
+    q: "What is a Sustaining Supporter?",
+    a: "Sustaining Supporters cover PHI's core operating costs — the overhead every programme depends on — with a recurring monthly gift, so more of every other donor's contribution reaches the field.",
+  },
+  {
+    q: "Is there a minimum donation?",
+    a: "Yes. To keep processing costs low relative to the funds that reach our programmes, the minimum gift is $100.",
   },
   {
     q: "How do I donate from Europe?",

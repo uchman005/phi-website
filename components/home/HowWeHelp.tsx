@@ -1,6 +1,7 @@
 import { TbLeaf, TbUsers } from "react-icons/tb";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import Button from "@/components/ui/Button";
+import { FaPeopleGroup } from "react-icons/fa6";
 
 const cards = [
   {
@@ -19,6 +20,14 @@ const cards = [
       "Educate, train, and empower community leaders, farmers, and entrepreneurs. When people have knowledge and agency, transformation is sustainable and self-propelling.",
     cta: { label: "Build capacity", href: "/build-capacity" },
   },
+  {
+    icon: FaPeopleGroup,
+    iconBg: "bg-ochre-l text-ochre",
+    title: "Leverage the Power of Connection",
+    description:
+      "Take advantage of existing community efforts, research, outreach and events to promote sustainable development practices.",
+    cta: { label: "Leverage connections", href: "/leverage-connections" },
+  }
 ];
 
 export default function HowWeHelp() {
@@ -27,11 +36,11 @@ export default function HowWeHelp() {
       <div className="max-w-[1200px] mx-auto">
         <RevealOnScroll>
           <h2 className="font-display text-2xl sm:text-3xl text-ink mb-10 text-center">
-            How can we help?
+            Our Process
           </h2>
         </RevealOnScroll>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {cards.map((card, i) => {
             const Icon = card.icon;
             return (

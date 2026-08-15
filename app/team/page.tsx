@@ -28,15 +28,15 @@ const sections: { heading: string; members: TeamMember[] }[] = [
     members: [
       {
         name: "Brian Stephenson",
-        role: "President, Passion of Hope",
+        role: "President and Founder, Passion of Hope International. CEO, DHA East Africa, Ltd.",
         photo: "/images/people/team/brian-stephenson.jpg",
         location: "USA",
       },
       {
         name: "Victor Ibeto",
-        role: "Chief Operating Officer, PHI (USA); Board Member, Maripha Empowerment Foundation (Nigeria)",
+        role: "Chief Operating Officer, Passion of Hope International. Attorney.",
         photo: "/images/people/team/victor-ibeto.jpg",
-        location: "USA",
+        location: "Benin",
       },
     ],
   },
@@ -45,9 +45,9 @@ const sections: { heading: string; members: TeamMember[] }[] = [
     members: [
       {
         name: "Mariam Olorundare",
-        role: "CEO, Maripha Empowerment Foundation, PHI Nigeria",
+        role: "President, Maripha Empowerment Foundation. Hub Leader. Training: Catering / Agro-ecology.",
         photo: "/images/people/team/mariam-olorundare.jpg",
-        location: "Maripha, Nigeria",
+        location: "Nigeria",
       },
       {
         name: "Guillain Nabahya",
@@ -57,9 +57,9 @@ const sections: { heading: string; members: TeamMember[] }[] = [
       },
       {
         name: "Mary Omega",
-        role: "Hub Leader, Passion of Hope, Kenya",
+        role: "President, Kamser Seka Widows Self-Help Group. Hub Leader. Training: Education / Agro-ecology.",
         photo: "/images/people/team/mary-omega.jpg",
-        location: "Kendu Bay, Kenya",
+        location: "Kenya",
       },
     ],
   },
@@ -67,9 +67,10 @@ const sections: { heading: string; members: TeamMember[] }[] = [
     heading: "Staff",
     members: [
       {
-        name: "Obiefuna Marcel Uchenna",
-        role: "Web Developer, Passion of Hope International",
+        name: "Uche Obiefuna",
+        role: "Web Developer, Passion of Hope International. Training: Agro-ecology.",
         photo: "/images/people/team/obiefuna-marcel-uchenna.jpg",
+        location: "Nigeria",
       },
     ],
   },
@@ -98,12 +99,13 @@ const sections: { heading: string; members: TeamMember[] }[] = [
       },
       {
         name: "Dr. Sarah Olembo",
-        role: "Kenyan Scientist",
+        role: "Board Member. Horticulture Trade Specialist. Formerly, African Union Department of Rural Economy and Agriculture.",
         photo: "/images/people/team/sarah-olembo.jpg",
+        location: "Kenya",
       },
       {
         name: "Sharon Waswa",
-        role: "PHK Board Member",
+        role: "Board Chairperson, Passion of Hope Kenya. Learning & Development Specialist, AGCO.",
         photo: "/images/people/team/sharon-waswa.jpg",
       },
       {

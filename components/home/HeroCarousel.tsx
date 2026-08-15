@@ -18,7 +18,7 @@ interface Slide {
 const slides: Slide[] = [
   {
     tag: "Who we are",
-    title: "A US non-profit catalyzing rural Africa",
+    title: "Catalyst for community-driven sustainable development in Africa",
     description:
       "Passion of Hope International partners with local communities to build resilient, self-sustaining systems that addresses poverty, food insecurity, and environmental decline.",
     primary: { label: "Learn more", href: "/about" },
@@ -26,35 +26,44 @@ const slides: Slide[] = [
     image: "/images/hero/hero-banner.jpg",
   },
   {
+    tag: "Who we are",
+    title: "Systems Integrator making local partners effective",
+    description:
+      "Passion of Hope International helps local Organizations to drive actual change; change that is sustainable",
+    primary: { label: "Learn more", href: "/about" },
+    secondary: { label: "Donate now", href: "/donate" },
+    image: "/images/gallery/gallery-05.jpg",
+  },
+  {
     tag: "Our approach",
-    title: "Change that is owned by communities",
+    title: "Planet First, Community Owned",
     description:
       "We do not impose solutions. We listen, co-create, and walk alongside the people closest to the challenge — because lasting change must be theirs.",
     primary: { label: "Our story", href: "/about" },
     secondary: { label: "Our hubs", href: "/programs/hubs" },
-    image: "/images/hero/rural-youth-education.jpg",
+    image: "/images/gallery/gallery-08.jpg",
   },
   {
-    tag: "FEED Africa",
-    title: "Food sovereignty, farm to fork",
+    tag: "Our Approach",
+    title: "Partnerships with Academia, Community, and Business",
     description:
-      "Kilimo Bunifu — innovative farming — trains smallholder farmers as scientists, applying agro-ecological principles to increase yields, restore soil, and feed communities.",
+      "PHI connects grassroots organisations, academic institutions, civil society, and government to align resources, share knowledge, and amplify community-led initiatives.",
     primary: { label: "FEED Africa program", href: "/programs/feed-africa" },
     secondary: { label: "Donate", href: "/donate" },
     image: "/images/hero/farm-to-fork.png",
   },
   {
-    tag: "Our model",
-    title: "A systems integrator for local partners",
+    tag: "Our Impact",
+    title: "Transition from Poverty to Productivity",
     description:
-      "PHI connects grassroots organisations, academic institutions, civil society, and government to align resources, share knowledge, and amplify community-led initiatives.",
+      "Kilimo Bunifu — innovative farming — trains smallholder farmers as scientists, applying agro-ecological principles to increase yields, restore soil, and feed communities.",
     primary: { label: "Our partners", href: "/partners" },
     secondary: { label: "Think Global", href: "/programs/think-global" },
     image: "/images/hero/ecosystem-revival.jpg",
   },
   {
-    tag: "Holistic development",
-    title: "Agro-ecology + human capacity",
+    tag: "Our Impact",
+    title: "Healthy Food for Healthy Families",
     description:
       "True development regenerates the planet and its people simultaneously. Our programs integrate ecological restoration with skills training, entrepreneurship, and leadership.",
     primary: { label: "Impact areas", href: "/impact" },
@@ -62,13 +71,13 @@ const slides: Slide[] = [
     image: "/images/hero/sustainable-farming-drc.png",
   },
   {
-    tag: "Impact",
-    title: "Lifting communities out of poverty",
+    tag: "Our Impact",
+    title: "Next Generation Hope",
     description:
       "From the Jiimarishe honey enterprise in Gilgil to our school adoption programme, every PHI initiative is measured by lasting, community-owned outcomes.",
     primary: { label: "Impact stories", href: "/impact" },
     secondary: { label: "Support our work", href: "/donate" },
-    image: "/images/programs/jiimarishe-network.jpg",
+    image: "/images/hero/rural-youth-education.jpg",
   },
 ];
 
@@ -195,11 +204,10 @@ export default function HeroCarousel() {
               aria-selected={i === index}
               aria-label={`Slide ${i + 1}`}
               onClick={() => go(i)}
-              className={`h-1.5 rounded-pill transition-all duration-300 ${
-                i === index
+              className={`h-1.5 rounded-pill transition-all duration-300 ${i === index
                   ? "w-6 bg-green-bright"
                   : "w-1.5 bg-white/30 hover:bg-white/50"
-              }`}
+                }`}
             />
           ))}
         </div>

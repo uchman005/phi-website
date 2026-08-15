@@ -1,0 +1,64 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [master]
+
+concurrency:
+  group: production-deploy
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    name: Lint & build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - run: npm ci
+
+      - run: npm run lint
+
+      - run: npm run build
+
+  deploy:
+    name: Deploy to VPS
+    needs: verify
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          port: ${{ secrets.VPS_PORT }}
+          # ${{ github.sha }} / ${{ github.repository }} are expanded by
+          # GitHub Actions into literal text before this is sent over SSH,
+          # so no env-forwarding into the remote shell is needed.
+          script: |
+            set -euo pipefail
+            SCRIPT_PATH="/tmp/phi-deploy-${{ github.sha }}.sh"
+
+            curl -fsSL \
+              "https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/scripts/deploy.sh" \
+              -o "$SCRIPT_PATH"
+            chmod +x "$SCRIPT_PATH"
+
+            if APP_DIR="${{ vars.VPS_APP_DIR }}" \
+               PM2_ID="${{ vars.VPS_PM2_ID }}" \
+               HEALTH_URL="${{ vars.VPS_HEALTH_URL }}" \
+               bash "$SCRIPT_PATH"; then
+              status=0
+            else
+              status=$?
+            fi
+
+            rm -f "$SCRIPT_PATH"
+            exit $status
+

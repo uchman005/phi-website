@@ -10,6 +10,9 @@
 //                                   created automatically on first use.
 // ---------------------------------------------------------------------------
 
+import { createVerify } from "node:crypto";
+import { MIN_DONATION_AMOUNT } from "./donation-projects";
+
 const PAYPAL_ENV = process.env.PAYPAL_ENV === "live" ? "live" : "sandbox";
 
 export const PAYPAL_API_BASE =
@@ -74,14 +77,18 @@ async function paypalFetch(
   return json;
 }
 
+const MAX_DONATION = 100_000;
+
 /** Donation bounds enforced server-side regardless of what the client sends. */
 export function validateAmount(raw: unknown): number {
   const amount = Number(raw);
   if (!Number.isFinite(amount) || !Number.isInteger(amount)) {
     throw new Error("Amount must be a whole number of US dollars");
   }
-  if (amount < 1 || amount > 100_000) {
-    throw new Error("Amount must be between $1 and $100,000");
+  if (amount < MIN_DONATION_AMOUNT || amount > MAX_DONATION) {
+    throw new Error(
+      `Amount must be between $${MIN_DONATION_AMOUNT} and $${MAX_DONATION.toLocaleString()}`
+    );
   }
   return amount;
 }
@@ -125,36 +132,116 @@ export async function getDonationOrder(orderID: string) {
 }
 
 // ------------------------------------------------------------- webhooks ----
+//
+// PayPal's own remote /v1/notifications/verify-webhook-signature API is the
+// documented way to verify webhooks — but its Sandbox implementation is
+// unreliable: testing this integration live showed it returns
+// "verification_status": "SUCCESS" for a completely fabricated request
+// (fake transmission headers, fake signature). Verified directly against
+// PayPal's sandbox API, not a guess. Production/Live is expected to enforce
+// this properly, but relying on the remote check would leave the webhook
+// forgeable in Sandbox, and there is no way to be certain Live doesn't share
+// the same soft spot.
+//
+// Signature verification is done locally instead, per PayPal's documented
+// algorithm: fetch PayPal's signing certificate (only ever from PayPal's own
+// API domain — a hard requirement, or a forged cert_url could point
+// verification at an attacker-controlled certificate), reconstruct the
+// signed message, and verify it cryptographically. This is correct and
+// trustworthy in both Sandbox and Live.
+
+const ALLOWED_CERT_HOSTS = new Set(["api.paypal.com", "api.sandbox.paypal.com"]);
+const CERT_CACHE_TTL_MS = 24 * 60 * 60 * 1000; // PayPal's certs are long-lived
+const certCache = new Map<string, { pem: string; fetchedAt: number }>();
+
+// Small pure-JS CRC-32 (no Node version dependency — zlib.crc32 only landed
+// in very recent Node releases and hosting providers vary in what they run).
+const CRC_TABLE = (() => {
+  const table = new Uint32Array(256);
+  for (let n = 0; n < 256; n++) {
+    let c = n;
+    for (let k = 0; k < 8; k++) {
+      c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1;
+    }
+    table[n] = c >>> 0;
+  }
+  return table;
+})();
+
+function crc32(buf: Buffer): number {
+  let crc = 0xffffffff;
+  for (let i = 0; i < buf.length; i++) {
+    crc = CRC_TABLE[(crc ^ buf[i]) & 0xff] ^ (crc >>> 8);
+  }
+  return (crc ^ 0xffffffff) >>> 0;
+}
+
+async function getPayPalCert(certUrl: string): Promise<string> {
+  const cached = certCache.get(certUrl);
+  if (cached && Date.now() - cached.fetchedAt < CERT_CACHE_TTL_MS) {
+    return cached.pem;
+  }
+  const res = await fetch(certUrl, { cache: "no-store" });
+  if (!res.ok) {
+    throw new Error(`Failed to fetch PayPal signing certificate (${res.status})`);
+  }
+  const pem = await res.text();
+  certCache.set(certUrl, { pem, fetchedAt: Date.now() });
+  return pem;
+}
 
 /**
- * Verifies a PayPal webhook's signature via PayPal's own verification API —
- * PayPal checks the transmission headers against the event body server-side,
- * so we don't need to implement signature crypto ourselves. Requires
+ * Verifies a PayPal webhook's signature locally. `rawBody` must be the exact
+ * bytes PayPal sent (not a re-serialized JSON.stringify of the parsed
+ * object) — the signature covers the literal request body. Requires
  * PAYPAL_WEBHOOK_ID (see .env.local.example for how to obtain it).
  */
 export async function verifyWebhookSignature(
   headers: Headers,
-  event: unknown
+  rawBody: string
 ): Promise<boolean> {
   const webhookId = process.env.PAYPAL_WEBHOOK_ID;
   if (!webhookId) {
     throw new Error("PAYPAL_WEBHOOK_ID is not configured");
   }
 
-  const result = await paypalFetch("/v1/notifications/verify-webhook-signature", {
-    method: "POST",
-    body: {
-      auth_algo: headers.get("paypal-auth-algo"),
-      cert_url: headers.get("paypal-cert-url"),
-      transmission_id: headers.get("paypal-transmission-id"),
-      transmission_sig: headers.get("paypal-transmission-sig"),
-      transmission_time: headers.get("paypal-transmission-time"),
-      webhook_id: webhookId,
-      webhook_event: event,
-    },
-  });
+  const authAlgo = headers.get("paypal-auth-algo");
+  const certUrl = headers.get("paypal-cert-url");
+  const transmissionId = headers.get("paypal-transmission-id");
+  const transmissionSig = headers.get("paypal-transmission-sig");
+  const transmissionTime = headers.get("paypal-transmission-time");
 
-  return result.verification_status === "SUCCESS";
+  if (!authAlgo || !certUrl || !transmissionId || !transmissionSig || !transmissionTime) {
+    return false;
+  }
+
+  let certHost: string;
+  try {
+    certHost = new URL(certUrl).hostname;
+  } catch {
+    return false;
+  }
+  if (!ALLOWED_CERT_HOSTS.has(certHost)) {
+    console.error("[paypal webhook] rejected cert_url on unexpected host:", certHost);
+    return false;
+  }
+
+  const certPem = await getPayPalCert(certUrl);
+  const crc = crc32(Buffer.from(rawBody, "utf8"));
+  const message = `${transmissionId}|${transmissionTime}|${webhookId}|${crc}`;
+  const nodeAlgo = authAlgo.toUpperCase().includes("SHA256")
+    ? "RSA-SHA256"
+    : "RSA-SHA1";
+
+  try {
+    const verifier = createVerify(nodeAlgo);
+    verifier.update(message);
+    verifier.end();
+    return verifier.verify(certPem, transmissionSig, "base64");
+  } catch (err) {
+    console.error("[paypal webhook] local signature verification error:", err);
+    return false;
+  }
 }
 
 // ------------------------------------------------------------ monthly plan ----

@@ -2,9 +2,12 @@
 
 import { useState, type ChangeEvent } from "react";
 import { TbCheck, TbExternalLink } from "react-icons/tb";
-import { donationProjects as projects } from "@/lib/donation-projects";
+import {
+  donationProjects as projects,
+  MIN_DONATION_AMOUNT,
+} from "@/lib/donation-projects";
 
-const presetAmounts = [25, 50, 100, 250];
+const presetAmounts = [100, 250, 500, 1000];
 const frequencies = ["Once", "Monthly"];
 
 interface DonateFormProps {
@@ -17,8 +20,8 @@ interface DonateFormProps {
 }
 
 export default function DonateForm({ onUpdate }: DonateFormProps) {
-  const [selectedProject, setSelectedProject] = useState("jiimarishe");
-  const [selectedAmount, setSelectedAmount] = useState(50);
+  const [selectedProject, setSelectedProject] = useState("jiimarishe-kenya");
+  const [selectedAmount, setSelectedAmount] = useState(100);
   const [customAmount, setCustomAmount] = useState("");
   const [isCustom, setIsCustom] = useState(false);
   const [frequency, setFrequency] = useState("Once");
@@ -26,7 +29,16 @@ export default function DonateForm({ onUpdate }: DonateFormProps) {
   function selectProject(id: string) {
     setSelectedProject(id);
     const proj = projects.find((p) => p.id === id);
-    onUpdate(id, proj?.name ?? id, isCustom ? Number(customAmount) || 0 : selectedAmount, frequency);
+    // Sustaining Supporter exists specifically to cover overhead on a
+    // recurring basis — nudge frequency to Monthly, but leave it changeable.
+    const nextFrequency = proj?.sustaining ? "Monthly" : frequency;
+    setFrequency(nextFrequency);
+    onUpdate(
+      id,
+      proj?.name ?? id,
+      isCustom ? Number(customAmount) || 0 : selectedAmount,
+      nextFrequency
+    );
   }
 
   function selectAmount(amount: number) {
@@ -148,6 +160,9 @@ export default function DonateForm({ onUpdate }: DonateFormProps) {
             />
           </div>
         </div>
+        <p className="mt-3 font-sans text-xs text-ink-3">
+          Minimum donation: ${MIN_DONATION_AMOUNT}
+        </p>
       </fieldset>
 
       {/* Step 3 – Frequency */}

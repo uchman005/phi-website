@@ -25,6 +25,7 @@ const navItems: NavItem[] = [
     dropdown: [
       { label: "Our Story", href: "/about" },
       { label: "Meet the Team", href: "/team" },
+      { label: "Our Legacy", href: "/legacy" },
       { label: "Testimonials", href: "/testimonials" },
       { label: "Strategic Goals", href: "/strategic-goals" },
       { label: "Partners", href: "/partners" },

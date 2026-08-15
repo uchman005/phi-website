@@ -6,57 +6,70 @@
 // text a client request happens to send.
 // ---------------------------------------------------------------------------
 
+/** Client-safe: imported by both the donate UI and the server-only PayPal
+ * helpers, so the minimum only needs to change in one place. */
+export const MIN_DONATION_AMOUNT = 100;
+
 export interface DonationProject {
   id: string;
   name: string;
   description: string;
   accent: string;
   iconBg: string;
+  /** When true, DonateForm nudges the frequency selector to "Monthly" on selection. */
+  sustaining?: boolean;
 }
 
 export const donationProjects: DonationProject[] = [
   {
-    id: "jiimarishe",
-    name: "Jiimarishe Honey Project",
-    description: "Apiculture enterprise in Kenya — 5× income increase for farmers",
-    accent: "border-green",
-    iconBg: "bg-green-ll text-green",
+    id: "feed-africa-ndhiwa",
+    name: "FEED Africa – Ndhiwa",
+    description: "Building Kenya's agro-ecology and enterprise training campus in Ndhiwa, Homa Bay County",
+    accent: "border-terra",
+    iconBg: "bg-terra-l text-terra",
   },
   {
-    id: "adopt-a-school",
-    name: "Adopt a School",
-    description: "Rural school infrastructure, teachers, and learning materials",
+    id: "feed-africa-maripha",
+    name: "FEED Africa – Maripha",
+    description: "The Farmer Entrepreneur Institute at Maripha Farms, Kwara State, Nigeria",
     accent: "border-ochre",
     iconBg: "bg-ochre-l text-ochre",
   },
   {
-    id: "clean-water",
-    name: "Clean Water Initiative",
-    description: "Bore-holes, rainwater harvesting, and water committee training",
+    id: "jiimarishe-kenya",
+    name: "Jiimarishe Kenya",
+    description: "Apiculture enterprise in Kendu Bay — up to 5× income increase for farmers",
+    accent: "border-green",
+    iconBg: "bg-green-ll text-green",
+  },
+  {
+    id: "kilimo-bunifu-workshops",
+    name: "Kilimo Bunifu Workshops",
+    description: "Engaging Africa's next generation towards food sovereignty",
     accent: "border-blue-400",
     iconBg: "bg-blue-50 text-blue-500",
   },
   {
-    id: "medical-care",
-    name: "Medical Care Access",
-    description: "Mobile health clinics and community health worker training",
+    id: "jiimarishe-drc",
+    name: "Jiimarishe DRC",
+    description: "Scaling the Jiimarishe apiculture and enterprise model into DRC communities",
+    accent: "border-green-d",
+    iconBg: "bg-green-l text-green-d",
+  },
+  {
+    id: "chakula-bora-school-clubs",
+    name: "Chakula Bora School Clubs",
+    description: "After-school agro-ecology clubs teaching pupils to grow good food",
     accent: "border-red-400",
     iconBg: "bg-red-50 text-red-500",
   },
   {
-    id: "kilimo-bunifu",
-    name: "Kilimo Bunifu",
-    description: "Innovative agro-ecological farming — Workshop.",
-    accent: "border-terra",
-    iconBg: "bg-terra-l text-terra",
-  },
-  {
-    id: "FEED-Africa",
-    name: "FEED Africa",
-    description:
-      "Integrates agro-ecological food systems that restore land, feed families, and build economic resilience.",
-    accent: "border-terra",
-    iconBg: "bg-terra-l text-terra",
+    id: "sustaining-supporter",
+    name: "Sustaining Supporter",
+    description: "Cover PHI's core operating costs with a recurring monthly gift",
+    accent: "border-ochre",
+    iconBg: "bg-ochre-l text-ochre",
+    sustaining: true,
   },
   {
     id: "general-fund",

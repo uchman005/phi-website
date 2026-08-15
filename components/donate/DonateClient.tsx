@@ -8,9 +8,9 @@ import DonateSummary from "./DonateSummary";
 const PAYPAL_CLIENT_ID = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID ?? "";
 
 export default function DonateClient() {
-  const [projectId, setProjectId] = useState("jiimarishe");
-  const [projectName, setProjectName] = useState("Jiimarishe Honey Project");
-  const [amount, setAmount] = useState(50);
+  const [projectId, setProjectId] = useState("sustaining-supporter");
+  const [projectName, setProjectName] = useState("Sustaining Supporter");
+  const [amount, setAmount] = useState(100);
   const [frequency, setFrequency] = useState("Once");
 
   function handleUpdate(
