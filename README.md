@@ -6,10 +6,13 @@ nonprofit working across Kenya, Nigeria, and the DRC. Built with Next.js 16
 
 ## Getting started
 
+Uses [Bun](https://bun.sh) — the same runtime CI and the VPS deploy pipeline
+use, so `bun.lock` stays the single source of truth for dependency versions.
+
 ```bash
-npm install
+bun install
 cp .env.local.example .env.local   # fill in the values — see below
-npm run dev
+bun run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
@@ -17,9 +20,9 @@ Open [http://localhost:3000](http://localhost:3000).
 Other scripts:
 
 ```bash
-npm run build   # production build
-npm run start   # serve a production build locally
-npm run lint    # eslint
+bun run build   # production build
+bun run start   # serve a production build locally
+bun run lint    # eslint
 ```
 
 ## Environment variables
@@ -84,15 +87,22 @@ still hold their content directly in the page file.
 
 Pushing to `master` triggers `.github/workflows/deploy.yml`:
 
-1. **`verify`** job — lints and builds on a GitHub-hosted runner. If this
-   fails, the VPS is never touched.
-2. **`deploy`** job — SSHes into the VPS and runs `scripts/deploy.sh` (fetched
-   fresh from the exact commit being deployed, since the repo is public).
-   That script backs up the currently-live build, pulls the new code,
-   installs dependencies, lints, and builds again — and **automatically
-   rolls back to the previous commit and restarts pm2 on it** if any of
-   those steps, or a post-restart health check, fails. A failed deploy always
+1. **`verify`** job — installs (`bun install --frozen-lockfile`), lints, and
+   builds on a GitHub-hosted runner via [`oven-sh/setup-bun`](https://github.com/oven-sh/setup-bun).
+   If this fails, the VPS is never touched.
+2. **`deploy`** job — SSHes into the VPS and runs the deploy script inlined
+   directly in `deploy.yml`'s `script:` block (no separate file — since it's
+   sent over the SSH session rather than living inside the app's own git
+   working directory, it's never at risk of being rewritten mid-run by the
+   `git reset --hard` it performs). It backs up the currently-live build and
+   `bun.lock`/`bun.lockb`, pulls the new code, runs `bun install
+   --frozen-lockfile`, lints, and builds again — and **automatically rolls
+   back to the previous commit and restarts pm2 on it** if any of those
+   steps, or a post-restart health check, fails. A failed deploy always
    leaves production on the last known-good version.
+
+The VPS runs the app under Bun (matching local dev and CI) — `pm2 restart`
+just restarts whatever process pm2 was already configured to run there.
 
 Required GitHub repo configuration (Settings → Secrets and variables →
 Actions):
@@ -100,7 +110,7 @@ Actions):
 - **Secrets**: `VPS_HOST`, `VPS_USERNAME`, `VPS_SSH_KEY`, `VPS_PORT`
 - **Variables**: `VPS_APP_DIR`, `VPS_PM2_ID`, `VPS_HEALTH_URL`
 
-See `scripts/deploy.sh` for the full rollback logic and required env vars.
+See `.github/workflows/deploy.yml` for the full rollback logic.
 
 ## Tech stack
 

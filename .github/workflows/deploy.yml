@@ -15,17 +15,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - uses: oven-sh/setup-bun@v2
         with:
-          node-version: 20
-          cache: "npm"
+          bun-version: latest
 
-      - run: npm ci
+      - run: bun install --frozen-lockfile
 
-      - run: npm run lint
+      - run: bun run lint
 
-      - run: npm run build
+      - run: bun run build
 
+  # Only runs if `verify` succeeded. Connects to the VPS and performs a safe
+  # deploy: pm2 is only restarted if `bun run lint` AND `bun run build`
+  # succeed there too (the VPS's environment is what actually matters, and
+  # it can differ from the runner above). If anything fails — deps, lint,
+  # build, or the post-restart health check — the app is rolled back to the
+  # exact commit it was running before this deploy started, and pm2 is
+  # restarted on that known-good version. Rollback restores the previous
+  # .next build from a local backup rather than rebuilding it, so rollback
+  # never itself depends on a build succeeding.
   deploy:
     name: Deploy to VPS
     needs: verify
@@ -38,27 +46,103 @@ jobs:
           username: ${{ secrets.VPS_USERNAME }}
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_PORT }}
-          # ${{ github.sha }} / ${{ github.repository }} are expanded by
-          # GitHub Actions into literal text before this is sent over SSH,
-          # so no env-forwarding into the remote shell is needed.
+          # No special "fail on error" input is needed here — the composite
+          # action's step fails whenever the remote script exits non-zero,
+          # which rollback() always does (`exit 1`).
           script: |
             set -euo pipefail
-            SCRIPT_PATH="/tmp/phi-deploy-${{ github.sha }}.sh"
 
-            curl -fsSL \
-              "https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/scripts/deploy.sh" \
-              -o "$SCRIPT_PATH"
-            chmod +x "$SCRIPT_PATH"
+            APP_DIR="${{ vars.VPS_APP_DIR }}"
+            : "${APP_DIR:?VPS_APP_DIR repository variable is required}"
+            PM2_ID="${{ vars.VPS_PM2_ID }}"
+            : "${PM2_ID:=0}"
+            HEALTH_URL="${{ vars.VPS_HEALTH_URL }}"
+            : "${HEALTH_URL:=http://127.0.0.1:3000}"
 
-            if APP_DIR="${{ vars.VPS_APP_DIR }}" \
-               PM2_ID="${{ vars.VPS_PM2_ID }}" \
-               HEALTH_URL="${{ vars.VPS_HEALTH_URL }}" \
-               bash "$SCRIPT_PATH"; then
-              status=0
-            else
-              status=$?
+            BACKUP_DIR="$APP_DIR/.deploy-backup"
+            # Bun's lockfile is either the newer text format (bun.lock) or
+            # the older binary one (bun.lockb) — back up whichever exists.
+            LOCKFILES="bun.lock bun.lockb"
+
+            log() { printf '[deploy %s] %s\n' "$(date -u +%H:%M:%S)" "$*"; }
+
+            rollback() {
+              log "DEPLOY FAILED at step: $1 — rolling back to $PREV_COMMIT"
+              cd "$APP_DIR"
+              git reset --hard "$PREV_COMMIT"
+
+              for f in $LOCKFILES; do
+                [ -f "$BACKUP_DIR/$f.bak" ] && cp "$BACKUP_DIR/$f.bak" "$f"
+              done
+              bun install --frozen-lockfile
+
+              if [ -d "$BACKUP_DIR/.next" ]; then
+                rm -rf .next
+                cp -r "$BACKUP_DIR/.next" .next
+                log "Restored previous .next build from backup (no rebuild needed)"
+              else
+                log "No previous build backup available — rebuilding previous commit as a last resort"
+                bun run build
+              fi
+
+              pm2 restart "$PM2_ID" --update-env
+              pm2 save
+
+              log "Rollback complete. App is back on $PREV_COMMIT and pm2 process $PM2_ID has been restarted."
+              log "This deploy is reported as FAILED — production was left safe on the previous version."
+              exit 1
+            }
+
+            [ -d "$APP_DIR/.git" ] || { echo "APP_DIR ($APP_DIR) is not a git repository"; exit 1; }
+            cd "$APP_DIR"
+
+            PREV_COMMIT=$(git rev-parse HEAD)
+            log "Deploying in $APP_DIR — currently on $PREV_COMMIT"
+
+            # Back up the build that's currently live *before* touching
+            # anything, so rollback can restore it verbatim regardless of
+            # what goes wrong next.
+            rm -rf "$BACKUP_DIR"
+            mkdir -p "$BACKUP_DIR"
+            [ -d .next ] && cp -r .next "$BACKUP_DIR/.next"
+            for f in $LOCKFILES; do
+              [ -f "$f" ] && cp "$f" "$BACKUP_DIR/$f.bak"
+            done
+
+            log "Fetching origin/master (public repo — no credentials needed)..."
+            git fetch --all --prune
+            git reset --hard origin/master
+            NEW_COMMIT=$(git rev-parse HEAD)
+
+            if [ "$NEW_COMMIT" = "$PREV_COMMIT" ]; then
+              log "Already up to date at $NEW_COMMIT — nothing to deploy."
+              rm -rf "$BACKUP_DIR"
+              exit 0
             fi
+            log "Updated working tree to $NEW_COMMIT"
 
-            rm -f "$SCRIPT_PATH"
-            exit $status
+            log "Installing dependencies..."
+            bun install --frozen-lockfile || rollback "bun install"
 
+            log "Running lint..."
+            bun run lint || rollback "lint"
+
+            log "Running build..."
+            bun run build || rollback "build"
+
+            log "Lint and build are clean. Restarting pm2 process $PM2_ID..."
+            pm2 restart "$PM2_ID" --update-env
+            pm2 save
+
+            log "Health check against $HEALTH_URL..."
+            attempt=0
+            until curl -fsS -o /dev/null "$HEALTH_URL"; do
+              attempt=$((attempt + 1))
+              if [ "$attempt" -ge 10 ]; then
+                rollback "post-restart health check ($HEALTH_URL did not respond)"
+              fi
+              sleep 2
+            done
+
+            rm -rf "$BACKUP_DIR"
+            log "Deploy successful — now running commit $NEW_COMMIT"
