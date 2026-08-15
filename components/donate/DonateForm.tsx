@@ -20,7 +20,7 @@ interface DonateFormProps {
 }
 
 export default function DonateForm({ onUpdate }: DonateFormProps) {
-  const [selectedProject, setSelectedProject] = useState("jiimarishe-kenya");
+  const [selectedProject, setSelectedProject] = useState("sustaining-supporter");
   const [selectedAmount, setSelectedAmount] = useState(100);
   const [customAmount, setCustomAmount] = useState("");
   const [isCustom, setIsCustom] = useState(false);

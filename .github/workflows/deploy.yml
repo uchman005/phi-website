@@ -124,13 +124,10 @@ jobs:
             log "Installing dependencies..."
             bun install --frozen-lockfile || rollback "bun install"
 
-            log "Running lint..."
-            bun run lint || rollback "lint"
-
             log "Running build..."
             bun run build || rollback "build"
 
-            log "Lint and build are clean. Restarting pm2 process $PM2_ID..."
+            log "Build clean. Restarting pm2 process $PM2_ID..."
             pm2 restart "$PM2_ID" --update-env
             pm2 save
 

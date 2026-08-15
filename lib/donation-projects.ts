@@ -22,23 +22,23 @@ export interface DonationProject {
 
 export const donationProjects: DonationProject[] = [
   {
-    id: "feed-africa-ndhiwa",
-    name: "FEED Africa – Ndhiwa",
-    description: "Building Kenya's agro-ecology and enterprise training campus in Ndhiwa, Homa Bay County",
+    id: "general-fund",
+    name: "General Fund",
+    description: "Support wherever it is needed most across all programmes",
+    accent: "border-green-d",
+    iconBg: "bg-green-l text-green-d",
+  },
+  {
+    id: "feed-africa",
+    name: "FEED Africa",
+    description: "Farmer entrepreneurship and ecosystem development — from the Ndhiwa Mother Farm in Kenya to the Maripha Institute in Nigeria",
     accent: "border-terra",
     iconBg: "bg-terra-l text-terra",
   },
   {
-    id: "feed-africa-maripha",
-    name: "FEED Africa – Maripha",
-    description: "The Farmer Entrepreneur Institute at Maripha Farms, Kwara State, Nigeria",
-    accent: "border-ochre",
-    iconBg: "bg-ochre-l text-ochre",
-  },
-  {
-    id: "jiimarishe-kenya",
-    name: "Jiimarishe Kenya",
-    description: "Apiculture enterprise in Kendu Bay — up to 5× income increase for farmers",
+    id: "jiimarishe",
+    name: "Jiimarishe",
+    description: "Apiculture enterprise raising incomes in Kendu Bay, Kenya — now scaling into DRC communities",
     accent: "border-green",
     iconBg: "bg-green-ll text-green",
   },
@@ -48,13 +48,6 @@ export const donationProjects: DonationProject[] = [
     description: "Engaging Africa's next generation towards food sovereignty",
     accent: "border-blue-400",
     iconBg: "bg-blue-50 text-blue-500",
-  },
-  {
-    id: "jiimarishe-drc",
-    name: "Jiimarishe DRC",
-    description: "Scaling the Jiimarishe apiculture and enterprise model into DRC communities",
-    accent: "border-green-d",
-    iconBg: "bg-green-l text-green-d",
   },
   {
     id: "chakula-bora-school-clubs",
@@ -70,13 +63,6 @@ export const donationProjects: DonationProject[] = [
     accent: "border-ochre",
     iconBg: "bg-ochre-l text-ochre",
     sustaining: true,
-  },
-  {
-    id: "general-fund",
-    name: "General Fund",
-    description: "Support wherever it is needed most across all programmes",
-    accent: "border-green-d",
-    iconBg: "bg-green-l text-green-d",
   },
 ];
 
