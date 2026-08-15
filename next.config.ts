@@ -13,11 +13,11 @@ import type { NextConfig } from "next";
 // reasonable follow-up if this is ever tightened further.
 const csp = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://www.paypal.com https://www.paypalobjects.com",
+  "script-src 'self' 'unsafe-inline' https://www.paypal.com https://www.paypalobjects.com https://www.googletagmanager.com",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: https://www.paypalobjects.com https://www.paypal.com",
+  "img-src 'self' data: https://www.paypalobjects.com https://www.paypal.com https://www.googletagmanager.com",
   "font-src 'self' data:",
-  "connect-src 'self' https://www.paypal.com https://www.paypalobjects.com https://api-m.paypal.com https://api-m.sandbox.paypal.com",
+  "connect-src 'self' https://www.paypal.com https://www.paypalobjects.com https://api-m.paypal.com https://api-m.sandbox.paypal.com https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com",
   "frame-src https://www.paypal.com https://www.sandbox.paypal.com",
   "frame-ancestors 'self'",
   "object-src 'none'",

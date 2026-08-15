@@ -1,8 +1,17 @@
 import type { Metadata } from "next";
 import { Newsreader, Hanken_Grotesk, Spline_Sans_Mono } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+
+// Production-only, regardless of what's in the local env — `bun run dev`
+// traffic should never land in real analytics. Same graceful-degradation
+// pattern as the PayPal integration: unset simply means nothing renders.
+const GA_MEASUREMENT_ID =
+  process.env.NODE_ENV === "production"
+    ? process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID
+    : undefined;
 
 const newsreader = Newsreader({
   subsets: ["latin"],
@@ -127,6 +136,7 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
+        {GA_MEASUREMENT_ID && <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />}
       </body>
     </html>
   );
