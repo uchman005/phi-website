@@ -31,7 +31,7 @@ const tiles = [
   {
     icon: TbPhone,
     title: "Phone",
-    lines: ["+1 (301) 000-0000", "Mon – Fri, 9am – 5pm EST"],
+    lines: ["+1 443-708-1026", "Mon – Fri, 9am – 5pm EST"],
     accent: "bg-ochre-l text-ochre-d",
   },
 ];
