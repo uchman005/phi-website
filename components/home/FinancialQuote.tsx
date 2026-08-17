@@ -23,7 +23,7 @@ export default function FinancialQuote() {
                 <div className="h-1.5 flex-1 bg-green-l rounded-pill overflow-hidden">
                   <div className="h-full w-full bg-green rounded-pill" />
                 </div>
-                <span className="font-mono text-xs text-green font-semibold">
+                <span className="font-mono text-xs text-green-d font-semibold">
                   100%
                 </span>
               </div>

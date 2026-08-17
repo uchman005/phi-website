@@ -69,7 +69,7 @@ export default function DonateForm({ onUpdate }: DonateFormProps) {
       {/* Step 1 – Project */}
       <fieldset>
         <legend className="font-sans font-bold text-base text-ink mb-4 flex items-center gap-2">
-          <span className="w-6 h-6 rounded-full bg-green text-white text-xs flex items-center justify-center font-mono">
+          <span className="w-6 h-6 rounded-full bg-green-d text-white text-xs flex items-center justify-center font-mono">
             1
           </span>
           Choose a project
@@ -120,7 +120,7 @@ export default function DonateForm({ onUpdate }: DonateFormProps) {
       {/* Step 2 – Amount */}
       <fieldset>
         <legend className="font-sans font-bold text-base text-ink mb-4 flex items-center gap-2">
-          <span className="w-6 h-6 rounded-full bg-green text-white text-xs flex items-center justify-center font-mono">
+          <span className="w-6 h-6 rounded-full bg-green-d text-white text-xs flex items-center justify-center font-mono">
             2
           </span>
           Select an amount
@@ -168,7 +168,7 @@ export default function DonateForm({ onUpdate }: DonateFormProps) {
       {/* Step 3 – Frequency */}
       <fieldset>
         <legend className="font-sans font-bold text-base text-ink mb-4 flex items-center gap-2">
-          <span className="w-6 h-6 rounded-full bg-green text-white text-xs flex items-center justify-center font-mono">
+          <span className="w-6 h-6 rounded-full bg-green-d text-white text-xs flex items-center justify-center font-mono">
             3
           </span>
           Frequency
@@ -194,7 +194,7 @@ export default function DonateForm({ onUpdate }: DonateFormProps) {
       {/* Step 4 – Donor details */}
       <fieldset>
         <legend className="font-sans font-bold text-base text-ink mb-4 flex items-center gap-2">
-          <span className="w-6 h-6 rounded-full bg-green text-white text-xs flex items-center justify-center font-mono">
+          <span className="w-6 h-6 rounded-full bg-green-d text-white text-xs flex items-center justify-center font-mono">
             4
           </span>
           Your details
@@ -205,7 +205,7 @@ export default function DonateForm({ onUpdate }: DonateFormProps) {
               htmlFor="donor-name"
               className="font-sans text-sm font-medium text-ink"
             >
-              Full name <span className="text-terra" aria-hidden>*</span>
+              Full name <span className="text-terra-d" aria-hidden>*</span>
             </label>
             <input
               id="donor-name"
@@ -221,7 +221,7 @@ export default function DonateForm({ onUpdate }: DonateFormProps) {
               htmlFor="donor-email"
               className="font-sans text-sm font-medium text-ink"
             >
-              Email <span className="text-terra" aria-hidden>*</span>
+              Email <span className="text-terra-d" aria-hidden>*</span>
             </label>
             <input
               id="donor-email"
@@ -242,7 +242,7 @@ export default function DonateForm({ onUpdate }: DonateFormProps) {
         </h3>
         <div className="bg-cream rounded-lg p-5 border border-line flex items-start gap-4">
           <div className="w-10 h-10 rounded-lg bg-green-ll flex items-center justify-center shrink-0">
-            <TbExternalLink className="text-green text-lg" aria-hidden />
+            <TbExternalLink className="text-green-d text-lg" aria-hidden />
           </div>
           <div>
             <h4 className="font-sans font-semibold text-sm text-ink mb-1">

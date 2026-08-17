@@ -28,13 +28,16 @@ export default function DarkCTA({
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-white leading-tight mb-4 max-w-2xl mx-auto">
             {headline}
           </h2>
-          <p className="text-white/70 font-sans text-lg mb-10 max-w-xl mx-auto">
+          {/* white/90, not /70 — the gradient's lightest point (#0F7155,
+              where this centered text often lands) only gives white/70 a
+              3.79:1 ratio, below AA. /90 clears 5:1 even there. */}
+          <p className="text-white/90 font-sans text-lg mb-10 max-w-xl mx-auto">
             {sub}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
               href={primary.href}
-              className="inline-flex items-center gap-2 px-7 py-3.5 bg-green text-white rounded-pill font-sans font-semibold hover:bg-green-d transition-colors shadow-md"
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-green-d text-white rounded-pill font-sans font-semibold hover:bg-green-dd transition-colors shadow-md"
             >
               {primary.label}
               <TbArrowRight aria-hidden />

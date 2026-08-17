@@ -19,7 +19,7 @@ const goals = [
   {
     number: "01",
     icon: TbBrain,
-    accent: "bg-green-ll text-green",
+    accent: "bg-green-ll text-green-d",
     title: "Invest in Knowledge Systems",
     description:
       "Build and connect knowledge networks that enable communities, researchers, and practitioners to learn from each other. The Chakula Bora digital network aggregates field research, farmer data, and best practices — making knowledge a shared resource, not a proprietary one.",
@@ -33,7 +33,7 @@ const goals = [
   {
     number: "02",
     icon: TbUsers,
-    accent: "bg-terra-l text-terra",
+    accent: "bg-terra-l text-terra-d",
     title: "Invest in People in Rural Communities",
     description:
       "Human capacity is the most durable asset a community can build. PHI's training programmes, leadership development, and enterprise support equip individuals to become drivers of change in their own households, villages, and regions.",
@@ -47,7 +47,7 @@ const goals = [
   {
     number: "03",
     icon: TbTool,
-    accent: "bg-ochre-l text-ochre",
+    accent: "bg-ochre-l text-ochre-d",
     title: "Invest in Appropriate Technologies & Infrastructure",
     description:
       "Technology that fits the context — affordable, maintainable, and ecologically sound. From drip irrigation to solar energy, from mobile health kits to community grain stores, PHI backs practical innovation that communities can adopt, adapt, and own.",
@@ -65,19 +65,19 @@ const metrics = [
     value: "3",
     label: "Knowledge hubs",
     sub: "Across East & West Africa",
-    accent: "bg-green-ll text-green",
+    accent: "bg-green-ll",
   },
   {
     value: "20+",
     label: "Communities reached",
     sub: "Direct programme beneficiaries",
-    accent: "bg-terra-l text-terra",
+    accent: "bg-terra-l",
   },
   {
     value: "5×",
     label: "Income increase",
     sub: "Jiimarishe pilot results",
-    accent: "bg-ochre-l text-ochre",
+    accent: "bg-ochre-l",
   },
 ];
 
@@ -153,13 +153,13 @@ export default function StrategicGoalsPage() {
                 <div
                   className={`rounded-lg p-8 text-center ${m.accent} border border-transparent`}
                 >
-                  <div className="font-display text-5xl font-semibold mb-2">
+                  <div className="font-display text-5xl font-semibold mb-2 text-ink">
                     {m.value}
                   </div>
-                  <div className="font-sans font-semibold text-sm mb-1">
+                  <div className="font-sans font-semibold text-sm mb-1 text-ink-2">
                     {m.label}
                   </div>
-                  <div className="font-sans text-xs opacity-70">{m.sub}</div>
+                  <div className="font-sans text-xs text-ink-2">{m.sub}</div>
                 </div>
               </RevealOnScroll>
             ))}

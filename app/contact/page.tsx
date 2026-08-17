@@ -20,19 +20,19 @@ const tiles = [
     icon: TbMapPin,
     title: "Headquarters",
     lines: ["Passion of Hope International", "Maryland, USA"],
-    accent: "bg-green-ll text-green",
+    accent: "bg-green-ll text-green-d",
   },
   {
     icon: TbMail,
     title: "Email",
-    lines: ["info@passionofhope.org", "partnerships@passionofhope.org"],
-    accent: "bg-terra-l text-terra",
+    lines: ["victor@passionofhope.org", "admin@passionofhope.org"],
+    accent: "bg-terra-l text-terra-d",
   },
   {
     icon: TbPhone,
     title: "Phone",
     lines: ["+1 (301) 000-0000", "Mon – Fri, 9am – 5pm EST"],
-    accent: "bg-ochre-l text-ochre",
+    accent: "bg-ochre-l text-ochre-d",
   },
 ];
 
@@ -99,10 +99,10 @@ export default function ContactPage() {
                     your subject.
                   </p>
                   <a
-                    href="mailto:partnerships@passionofhope.org"
-                    className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-green hover:text-green-d transition-colors"
+                    href="mailto:admin@passionofhope.org"
+                    className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-green-d hover:text-green-dd transition-colors"
                   >
-                    partnerships@passionofhope.org
+                    admin@passionofhope.org
                   </a>
                 </div>
               </div>

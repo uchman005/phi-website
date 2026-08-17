@@ -29,7 +29,7 @@ export default function TeamCard({
       </div>
       <div className="p-5 flex flex-col gap-2 flex-1">
         <h3 className="font-sans font-bold text-sm text-ink">{name}</h3>
-        <p className="font-sans text-xs text-green font-semibold">{role}</p>
+        <p className="font-sans text-xs text-green-d font-semibold">{role}</p>
         {location && (
           <div className="flex items-center gap-1 text-xs text-ink-3">
             <TbMapPin className="shrink-0" aria-hidden />

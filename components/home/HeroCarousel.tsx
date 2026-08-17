@@ -151,7 +151,7 @@ export default function HeroCarousel() {
                 <div className="flex flex-wrap gap-3">
                   <Link
                     href={slide.primary.href}
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-green text-white rounded-pill font-sans font-semibold text-sm hover:bg-green-d transition-colors shadow-sm"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-green-d text-white rounded-pill font-sans font-semibold text-sm hover:bg-green-dd transition-colors shadow-sm"
                   >
                     {slide.primary.label}
                     <TbArrowRight aria-hidden />

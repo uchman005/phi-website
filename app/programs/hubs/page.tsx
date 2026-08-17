@@ -52,7 +52,7 @@ export default function HubsPage() {
                       </span>
                       <div className="flex items-start gap-1.5">
                         <TbMapPin
-                          className="text-green mt-0.5 shrink-0"
+                          className="text-green-d mt-0.5 shrink-0"
                           aria-hidden
                         />
                         <div>
@@ -81,10 +81,10 @@ export default function HubsPage() {
                     </div>
 
                     <div className="flex items-center justify-between mt-1">
-                      <span className="font-mono text-xs text-green bg-green-ll px-3 py-1 rounded-pill">
+                      <span className="font-mono text-xs text-green-d bg-green-ll px-3 py-1 rounded-pill">
                         {hub.projects.length} projects
                       </span>
-                      <span className="inline-flex items-center gap-1 text-sm font-sans font-semibold text-green group-hover:text-green-d transition-colors">
+                      <span className="inline-flex items-center gap-1 text-sm font-sans font-semibold text-green-d group-hover:text-green-dd transition-colors">
                         Explore hub
                         <TbArrowRight
                           className="group-hover:translate-x-0.5 transition-transform"

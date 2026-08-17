@@ -88,7 +88,7 @@ export default function FeedAfricaPage() {
         <div className="max-w-[1200px] mx-auto">
           <div className="max-w-3xl">
             <RevealOnScroll>
-              <span className="inline-block font-mono text-xs text-green uppercase tracking-widest mb-3">
+              <span className="inline-block font-mono text-xs text-green-d uppercase tracking-widest mb-3">
                 The program
               </span>
               <h2 className="font-display text-2xl sm:text-3xl text-ink mb-5">
@@ -121,7 +121,7 @@ export default function FeedAfricaPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-12">
             <RevealOnScroll>
               <div>
-                <span className="inline-block font-mono text-xs text-green uppercase tracking-widest mb-3">
+                <span className="inline-block font-mono text-xs text-green-d uppercase tracking-widest mb-3">
                   🇳🇬 Nigeria
                 </span>
                 <h2 className="font-display text-2xl sm:text-3xl text-ink mb-5">
@@ -163,7 +163,7 @@ export default function FeedAfricaPage() {
               return (
                 <RevealOnScroll key={p.title} delay={(i % 2) * 0.1}>
                   <div className="bg-paper rounded-lg p-6 border border-line flex gap-4">
-                    <div className="w-11 h-11 rounded-lg bg-green-ll text-green flex items-center justify-center shrink-0">
+                    <div className="w-11 h-11 rounded-lg bg-green-ll text-green-d flex items-center justify-center shrink-0">
                       <Icon className="text-xl" aria-hidden />
                     </div>
                     <div>
@@ -220,7 +220,7 @@ export default function FeedAfricaPage() {
       <section className="bg-paper py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-[1200px] mx-auto">
           <RevealOnScroll>
-            <span className="inline-block font-mono text-xs text-green uppercase tracking-widest mb-3">
+            <span className="inline-block font-mono text-xs text-green-d uppercase tracking-widest mb-3">
               🇰🇪 Kenya
             </span>
             <h2 className="font-display text-2xl sm:text-3xl text-ink mb-5">
@@ -249,7 +249,7 @@ export default function FeedAfricaPage() {
               return (
                 <RevealOnScroll key={o.title} delay={(i % 2) * 0.1}>
                   <div className="bg-cream rounded-lg p-6 border border-line flex gap-4 h-full">
-                    <div className="w-11 h-11 rounded-lg bg-terra-l text-terra flex items-center justify-center shrink-0">
+                    <div className="w-11 h-11 rounded-lg bg-terra-l text-terra-d flex items-center justify-center shrink-0">
                       <Icon className="text-xl" aria-hidden />
                     </div>
                     <div>
@@ -269,7 +269,7 @@ export default function FeedAfricaPage() {
       </section>
 
       {/* Agenda 2063 band */}
-      <section className="bg-green py-12 px-4 sm:px-6 lg:px-8">
+      <section className="bg-green-dd py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-[900px] mx-auto text-center">
           <RevealOnScroll>
             <TbPlant2 className="text-3xl text-white/80 mx-auto mb-4" aria-hidden />

@@ -36,7 +36,7 @@ export default function ContactForm() {
         <button
           type="button"
           onClick={() => setSubmitted(false)}
-          className="text-sm font-sans font-semibold text-green hover:text-green-d transition-colors"
+          className="text-sm font-sans font-semibold text-green-d hover:text-green-dd transition-colors"
         >
           Send another message
         </button>
@@ -54,7 +54,7 @@ export default function ContactForm() {
             htmlFor="first-name"
             className="font-sans text-sm font-medium text-ink"
           >
-            First name <span className="text-terra" aria-hidden>*</span>
+            First name <span className="text-terra-d" aria-hidden>*</span>
           </label>
           <input
             id="first-name"
@@ -71,7 +71,7 @@ export default function ContactForm() {
             htmlFor="last-name"
             className="font-sans text-sm font-medium text-ink"
           >
-            Last name <span className="text-terra" aria-hidden>*</span>
+            Last name <span className="text-terra-d" aria-hidden>*</span>
           </label>
           <input
             id="last-name"
@@ -90,7 +90,7 @@ export default function ContactForm() {
           htmlFor="email"
           className="font-sans text-sm font-medium text-ink"
         >
-          Email address <span className="text-terra" aria-hidden>*</span>
+          Email address <span className="text-terra-d" aria-hidden>*</span>
         </label>
         <input
           id="email"
@@ -143,7 +143,7 @@ export default function ContactForm() {
           htmlFor="subject"
           className="font-sans text-sm font-medium text-ink"
         >
-          Subject <span className="text-terra" aria-hidden>*</span>
+          Subject <span className="text-terra-d" aria-hidden>*</span>
         </label>
         <select
           id="subject"
@@ -165,7 +165,7 @@ export default function ContactForm() {
           htmlFor="message"
           className="font-sans text-sm font-medium text-ink"
         >
-          Message <span className="text-terra" aria-hidden>*</span>
+          Message <span className="text-terra-d" aria-hidden>*</span>
         </label>
         <textarea
           id="message"
@@ -179,7 +179,7 @@ export default function ContactForm() {
 
       <button
         type="submit"
-        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-green text-white rounded-pill font-sans font-semibold text-sm hover:bg-green-d transition-colors shadow-sm self-start"
+        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-green-d text-white rounded-pill font-sans font-semibold text-sm hover:bg-green-dd transition-colors shadow-sm self-start"
       >
         Send message
         <TbSend aria-hidden />

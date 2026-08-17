@@ -38,9 +38,15 @@ export default function ImagePlaceholder({
         }}
       />
       {label && (
-        <span className="absolute bottom-3 left-3 font-mono text-xs text-white/70 uppercase tracking-widest">
-          {label}
-        </span>
+        <>
+          {/* Scrim guarantees label contrast regardless of where the label
+              falls on the gradient — the lightest stops (e.g. green-l)
+              leave white text near-illegible without it. */}
+          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/75 to-transparent" />
+          <span className="absolute bottom-3 left-3 font-mono text-xs text-white uppercase tracking-widest">
+            {label}
+          </span>
+        </>
       )}
     </div>
   );

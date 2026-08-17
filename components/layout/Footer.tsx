@@ -143,7 +143,7 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Passion of Hope International.
             All rights reserved.
           </p>
-          <p className="text-xs text-white/40 font-sans text-center sm:text-right">
+          <p className="text-xs text-white/70 font-sans text-center sm:text-right">
             Registered 501(c)(3) non-profit · EIN: 88-XXXXXXX
           </p>
         </div>

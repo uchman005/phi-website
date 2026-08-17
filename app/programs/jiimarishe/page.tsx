@@ -20,14 +20,14 @@ export const metadata: Metadata = {
 const outcomes = [
   {
     icon: TbTrendingUp,
-    accent: "bg-green-ll text-green",
+    accent: "bg-green-ll text-green-d",
     title: "5× household income",
     description:
       "The Jiimarishe honey pilot in Kendu Bay lifted participating households to five times their previous income — enough to pay school fees in full and reinvest in the enterprise.",
   },
   {
     icon: TbHexagon,
-    accent: "bg-ochre-l text-ochre",
+    accent: "bg-ochre-l text-ochre-d",
     title: "Community-owned",
     description:
       "Jiimarishe is a scalable, community-owned cooperative model. Members own the hives, the harvest, and the profit — building enterprise that stays rooted in the community.",
@@ -70,7 +70,7 @@ export default function JiimarishePage() {
             </RevealOnScroll>
             <RevealOnScroll delay={0.1}>
               <div>
-                <span className="inline-block font-mono text-xs text-green uppercase tracking-widest mb-3">
+                <span className="inline-block font-mono text-xs text-green-d uppercase tracking-widest mb-3">
                   The Jiimarishe honey pilot
                 </span>
                 <h2 className="font-display text-2xl sm:text-3xl text-ink mb-5">
@@ -90,7 +90,7 @@ export default function JiimarishePage() {
                 </p>
                 <Link
                   href="/impact"
-                  className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-green hover:text-green-d transition-colors"
+                  className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-green-d hover:text-green-dd transition-colors"
                 >
                   Read Syprina&apos;s story
                   <TbArrowRight aria-hidden />

@@ -19,21 +19,21 @@ export const metadata: Metadata = {
 const modules = [
   {
     icon: TbFlask,
-    accent: "bg-green-ll text-green",
+    accent: "bg-green-ll text-green-d",
     title: "The farmer as scientist",
     description:
       "Farmers are trained to observe, experiment, record, and share — turning their fields into living laboratories for agro-ecological innovation instead of simply following instructions.",
   },
   {
     icon: TbTool,
-    accent: "bg-ochre-l text-ochre",
+    accent: "bg-ochre-l text-ochre-d",
     title: "Hands-on, in the field",
     description:
       "In-person and online sessions cover soil health, water management, composting, and post-harvest processing — practical skills learned by doing, not by lecture.",
   },
   {
     icon: TbClipboardData,
-    accent: "bg-terra-l text-terra",
+    accent: "bg-terra-l text-terra-d",
     title: "Data & enterprise",
     description:
       "Workshops build the record-keeping, cost analysis, and market-linkage skills farmers need to run their plots as sustainable enterprises, not just subsistence plots.",
@@ -65,7 +65,7 @@ export default function KilimoBunifuPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <RevealOnScroll>
               <div>
-                <span className="inline-block font-mono text-xs text-green uppercase tracking-widest mb-3">
+                <span className="inline-block font-mono text-xs text-green-d uppercase tracking-widest mb-3">
                   The workshop
                 </span>
                 <h2 className="font-display text-2xl sm:text-3xl text-ink mb-5">

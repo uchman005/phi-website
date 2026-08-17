@@ -24,21 +24,21 @@ export const metadata: Metadata = {
 const categories = [
   {
     icon: TbSchool,
-    accent: "bg-green-ll text-green",
+    accent: "bg-green-ll text-green-d",
     title: "Academic Institutions",
     description:
       "Universities and research centres that provide technical expertise, field research capacity, and student engagement for PHI's agro-ecology and development programmes.",
   },
   {
     icon: TbBuilding,
-    accent: "bg-ochre-l text-ochre",
+    accent: "bg-ochre-l text-ochre-d",
     title: "Local Government",
     description:
       "County and municipal governments that co-invest in infrastructure, land rights, and policy frameworks that enable PHI programmes to scale and sustain.",
   },
   {
     icon: TbUsers,
-    accent: "bg-terra-l text-terra",
+    accent: "bg-terra-l text-terra-d",
     title: "Civil Society",
     description:
       "NGOs, cooperatives, faith communities, and grassroots organisations that extend PHI's reach and ensure programmes are culturally grounded and locally owned.",
@@ -176,7 +176,7 @@ export default function PartnersPage() {
             {grantCategories.map((g, i) => (
               <RevealOnScroll key={g.title} delay={i * 0.1}>
                 <div className="bg-green-ll rounded-lg p-6 border border-green-l h-full">
-                  <div className="font-mono text-sm text-green font-semibold mb-3">
+                  <div className="font-mono text-sm text-green-d font-semibold mb-3">
                     {g.amount}
                   </div>
                   <h3 className="font-sans font-bold text-base text-ink mb-2">

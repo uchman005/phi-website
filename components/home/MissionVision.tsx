@@ -6,7 +6,7 @@ export default function MissionVision() {
       <div className="max-w-[1200px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <RevealOnScroll delay={0}>
-            <div className="bg-green rounded-lg p-8 h-full">
+            <div className="bg-green-dd rounded-lg p-8 h-full">
               <span className="inline-block font-mono text-xs text-white uppercase tracking-widest mb-3">
                 Our Vision
               </span>
@@ -18,7 +18,7 @@ export default function MissionVision() {
 
           <RevealOnScroll delay={0.2}>
             <div className="bg-paper rounded-lg p-8 border border-green-l h-full">
-              <span className="inline-block font-mono text-xs text-green uppercase tracking-widest mb-3">
+              <span className="inline-block font-mono text-xs text-green-d uppercase tracking-widest mb-3">
                 Our Mission
               </span>
               <p className="font-display text-xl sm:text-2xl text-ink leading-snug">

@@ -32,7 +32,7 @@ export default function BlogCard({
       </div>
       <div className="p-6 flex flex-col gap-3 flex-1">
         <div className="flex items-center gap-2">
-          <span className="font-mono text-[10px] text-green bg-green-ll px-2 py-0.5 rounded-pill">
+          <span className="font-mono text-[10px] text-green-d bg-green-ll px-2 py-0.5 rounded-pill">
             {tag}
           </span>
           <span className="text-xs text-ink-3 font-sans">{date}</span>
@@ -43,7 +43,7 @@ export default function BlogCard({
         <p className="text-xs text-ink-2 leading-relaxed flex-1">{excerpt}</p>
         <Link
           href={href}
-          className="inline-flex items-center gap-1.5 text-xs font-sans font-semibold text-green hover:text-green-d transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs font-sans font-semibold text-green-d hover:text-green-dd transition-colors"
         >
           Read more <TbArrowRight aria-hidden />
         </Link>

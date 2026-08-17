@@ -19,7 +19,7 @@ export default function PageHero({ crumbs, headline, sub }: PageHeroProps) {
           <nav aria-label="Breadcrumb" className="mb-4">
             <ol className="flex items-center gap-1.5 text-sm text-ink-3 font-sans">
               <li>
-                <Link href="/" className="hover:text-green transition-colors">
+                <Link href="/" className="hover:text-green-dd transition-colors">
                   Home
                 </Link>
               </li>
@@ -29,7 +29,7 @@ export default function PageHero({ crumbs, headline, sub }: PageHeroProps) {
                   {crumb.href ? (
                     <Link
                       href={crumb.href}
-                      className="hover:text-green transition-colors"
+                      className="hover:text-green-dd transition-colors"
                     >
                       {crumb.label}
                     </Link>

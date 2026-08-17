@@ -69,12 +69,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </RevealOnScroll>
 
           <div className="flex items-center gap-2 mb-8">
-            <TbUser className="text-green shrink-0" aria-hidden />
+            <TbUser className="text-green-d shrink-0" aria-hidden />
             <p className="font-sans text-sm text-ink-2">
               A project of the{" "}
               <Link
                 href={`/programs/hubs/${hub.slug}`}
-                className="font-semibold text-ink hover:text-green transition-colors"
+                className="font-semibold text-ink hover:text-green-dd transition-colors"
               >
                 {hub.shortName}
               </Link>{" "}
@@ -116,7 +116,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <div className="mt-10">
               <Link
                 href={`/programs/hubs/${hub.slug}`}
-                className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-green hover:text-green-d transition-colors"
+                className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-green-d hover:text-green-dd transition-colors"
               >
                 <TbArrowRight className="rotate-180" aria-hidden />
                 Back to {hub.shortName}

@@ -19,21 +19,21 @@ export const metadata: Metadata = {
 const pillars = [
   {
     icon: TbSchool,
-    accent: "bg-ochre-l text-ochre",
+    accent: "bg-ochre-l text-ochre-d",
     title: "Educate",
     description:
       "From secondary-school students to adult learners, we open doors to knowledge — practical, locally relevant, and taught by people the community trusts.",
   },
   {
     icon: TbSeedling,
-    accent: "bg-green-ll text-green",
+    accent: "bg-green-ll text-green-d",
     title: "Train",
     description:
       "Hands-on training in farming, enterprise, and stewardship equips people with skills they keep for life — and pass on to others.",
   },
   {
     icon: TbBulb,
-    accent: "bg-terra-l text-terra",
+    accent: "bg-terra-l text-terra-d",
     title: "Empower",
     description:
       "Knowledge becomes agency. Leaders, farmers, and entrepreneurs gain the confidence and tools to act, decide, and lead in their own communities.",
@@ -95,7 +95,7 @@ export default function BuildCapacityPage() {
       <section className="bg-cream py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-[1200px] mx-auto">
           <RevealOnScroll>
-            <span className="inline-block font-mono text-xs text-green uppercase tracking-widest mb-3">
+            <span className="inline-block font-mono text-xs text-green-d uppercase tracking-widest mb-3">
               Across our hubs
             </span>
             <h2 className="font-display text-2xl sm:text-3xl text-ink mb-2">
@@ -133,7 +133,7 @@ export default function BuildCapacityPage() {
                   href={ex.href}
                   className="group block bg-paper rounded-lg p-8 border border-line hover:border-green-l hover:-translate-y-1 transition-all duration-200 h-full"
                 >
-                  <span className="font-mono text-xs text-green uppercase tracking-widest">
+                  <span className="font-mono text-xs text-green-d uppercase tracking-widest">
                     {ex.hub}
                   </span>
                   <h3 className="font-sans font-bold text-base text-ink mt-2 mb-3">
@@ -142,7 +142,7 @@ export default function BuildCapacityPage() {
                   <p className="text-sm text-ink-2 leading-relaxed mb-4">
                     {ex.text}
                   </p>
-                  <span className="inline-flex items-center gap-1 text-sm font-sans font-semibold text-green group-hover:text-green-d transition-colors">
+                  <span className="inline-flex items-center gap-1 text-sm font-sans font-semibold text-green-d group-hover:text-green-dd transition-colors">
                     Explore hub
                     <TbArrowRight
                       className="group-hover:translate-x-0.5 transition-transform"
@@ -157,7 +157,7 @@ export default function BuildCapacityPage() {
           <div className="mt-10 text-center">
             <Link
               href="/programs/hubs"
-              className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-green hover:text-green-d transition-colors"
+              className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-green-d hover:text-green-dd transition-colors"
             >
               Meet all our hubs
               <TbArrowRight aria-hidden />

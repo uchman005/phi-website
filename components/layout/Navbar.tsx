@@ -159,9 +159,9 @@ export default function Navbar() {
                           <Link
                             href={sub.href}
                             role="menuitem"
-                            className={`block px-4 py-2.5 text-sm font-sans hover:bg-green-ll hover:text-green-d transition-colors ${
+                            className={`block px-4 py-2.5 text-sm font-sans hover:bg-green-ll hover:text-green-dd transition-colors ${
                               pathname === sub.href
-                                ? "text-green font-semibold"
+                                ? "text-green-d font-semibold"
                                 : "text-ink-2"
                             }`}
                           >
@@ -179,7 +179,7 @@ export default function Navbar() {
                   href={item.href!}
                   className={`px-3 py-2 rounded-md text-sm font-sans font-medium transition-colors ${
                     pathname === item.href
-                      ? "text-green font-semibold bg-green-ll"
+                      ? "text-green-d font-semibold bg-green-ll"
                       : "text-ink-2 hover:text-ink hover:bg-cream"
                   }`}
                 >
@@ -259,9 +259,9 @@ export default function Navbar() {
                             <li key={sub.href}>
                               <Link
                                 href={sub.href}
-                                className={`block px-3 py-2.5 rounded-lg text-sm font-sans hover:bg-green-ll hover:text-green-d transition-colors ${
+                                className={`block px-3 py-2.5 rounded-lg text-sm font-sans hover:bg-green-ll hover:text-green-dd transition-colors ${
                                   pathname === sub.href
-                                    ? "text-green font-semibold bg-green-ll"
+                                    ? "text-green-d font-semibold bg-green-ll"
                                     : "text-ink-2"
                                 }`}
                               >
@@ -279,7 +279,7 @@ export default function Navbar() {
                       href={item.href!}
                       className={`block px-3 py-2.5 rounded-lg text-sm font-sans font-medium transition-colors ${
                         pathname === item.href
-                          ? "text-green font-semibold bg-green-ll"
+                          ? "text-green-d font-semibold bg-green-ll"
                           : "text-ink-2 hover:bg-cream"
                       }`}
                     >

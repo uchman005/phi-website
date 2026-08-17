@@ -25,21 +25,21 @@ export const metadata: Metadata = {
 const pillars = [
   {
     icon: TbUsersGroup,
-    accent: "bg-green-ll text-green",
+    accent: "bg-green-ll text-green-d",
     title: "Community efforts",
     description:
       "Rather than starting from zero, PHI's hubs plug into chama groups, cooperatives, and community organisations already doing the work — and help them go further.",
   },
   {
     icon: TbFlask,
-    accent: "bg-terra-l text-terra",
+    accent: "bg-terra-l text-terra-d",
     title: "Research & institutions",
     description:
       "Partnerships with universities and research centres — from the Songhaï Centre to the University of Ilorin — bring evidence-based, locally-adapted practice to every programme.",
   },
   {
     icon: TbCalendarEvent,
-    accent: "bg-ochre-l text-ochre",
+    accent: "bg-ochre-l text-ochre-d",
     title: "Outreach & events",
     description:
       "World Food Day showcases, school farm tours, and field days put community-led innovation in front of new farmers, students, and partners.",
@@ -101,7 +101,7 @@ export default function LeverageConnectionsPage() {
       <section className="bg-cream py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-[1200px] mx-auto">
           <RevealOnScroll>
-            <span className="inline-block font-mono text-xs text-green uppercase tracking-widest mb-3">
+            <span className="inline-block font-mono text-xs text-green-d uppercase tracking-widest mb-3">
               Across our hubs
             </span>
             <h2 className="font-display text-2xl sm:text-3xl text-ink mb-2">
@@ -139,7 +139,7 @@ export default function LeverageConnectionsPage() {
                   href={ex.href}
                   className="group block bg-paper rounded-lg p-8 border border-line hover:border-green-l hover:-translate-y-1 transition-all duration-200 h-full"
                 >
-                  <span className="font-mono text-xs text-green uppercase tracking-widest">
+                  <span className="font-mono text-xs text-green-d uppercase tracking-widest">
                     {ex.hub}
                   </span>
                   <h3 className="font-sans font-bold text-base text-ink mt-2 mb-3">
@@ -148,7 +148,7 @@ export default function LeverageConnectionsPage() {
                   <p className="text-sm text-ink-2 leading-relaxed mb-4">
                     {ex.text}
                   </p>
-                  <span className="inline-flex items-center gap-1 text-sm font-sans font-semibold text-green group-hover:text-green-d transition-colors">
+                  <span className="inline-flex items-center gap-1 text-sm font-sans font-semibold text-green-d group-hover:text-green-dd transition-colors">
                     Explore hub
                     <TbArrowRight
                       className="group-hover:translate-x-0.5 transition-transform"
@@ -163,7 +163,7 @@ export default function LeverageConnectionsPage() {
           <div className="mt-10 text-center">
             <Link
               href="/partners"
-              className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-green hover:text-green-d transition-colors"
+              className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-green-d hover:text-green-dd transition-colors"
             >
               Meet our partners
               <TbArrowRight aria-hidden />

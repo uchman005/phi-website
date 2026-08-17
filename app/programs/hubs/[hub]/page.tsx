@@ -64,7 +64,7 @@ export default async function HubPage({ params }: HubPageProps) {
             </RevealOnScroll>
             <RevealOnScroll delay={0.1}>
               <div>
-                <span className="inline-block font-mono text-xs text-green uppercase tracking-widest mb-3">
+                <span className="inline-block font-mono text-xs text-green-d uppercase tracking-widest mb-3">
                   What we do
                 </span>
                 {hub.description.map((para, i) => (
@@ -76,13 +76,13 @@ export default async function HubPage({ params }: HubPageProps) {
                 {/* Location & leader */}
                 <div className="mt-6 flex flex-col gap-3 border-t border-line pt-6">
                   <div className="flex items-start gap-2">
-                    <TbMapPin className="text-green mt-0.5 shrink-0" aria-hidden />
+                    <TbMapPin className="text-green-d mt-0.5 shrink-0" aria-hidden />
                     <p className="font-sans text-sm text-ink-2">
                       {hub.city} · {hub.region}, {hub.country}
                     </p>
                   </div>
                   <div className="flex items-start gap-2">
-                    <TbUser className="text-green mt-0.5 shrink-0" aria-hidden />
+                    <TbUser className="text-green-d mt-0.5 shrink-0" aria-hidden />
                     <p className="font-sans text-sm text-ink-2">
                       <span className="font-semibold text-ink">
                         {hub.leader}
@@ -97,7 +97,7 @@ export default async function HubPage({ params }: HubPageProps) {
                   {hub.focus.map((tag) => (
                     <li
                       key={tag}
-                      className="font-mono text-xs text-green bg-green-ll px-3 py-1 rounded-pill"
+                      className="font-mono text-xs text-green-d bg-green-ll px-3 py-1 rounded-pill"
                     >
                       {tag}
                     </li>
@@ -142,7 +142,7 @@ export default async function HubPage({ params }: HubPageProps) {
                     <p className="text-sm text-ink-2 leading-relaxed">
                       {project.summary}
                     </p>
-                    <span className="inline-flex items-center gap-1 text-sm font-sans font-semibold text-green group-hover:text-green-d transition-colors">
+                    <span className="inline-flex items-center gap-1 text-sm font-sans font-semibold text-green-d group-hover:text-green-dd transition-colors">
                       View project
                       <TbArrowRight
                         className="group-hover:translate-x-0.5 transition-transform"
@@ -158,7 +158,7 @@ export default async function HubPage({ params }: HubPageProps) {
           <div className="mt-10">
             <Link
               href="/programs/hubs"
-              className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-green hover:text-green-d transition-colors"
+              className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-green-d hover:text-green-dd transition-colors"
             >
               <TbArrowRight className="rotate-180" aria-hidden />
               All hubs

@@ -30,7 +30,7 @@ export default function NakuruLegacy() {
     <section className="bg-paper py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-[1200px] mx-auto">
         <RevealOnScroll>
-          <span className="inline-block font-mono text-xs text-green uppercase tracking-widest mb-3">
+          <span className="inline-block font-mono text-xs text-green-d uppercase tracking-widest mb-3">
             Our legacy
           </span>
           <h2 className="font-display text-2xl sm:text-3xl text-ink mb-2">
@@ -63,7 +63,7 @@ export default function NakuruLegacy() {
                   <p className="text-ink-2 text-sm leading-relaxed flex-1">
                     {p.description}
                   </p>
-                  <span className="inline-block font-mono text-xs text-green bg-green-ll px-3 py-1 rounded-pill w-fit">
+                  <span className="inline-block font-mono text-xs text-green-d bg-green-ll px-3 py-1 rounded-pill w-fit">
                     {p.metric}
                   </span>
                 </div>

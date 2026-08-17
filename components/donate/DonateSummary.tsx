@@ -52,7 +52,7 @@ export default function DonateSummary({
           received. A receipt will arrive from PayPal shortly — donations to
           PHI are tax-deductible to the extent permitted by law.
         </p>
-        <p className="font-mono text-[10px] text-white/50 break-all">
+        <p className="font-mono text-xs text-white/70 break-all">
           Reference: {payment.reference}
         </p>
         <button
@@ -75,26 +75,26 @@ export default function DonateSummary({
 
       <dl className="flex flex-col gap-4">
         <div>
-          <dt className="font-mono text-[10px] text-green-bright uppercase tracking-widest mb-1">
+          <dt className="font-mono text-xs text-green-bright uppercase tracking-widest mb-1">
             Project
           </dt>
           <dd className="font-sans text-sm text-white/90">{project}</dd>
         </div>
         <div>
-          <dt className="font-mono text-[10px] text-green-bright uppercase tracking-widest mb-1">
+          <dt className="font-mono text-xs text-green-bright uppercase tracking-widest mb-1">
             Frequency
           </dt>
           <dd className="font-sans text-sm text-white/90">{frequency}</dd>
         </div>
         <div>
-          <dt className="font-mono text-[10px] text-green-bright uppercase tracking-widest mb-1">
+          <dt className="font-mono text-xs text-green-bright uppercase tracking-widest mb-1">
             Amount
           </dt>
           <dd className="font-display text-4xl text-white">{displayAmount}</dd>
         </div>
         {isMonthly && amount > 0 && (
           <div>
-            <dt className="font-mono text-[10px] text-green-bright uppercase tracking-widest mb-1">
+            <dt className="font-mono text-xs text-green-bright uppercase tracking-widest mb-1">
               Annual total
             </dt>
             <dd className="font-sans text-sm text-white/70">{total}</dd>
@@ -223,7 +223,7 @@ export default function DonateSummary({
         </div>
       )}
 
-      <p className="font-sans text-[10px] text-white/40 text-center leading-relaxed">
+      <p className="font-sans text-xs text-white/70 text-center leading-relaxed">
         Processed securely by PayPal. PHI is a registered 501(c)(3) — donations
         are tax-deductible to the extent permitted by law.
       </p>

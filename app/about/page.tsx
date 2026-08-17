@@ -51,19 +51,19 @@ const beliefs = [
     icon: TbBulb,
     title: "Vision",
     text: "An empowered Africa with resilient and food sovereign communities.",
-    accent: "bg-green-ll text-green",
+    accent: "bg-green-ll text-green-d",
   },
   {
     icon: TbPlant2,
     title: "Mission",
     text: "To invest in knowledge and people in rural communities, building climate-resilient, and sustainable food systems.",
-    accent: "bg-terra-l text-terra",
+    accent: "bg-terra-l text-terra-d",
   },
   {
     icon: TbScale,
     title: "Belief",
     text: "The people closest to a problem are best placed to solve it. Real change comes from within — PHI's role is to unlock what is already there.",
-    accent: "bg-ochre-l text-ochre",
+    accent: "bg-ochre-l text-ochre-d",
   },
 ];
 
@@ -128,7 +128,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <RevealOnScroll>
               <div>
-                <span className="inline-block font-mono text-xs text-green uppercase tracking-widest mb-3">
+                <span className="inline-block font-mono text-xs text-green-d uppercase tracking-widest mb-3">
                   Our Story
                 </span>
                 <h2 className="font-display text-2xl sm:text-3xl text-ink mb-5">
@@ -178,7 +178,7 @@ export default function AboutPage() {
             {milestones.map((m, i) => (
               <RevealOnScroll key={m.year} delay={i * 0.1} as="li">
                 <div className="bg-paper rounded-lg p-6 border border-line h-full">
-                  <span className="inline-block font-mono text-xs text-green uppercase tracking-widest mb-1">
+                  <span className="inline-block font-mono text-xs text-green-d uppercase tracking-widest mb-1">
                     {m.year}
                   </span>
                   <div className="flex items-center gap-1.5 mb-3">

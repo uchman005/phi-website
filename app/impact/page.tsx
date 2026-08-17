@@ -32,25 +32,25 @@ const metrics = [
     value: "5×",
     label: "Income increase",
     sub: "Jiimarishe apiculture pilot",
-    accent: "bg-green-ll text-green",
+    accent: "bg-green-ll",
   },
   {
     value: "4",
     label: "Active hubs",
     sub: "Across East & West Africa",
-    accent: "bg-terra-l text-terra",
+    accent: "bg-terra-l",
   },
   {
     value: "3",
     label: "Countries",
     sub: "Kenya · Nigeria · DRC",
-    accent: "bg-ochre-l text-ochre",
+    accent: "bg-ochre-l",
   },
   {
     value: "20+",
     label: "Communities reached",
     sub: "Direct programme beneficiaries",
-    accent: "bg-green-l text-green-d",
+    accent: "bg-green-l",
   },
 ];
 
@@ -73,7 +73,7 @@ const areas = [
   },
   {
     icon: TbSchool,
-    accent: "bg-ochre-l text-ochre",
+    accent: "bg-ochre-l text-ochre-d",
     title: "Education",
     description:
       "Adopt-a-School builds and equips rural classrooms, trains teachers, and provides learning materials — because every child deserves a quality education regardless of geography.",
@@ -81,7 +81,7 @@ const areas = [
   },
   {
     icon: TbUsers,
-    accent: "bg-terra-l text-terra",
+    accent: "bg-terra-l text-terra-d",
     title: "Empowering Women",
     description:
       "Women are at the centre of every PHI intervention. Entrepreneurship training, savings groups, legal literacy, and leadership programmes unlock women's full economic potential.",
@@ -89,7 +89,7 @@ const areas = [
   },
   {
     icon: TbHome,
-    accent: "bg-green-ll text-green",
+    accent: "bg-green-ll text-green-d",
     title: "Housing",
     description:
       "Dignified, climate-resilient housing built with local materials and labour. PHI integrates solar energy, rainwater collection, and ventilation into affordable community housing.",
@@ -140,13 +140,13 @@ export default function ImpactPage() {
             {metrics.map((m, i) => (
               <RevealOnScroll key={m.label} delay={i * 0.08}>
                 <div className={`rounded-lg p-6 text-center ${m.accent}`}>
-                  <div className="font-display text-4xl font-semibold mb-1">
+                  <div className="font-display text-4xl font-semibold mb-1 text-ink">
                     {m.value}
                   </div>
-                  <div className="font-sans font-semibold text-xs mb-0.5">
+                  <div className="font-sans font-semibold text-xs mb-0.5 text-ink-2">
                     {m.label}
                   </div>
-                  <div className="font-sans text-[10px] opacity-70">
+                  <div className="font-sans text-xs text-ink-2">
                     {m.sub}
                   </div>
                 </div>
@@ -160,7 +160,7 @@ export default function ImpactPage() {
       <section className="bg-paper py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-[1200px] mx-auto">
           <RevealOnScroll>
-            <span className="inline-block font-mono text-xs text-green uppercase tracking-widest mb-3">
+            <span className="inline-block font-mono text-xs text-green-d uppercase tracking-widest mb-3">
               Impact areas
             </span>
             <h2 className="font-display text-2xl sm:text-3xl text-ink mb-2">
@@ -188,7 +188,7 @@ export default function ImpactPage() {
                     <p className="text-sm text-ink-2 leading-relaxed flex-1">
                       {area.description}
                     </p>
-                    <span className="inline-block font-mono text-xs text-green bg-green-ll px-3 py-1 rounded-pill w-fit">
+                    <span className="inline-block font-mono text-xs text-green-d bg-green-ll px-3 py-1 rounded-pill w-fit">
                       {area.metric}
                     </span>
                   </article>
@@ -203,7 +203,7 @@ export default function ImpactPage() {
       <section className="bg-cream py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-[1200px] mx-auto">
           <RevealOnScroll>
-            <span className="inline-block font-mono text-xs text-green uppercase tracking-widest mb-3">
+            <span className="inline-block font-mono text-xs text-green-d uppercase tracking-widest mb-3">
               Impact stories
             </span>
           </RevealOnScroll>
@@ -247,7 +247,7 @@ export default function ImpactPage() {
                 </blockquote>
                 <Link
                   href="/donate"
-                  className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-green hover:text-green-d transition-colors"
+                  className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-green-d hover:text-green-dd transition-colors"
                 >
                   Support more stories like Syprina&apos;s
                   <TbArrowRight aria-hidden />

@@ -6,7 +6,7 @@ import { FaPeopleGroup } from "react-icons/fa6";
 const cards = [
   {
     icon: TbLeaf,
-    iconBg: "bg-green-ll text-green",
+    iconBg: "bg-green-ll text-green-d",
     title: "Heal the planet",
     description:
       "Engage in ecosystem revival through agro-ecological farming, reforestation, soil restoration, and sustainable water management — returning land to its productive best.",
@@ -14,7 +14,7 @@ const cards = [
   },
   {
     icon: TbUsers,
-    iconBg: "bg-terra-l text-terra",
+    iconBg: "bg-terra-l text-terra-d",
     title: "Build capacity",
     description:
       "Educate, train, and empower community leaders, farmers, and entrepreneurs. When people have knowledge and agency, transformation is sustainable and self-propelling.",
@@ -22,7 +22,7 @@ const cards = [
   },
   {
     icon: FaPeopleGroup,
-    iconBg: "bg-ochre-l text-ochre",
+    iconBg: "bg-ochre-l text-ochre-d",
     title: "Leverage the Power of Connection",
     description:
       "Take advantage of existing community efforts, research, outreach and events to promote sustainable development practices.",

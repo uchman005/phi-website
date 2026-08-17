@@ -19,21 +19,21 @@ export const metadata: Metadata = {
 const features = [
   {
     icon: TbNetwork,
-    accent: "bg-green-ll text-green",
+    accent: "bg-green-ll text-green-d",
     title: "One connected network",
     description:
       "ChakulaBora digitally links PHI's hubs, partner organisations, academic institutions, and community leaders — so a breakthrough in one community reaches every other in real time.",
   },
   {
     icon: TbDeviceLaptop,
-    accent: "bg-ochre-l text-ochre",
+    accent: "bg-ochre-l text-ochre-d",
     title: "An open knowledge platform",
     description:
       "Field research, farmer innovations, market data, and policy analysis are aggregated into an open, community-accessible resource — knowledge as a shared good, not a gated one.",
   },
   {
     icon: TbUsersGroup,
-    accent: "bg-terra-l text-terra",
+    accent: "bg-terra-l text-terra-d",
     title: "ChakulaBora Clubs",
     description:
       "Local clubs bring the network to the ground — youth and community members meet, exchange ideas, and carry innovations back into their own villages and schools.",
@@ -57,7 +57,7 @@ export default function ChakulaBoraPage() {
         <div className="max-w-[1200px] mx-auto">
           <div className="max-w-3xl">
             <RevealOnScroll>
-              <span className="inline-block font-mono text-xs text-green uppercase tracking-widest mb-3">
+              <span className="inline-block font-mono text-xs text-green-d uppercase tracking-widest mb-3">
                 The network
               </span>
               <h2 className="font-display text-2xl sm:text-3xl text-ink mb-5">
@@ -77,7 +77,7 @@ export default function ChakulaBoraPage() {
               </p>
               <Link
                 href="/partners"
-                className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-green hover:text-green-d transition-colors"
+                className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-green-d hover:text-green-dd transition-colors"
               >
                 See our knowledge partners
                 <TbArrowRight aria-hidden />
@@ -86,7 +86,7 @@ export default function ChakulaBoraPage() {
               <Link
                 href="https://www.chakulabora.net/"
                 target="_blank"
-                className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-green hover:text-green-d transition-colors"
+                className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-green-d hover:text-green-dd transition-colors"
               >
                 Expore the network
                 <TbExternalLink aria-hidden />

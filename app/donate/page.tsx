@@ -96,7 +96,7 @@ export default function DonatePage() {
                   <summary className="font-sans font-semibold text-sm text-ink cursor-pointer list-none flex items-center justify-between gap-4">
                     {f.q}
                     <span
-                      className="text-green transition-transform group-open:rotate-45 text-lg leading-none"
+                      className="text-green-d transition-transform group-open:rotate-45 text-lg leading-none"
                       aria-hidden
                     >
                       +
