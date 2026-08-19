@@ -29,7 +29,7 @@ const sections: { heading: string; members: TeamMember[] }[] = [
       {
         name: "Brian Stephenson",
         role: "President and Founder, Passion of Hope International. CEO, DHA East Africa, Ltd.",
-        photo: "/images/people/team/brian-stephenson.jpg",
+        photo: "/images/people/team/brian.jpg",
         location: "USA",
       },
       {
