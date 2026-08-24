@@ -35,7 +35,7 @@ const sections: { heading: string; members: TeamMember[] }[] = [
       {
         name: "Victor Ibeto",
         role: "Chief Operating Officer, Passion of Hope International. Attorney.",
-        photo: "/images/people/team/victor-ibeto.jpg",
+        photo: "/images/people/team/victor.jpeg",
         location: "Benin",
       },
     ],

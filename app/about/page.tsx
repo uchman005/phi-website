@@ -108,7 +108,7 @@ const team = [
     name: "Victor Ibeto",
     role: "US Management COO",
     location: "Maryland, USA",
-    photo: "/images/people/team/victor-ibeto.jpg",
+    photo: "/images/people/team/victor.jpeg",
     bio: "PHI's US-Africa leadership team manages operations, partnerships, fundraising, and the Chakula Bora Digital Network.",
   },
 ];
