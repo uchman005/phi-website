@@ -20,10 +20,10 @@ const slides: Slide[] = [
     tag: "Who we are",
     title: "Catalyst for community-driven sustainable development in Africa",
     description:
-      "Passion of Hope International partners with local communities to build resilient, self-sustaining systems that addresses poverty, food insecurity, and environmental decline.",
+      "Passion of Hope International partners with local communities by sowing into the lives of the people to build resilient, self-sustaining systems that address poverty, food insecurity, and environmental decline.",
     primary: { label: "Learn more", href: "/about" },
     secondary: { label: "Donate now", href: "/donate" },
-    image: "/images/hero/hero-banner.jpg",
+    image: "/images/hero/catalyst.jpeg",
   },
   {
     tag: "Who we are",
