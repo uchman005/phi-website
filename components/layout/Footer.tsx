@@ -137,7 +137,7 @@ export default function Footer() {
             All rights reserved.
           </p>
           <p className="text-xs text-white/70 font-sans text-center sm:text-right">
-            Registered 501(c)(3) non-profit
+            Registered 501(c)(3) non-profit · EIN: 30-1116311
           </p>
         </div>
       </div>

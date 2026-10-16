@@ -106,6 +106,8 @@ const orgSchema = {
   description:
     "A US 501(c)(3) nonprofit catalyzing appropriate and sustainable development in rural Africa — food sovereignty, clean energy, women's empowerment, and community-owned change in Kenya, Nigeria, and the DRC.",
   nonprofitStatus: "Nonprofit501c3",
+  // EIN as listed on PHI's Candid (GuideStar) profile.
+  taxID: "30-1116311",
   areaServed: ["Kenya", "Nigeria", "Democratic Republic of the Congo"],
   address: {
     "@type": "PostalAddress",
