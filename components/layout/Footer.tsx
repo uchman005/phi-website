@@ -6,6 +6,7 @@ import {
   FaYoutube,
   FaXTwitter,
 } from "react-icons/fa6";
+import type { IconType } from "react-icons";
 
 const footerLinks = [
   {
@@ -42,28 +43,18 @@ const footerLinks = [
   },
 ];
 
-const socialLinks = [
-  {
-    label: "LinkedIn",
-    href: "https://linkedin.com",
-    icon: FaLinkedin,
-  },
-  {
-    label: "Facebook",
-    href: "https://facebook.com",
-    icon: FaFacebook,
-  },
-  {
-    label: "YouTube",
-    href: "https://youtube.com",
-    icon: FaYoutube,
-  },
-  {
-    label: "X (Twitter)",
-    href: "https://x.com",
-    icon: FaXTwitter,
-  },
+// Only real profile URLs belong here — an icon renders only when its href is
+// set. TODO(founder): supply the official LinkedIn / Facebook / YouTube / X URLs.
+const socialLinks: { label: string; href: string | null; icon: IconType }[] = [
+  { label: "LinkedIn", href: null, icon: FaLinkedin },
+  { label: "Facebook", href: null, icon: FaFacebook },
+  { label: "YouTube", href: null, icon: FaYoutube },
+  { label: "X (Twitter)", href: null, icon: FaXTwitter },
 ];
+
+const activeSocialLinks = socialLinks.filter(
+  (link): link is typeof link & { href: string } => Boolean(link.href)
+);
 
 export default function Footer() {
   return (
@@ -96,23 +87,25 @@ export default function Footer() {
               — community-owned, planet-first, people-centred.
             </p>
             {/* Social icons */}
-            <nav aria-label="Social media" className="mt-6">
-              <ul className="flex items-center gap-3" role="list">
-                {socialLinks.map(({ label, href, icon: Icon }) => (
-                  <li key={label}>
-                    <a
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={label}
-                      className="flex items-center justify-center w-9 h-9 rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-white/80 hover:text-white"
-                    >
-                      <Icon className="text-base" aria-hidden />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+            {activeSocialLinks.length > 0 && (
+              <nav aria-label="Social media" className="mt-6">
+                <ul className="flex items-center gap-3" role="list">
+                  {activeSocialLinks.map(({ label, href, icon: Icon }) => (
+                    <li key={label}>
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={label}
+                        className="flex items-center justify-center w-9 h-9 rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-white/80 hover:text-white"
+                      >
+                        <Icon className="text-base" aria-hidden />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            )}
           </div>
 
           {/* Link columns */}
@@ -144,7 +137,7 @@ export default function Footer() {
             All rights reserved.
           </p>
           <p className="text-xs text-white/70 font-sans text-center sm:text-right">
-            Registered 501(c)(3) non-profit · EIN: 88-XXXXXXX
+            Registered 501(c)(3) non-profit
           </p>
         </div>
       </div>

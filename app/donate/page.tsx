@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import DonateClient from "@/components/donate/DonateClient";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
+import { resolveProjectId } from "@/lib/donation-projects";
 
 export const metadata: Metadata = {
   title: "Donate — Tax-Deductible Giving to Rural Africa",
@@ -54,7 +55,20 @@ const faqSchema = {
   })),
 };
 
-export default function DonatePage() {
+// Without a ?project= link the form opens on Sustaining Supporter, as before.
+const DEFAULT_FORM_PROJECT_ID = "sustaining-supporter";
+
+interface DonatePageProps {
+  searchParams: Promise<{ project?: string | string[] }>;
+}
+
+export default async function DonatePage({ searchParams }: DonatePageProps) {
+  const { project } = await searchParams;
+  const initialProjectId =
+    typeof project === "string"
+      ? resolveProjectId(project)
+      : DEFAULT_FORM_PROJECT_ID;
+
   return (
     <>
       <script
@@ -77,7 +91,7 @@ export default function DonatePage() {
       {/* Donate form + summary */}
       <section className="bg-paper py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-[1200px] mx-auto">
-          <DonateClient />
+          <DonateClient initialProjectId={initialProjectId} />
         </div>
       </section>
 

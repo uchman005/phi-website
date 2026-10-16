@@ -6,7 +6,6 @@ import DarkCTA from "@/components/home/DarkCTA";
 import BlogCard from "@/components/blog/BlogCard";
 import { blogPosts } from "@/lib/blog-posts";
 import {
-  TbArrowRight,
   TbDroplet,
   TbHeart,
   TbSchool,
@@ -14,12 +13,11 @@ import {
   TbHome,
   TbPlant2,
 } from "react-icons/tb";
-import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Impact",
   description:
-    "PHI's impact — the areas we work across and the families behind the figures. From clean water and education to Syprina's honey harvest in Kendu Bay.",
+    "PHI's impact — the areas we work across and the families behind the figures, from clean water and education to health and housing.",
   openGraph: {
     title: "Impact | Passion of Hope International",
     description:
@@ -207,57 +205,7 @@ export default function ImpactPage() {
               Impact stories
             </span>
           </RevealOnScroll>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <RevealOnScroll delay={0.05}>
-              <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
-                <Image
-                  src="/images/people/testimonials/syprina-auma.jpg"
-                  alt="Syprina Auma — Kendu Bay"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </div>
-            </RevealOnScroll>
-            <RevealOnScroll delay={0.1}>
-              <div>
-                <h2 className="font-display text-2xl sm:text-3xl text-ink mb-4">
-                  Syprina Auma: from subsistence to enterprise
-                </h2>
-                <p className="text-ink-2 leading-relaxed mb-4">
-                  Three years ago, Syprina Auma farmed a half-acre plot near
-                  Kendu Bay — barely enough to feed her family. When PHI&apos;s
-                  Jiimarishe programme arrived, she became one of the first
-                  women to complete the apiculture training.
-                </p>
-                <p className="text-ink-2 leading-relaxed mb-6">
-                  Today she manages a cooperative of 12 beehives, earns five
-                  times her previous income, and mentors new entrants to the
-                  programme. She has paid her children&apos;s school fees in
-                  full for two consecutive years.
-                </p>
-                <blockquote className="border-l-4 border-green pl-4 mb-6">
-                  <p className="font-display text-lg text-ink italic">
-                    &ldquo;The bees gave me back my confidence. Now I know I can
-                    build something — for my family, and for others.&rdquo;
-                  </p>
-                  <footer className="mt-2 font-sans text-sm text-ink-3">
-                    — Syprina Auma, Kendu Bay, Kenya
-                  </footer>
-                </blockquote>
-                <Link
-                  href="/donate"
-                  className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-green-d hover:text-green-dd transition-colors"
-                >
-                  Support more stories like Syprina&apos;s
-                  <TbArrowRight aria-hidden />
-                </Link>
-              </div>
-            </RevealOnScroll>
-          </div>
-
-          {/* More stories */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-14">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {stories.map((s, i) => (
               <RevealOnScroll key={s.name} delay={i * 0.1}>
                 <figure className="bg-paper rounded-lg p-8 border border-line h-full flex flex-col gap-5">

@@ -11,6 +11,7 @@ const presetAmounts = [100, 250, 500, 1000];
 const frequencies = ["Once", "Monthly"];
 
 interface DonateFormProps {
+  initialProjectId: string;
   onUpdate: (
     projectId: string,
     projectName: string,
@@ -19,8 +20,11 @@ interface DonateFormProps {
   ) => void;
 }
 
-export default function DonateForm({ onUpdate }: DonateFormProps) {
-  const [selectedProject, setSelectedProject] = useState("sustaining-supporter");
+export default function DonateForm({
+  initialProjectId,
+  onUpdate,
+}: DonateFormProps) {
+  const [selectedProject, setSelectedProject] = useState(initialProjectId);
   const [selectedAmount, setSelectedAmount] = useState(100);
   const [customAmount, setCustomAmount] = useState("");
   const [isCustom, setIsCustom] = useState(false);

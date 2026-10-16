@@ -135,9 +135,12 @@ export default function KilimoBunifuPage() {
       </section>
 
       <DarkCTA
-        headline="Train a farmer, feed a community"
-        sub="$50 puts one farmer through a Kilimo Bunifu workshop — a skill they keep, and teach, for life."
-        primary={{ label: "Donate to Kilimo Bunifu", href: "/donate" }}
+        headline="Back the next generation"
+        sub="Support Kilimo Bunifu III — young Africans, evidence and commitments on food sovereignty. 24 Nov 2026, Bulawayo."
+        primary={{
+          label: "Donate to Kilimo Bunifu",
+          href: "/donate?project=kilimo-bunifu-workshops",
+        }}
         secondary={{ label: "Explore FEED Africa", href: "/programs/feed-africa" }}
       />
     </>
