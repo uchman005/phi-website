@@ -5,6 +5,7 @@ import PageHero from "@/components/ui/PageHero";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import DarkCTA from "@/components/home/DarkCTA";
 import { blogPosts, getBlogPost } from "@/lib/blog-posts";
+import { pageTitle, withShareImage } from "@/lib/seo";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -21,12 +22,13 @@ export async function generateMetadata({
   const post = getBlogPost(slug);
   if (!post) return {};
   return {
-    title: post.title,
+    title: pageTitle(post.title),
     description: post.excerpt,
-    openGraph: {
+    openGraph: withShareImage({
       title: `${post.title} | Passion of Hope International`,
       description: post.excerpt,
-    },
+      images: [{ url: post.thumbnail, alt: post.title }],
+    }),
   };
 }
 

@@ -6,7 +6,7 @@ const projects = [
   {
     label: "Education",
     image: "/images/hubs/nigeria/mef-3.jpeg",
-    title: "Farmer Education",
+    title: "Adopt-a-School",
     description:
       "Partnering with rural schools to improve infrastructure, provide learning materials, and train teachers — giving every child a fair start.",
     href: "/impact",

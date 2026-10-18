@@ -4,16 +4,17 @@ import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import DarkCTA from "@/components/home/DarkCTA";
 import { TbSchool, TbBulb, TbUsersGroup, TbSeedling, TbArrowRight } from "react-icons/tb";
 import Link from "next/link";
+import { withShareImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Build Capacity",
   description:
     "Educate, train, and empower community leaders, farmers, and entrepreneurs. When people have knowledge and agency, transformation is sustainable and self-propelling.",
-  openGraph: {
+  openGraph: withShareImage({
     title: "Build Capacity | Passion of Hope International",
     description:
       "Educate, train, and empower — building the knowledge and agency that make change self-propelling.",
-  },
+  }),
 };
 
 const pillars = [

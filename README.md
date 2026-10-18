@@ -34,6 +34,8 @@ credentials and how to register the PayPal webhook. In short:
 | Variable | Purpose |
 |---|---|
 | `NEXT_PUBLIC_SITE_URL` | Canonical URL used in SEO metadata, sitemap, structured data |
+| `NEXT_PUBLIC_GA_MEASUREMENT_ID` | Google Analytics 4 ID; production builds only, empty disables analytics |
+| `SUBMISSIONS_DIR` | Where form submissions are saved as `<source>.jsonl` (default `data/submissions`, git-ignored) |
 | `NEXT_PUBLIC_PAYPAL_CLIENT_ID` | PayPal app Client ID (public) |
 | `PAYPAL_CLIENT_SECRET` | PayPal app Secret (server only — never commit or expose) |
 | `PAYPAL_ENV` | `sandbox` or `live` |
@@ -63,6 +65,17 @@ files under `lib/`, not scattered across page components. Edit these first:
 Team members (`app/team/page.tsx`), testimonials (`app/testimonials/page.tsx`),
 and most standalone pages (`app/about`, `app/impact`, `app/partners`, etc.)
 still hold their content directly in the page file.
+
+## Form submissions
+
+The contact form posts to a Server Action (`app/contact/actions.ts`) that
+validates on the server, rate-limits per IP, and appends each message to
+`data/submissions/contact.jsonl` on the server (see `lib/submissions.ts`).
+On the VPS, read new messages with:
+
+```bash
+tail -n 20 "$VPS_APP_DIR/data/submissions/contact.jsonl"
+```
 
 ## PayPal integration
 

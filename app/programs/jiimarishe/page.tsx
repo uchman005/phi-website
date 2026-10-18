@@ -3,18 +3,18 @@ import type { Metadata } from "next";
 import PageHero from "@/components/ui/PageHero";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import DarkCTA from "@/components/home/DarkCTA";
-import { TbHexagon, TbTrendingUp, TbLeaf, TbArrowRight } from "react-icons/tb";
-import Link from "next/link";
+import { TbHexagon, TbTrendingUp, TbLeaf } from "react-icons/tb";
+import { withShareImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Jiimarishe Enterprise",
   description:
     "Jiimarishe is PHI's flagship enterprise model — a community-owned apiculture cooperative that lifts household income fivefold while restoring ecosystems.",
-  openGraph: {
+  openGraph: withShareImage({
     title: "Jiimarishe Enterprise | Passion of Hope International",
     description:
       "A community-owned apiculture cooperative that raises income and restores ecosystems.",
-  },
+  }),
 };
 
 const outcomes = [
@@ -82,19 +82,10 @@ export default function JiimarishePage() {
                   bees, harvest and process honey, and sell into fair-price
                   markets through a shared cooperative.
                 </p>
-                <p className="text-ink-2 leading-relaxed mb-6">
-                  Within three years, participants like Syprina Auma were
-                  managing cooperatives of a dozen hives, earning five times
-                  their previous income, and mentoring new entrants — the model
-                  is now scaling across East and West Africa.
+                <p className="text-ink-2 leading-relaxed">
+                  Participants mentor new entrants, and the model is now scaling
+                  across East and West Africa.
                 </p>
-                <Link
-                  href="/impact"
-                  className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-green-d hover:text-green-dd transition-colors"
-                >
-                  Read Syprina&apos;s story
-                  <TbArrowRight aria-hidden />
-                </Link>
               </div>
             </RevealOnScroll>
           </div>

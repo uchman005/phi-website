@@ -7,6 +7,7 @@ import OurWork from "@/components/home/OurWork";
 import FinancialQuote from "@/components/home/FinancialQuote";
 import Testimonials from "@/components/home/Testimonials";
 import DarkCTA from "@/components/home/DarkCTA";
+import { withShareImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: {
@@ -15,11 +16,11 @@ export const metadata: Metadata = {
   },
   description:
     "A US 501(c)(3) nonprofit building food security, clean energy, and women's economic empowerment in Kenya, Nigeria, and the DRC. Tax-deductible donations — 100% of your gift reaches the mission.",
-  openGraph: {
+  openGraph: withShareImage({
     title: "Passion of Hope International — Charity for Rural Africa",
     description:
       "Food security, clean energy, and women's empowerment in Kenya, Nigeria, and the DRC. 100% of your donation reaches the mission.",
-  },
+  }),
 };
 
 export default function HomePage() {

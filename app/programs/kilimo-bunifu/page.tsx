@@ -4,16 +4,17 @@ import PageHero from "@/components/ui/PageHero";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import DarkCTA from "@/components/home/DarkCTA";
 import { TbTool, TbFlask, TbClipboardData, TbUsersGroup } from "react-icons/tb";
+import { withShareImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Kilimo Bunifu Workshop",
   description:
     "Kilimo Bunifu is PHI's hands-on farming workshop — training smallholder farmers as scientists through agro-ecology, enterprise development, and community governance.",
-  openGraph: {
+  openGraph: withShareImage({
     title: "Kilimo Bunifu Workshop | Passion of Hope International",
     description:
       "Hands-on training that turns smallholder farmers into scientists across rural Africa.",
-  },
+  }),
 };
 
 const modules = [
@@ -135,9 +136,12 @@ export default function KilimoBunifuPage() {
       </section>
 
       <DarkCTA
-        headline="Train a farmer, feed a community"
-        sub="$50 puts one farmer through a Kilimo Bunifu workshop — a skill they keep, and teach, for life."
-        primary={{ label: "Donate to Kilimo Bunifu", href: "/donate" }}
+        headline="Back the next generation"
+        sub="Support Kilimo Bunifu III — young Africans, evidence and commitments on food sovereignty. 24 Nov 2026, Bulawayo."
+        primary={{
+          label: "Donate to Kilimo Bunifu",
+          href: "/donate?project=kilimo-bunifu-workshops",
+        }}
         secondary={{ label: "Explore FEED Africa", href: "/programs/feed-africa" }}
       />
     </>

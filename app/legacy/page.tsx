@@ -4,16 +4,17 @@ import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import DarkCTA from "@/components/home/DarkCTA";
 import NakuruLegacy from "@/components/home/NakuruLegacy";
 import { TbWorld } from "react-icons/tb";
+import { withShareImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Our Legacy",
   description:
     "From a pilot in Nakuru County to a continent-wide movement under the FEED Africa initiative — the journey behind Passion of Hope International.",
-  openGraph: {
+  openGraph: withShareImage({
     title: "Our Legacy | Passion of Hope International",
     description:
       "From a pilot in Nakuru County to a continent-wide movement — PHI's journey so far.",
-  },
+  }),
 };
 
 export default function LegacyPage() {

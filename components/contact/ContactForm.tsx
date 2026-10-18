@@ -1,28 +1,60 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import { TbSend } from "react-icons/tb";
+import { submitContact } from "@/app/contact/actions";
+import {
+  CONTACT_MESSAGE_MAX,
+  contactSubjects,
+  initialContactState,
+  type ContactField,
+} from "@/lib/contact";
 
-const subjects = [
-  "General enquiry",
-  "Partnership enquiry",
-  "Donation enquiry",
-  "Media / Press",
-  "Volunteering",
-  "Other",
-];
+const inputClass =
+  "px-4 py-2.5 bg-cream border border-line rounded-md text-sm font-sans text-ink placeholder:text-ink-3 focus:outline-none focus:border-green focus:ring-2 focus:ring-green-l transition aria-[invalid=true]:border-terra-d";
 
-export default function ContactForm() {
-  const [submitted, setSubmitted] = useState(false);
+// Form order — focus goes to the first field in this list that has an error.
+const fieldIds: Record<ContactField, string> = {
+  firstName: "first-name",
+  lastName: "last-name",
+  email: "email",
+  phone: "phone",
+  organisation: "organisation",
+  subject: "subject",
+  message: "message",
+};
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setSubmitted(true);
-  }
+function FieldError({ id, message }: { id: string; message?: string }) {
+  if (!message) return null;
+  return (
+    <p id={`${id}-error`} className="text-xs font-sans text-terra-d">
+      {message}
+    </p>
+  );
+}
 
-  if (submitted) {
+function ContactFormInner({ onReset }: { onReset: () => void }) {
+  const [state, formAction, pending] = useActionState(
+    submitContact,
+    initialContactState
+  );
+  const formErrorRef = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    if (state.status !== "error") return;
+    const first = (Object.keys(fieldIds) as ContactField[]).find(
+      (f) => state.errors[f]
+    );
+    if (first) document.getElementById(fieldIds[first])?.focus();
+    else formErrorRef.current?.focus();
+  }, [state]);
+
+  if (state.status === "success") {
     return (
-      <div className="bg-green-ll rounded-lg p-10 flex flex-col items-center text-center gap-4 border border-green-l">
+      <div
+        role="status"
+        className="bg-green-ll rounded-lg p-10 flex flex-col items-center text-center gap-4 border border-green-l"
+      >
         <div className="w-14 h-14 rounded-full bg-green flex items-center justify-center">
           <TbSend className="text-white text-2xl" aria-hidden />
         </div>
@@ -35,7 +67,7 @@ export default function ContactForm() {
         </p>
         <button
           type="button"
-          onClick={() => setSubmitted(false)}
+          onClick={onReset}
           className="text-sm font-sans font-semibold text-green-d hover:text-green-dd transition-colors"
         >
           Send another message
@@ -44,9 +76,32 @@ export default function ContactForm() {
     );
   }
 
+  const { errors, values } = state;
+  const a11y = (field: ContactField) => ({
+    "aria-invalid": errors[field] ? true : undefined,
+    "aria-describedby": errors[field] ? `${fieldIds[field]}-error` : undefined,
+  });
+
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-5" noValidate>
+    <form action={formAction} className="flex flex-col gap-5" noValidate>
       <h2 className="font-display text-xl text-ink">Send us a message</h2>
+
+      {state.formError && (
+        <p
+          ref={formErrorRef}
+          tabIndex={-1}
+          role="alert"
+          className="text-sm font-sans text-terra-d bg-terra-l rounded-md px-4 py-3"
+        >
+          {state.formError}
+        </p>
+      )}
+
+      {/* Honeypot — hidden from people and assistive tech; bots fill it in. */}
+      <div className="hidden" aria-hidden>
+        <label htmlFor="website">Website</label>
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="flex flex-col gap-1.5">
@@ -62,9 +117,12 @@ export default function ContactForm() {
             type="text"
             required
             autoComplete="given-name"
-            className="px-4 py-2.5 bg-cream border border-line rounded-md text-sm font-sans text-ink placeholder:text-ink-3 focus:outline-none focus:border-green focus:ring-2 focus:ring-green-l transition"
+            defaultValue={values.firstName}
+            {...a11y("firstName")}
+            className={inputClass}
             placeholder="First name"
           />
+          <FieldError id="first-name" message={errors.firstName} />
         </div>
         <div className="flex flex-col gap-1.5">
           <label
@@ -79,9 +137,12 @@ export default function ContactForm() {
             type="text"
             required
             autoComplete="family-name"
-            className="px-4 py-2.5 bg-cream border border-line rounded-md text-sm font-sans text-ink placeholder:text-ink-3 focus:outline-none focus:border-green focus:ring-2 focus:ring-green-l transition"
+            defaultValue={values.lastName}
+            {...a11y("lastName")}
+            className={inputClass}
             placeholder="Last name"
           />
+          <FieldError id="last-name" message={errors.lastName} />
         </div>
       </div>
 
@@ -98,9 +159,12 @@ export default function ContactForm() {
           type="email"
           required
           autoComplete="email"
-          className="px-4 py-2.5 bg-cream border border-line rounded-md text-sm font-sans text-ink placeholder:text-ink-3 focus:outline-none focus:border-green focus:ring-2 focus:ring-green-l transition"
+          defaultValue={values.email}
+          {...a11y("email")}
+          className={inputClass}
           placeholder="you@example.com"
         />
+        <FieldError id="email" message={errors.email} />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -116,7 +180,8 @@ export default function ContactForm() {
             name="phone"
             type="tel"
             autoComplete="tel"
-            className="px-4 py-2.5 bg-cream border border-line rounded-md text-sm font-sans text-ink placeholder:text-ink-3 focus:outline-none focus:border-green focus:ring-2 focus:ring-green-l transition"
+            defaultValue={values.phone}
+            className={inputClass}
             placeholder="+1 (000) 000-0000"
           />
         </div>
@@ -132,7 +197,8 @@ export default function ContactForm() {
             name="organisation"
             type="text"
             autoComplete="organization"
-            className="px-4 py-2.5 bg-cream border border-line rounded-md text-sm font-sans text-ink placeholder:text-ink-3 focus:outline-none focus:border-green focus:ring-2 focus:ring-green-l transition"
+            defaultValue={values.organisation}
+            className={inputClass}
             placeholder="Organisation name"
           />
         </div>
@@ -149,15 +215,18 @@ export default function ContactForm() {
           id="subject"
           name="subject"
           required
-          className="px-4 py-2.5 bg-cream border border-line rounded-md text-sm font-sans text-ink focus:outline-none focus:border-green focus:ring-2 focus:ring-green-l transition appearance-none"
+          defaultValue={values.subject ?? ""}
+          {...a11y("subject")}
+          className={`${inputClass} appearance-none`}
         >
           <option value="">Select a subject…</option>
-          {subjects.map((s) => (
+          {contactSubjects.map((s) => (
             <option key={s} value={s}>
               {s}
             </option>
           ))}
         </select>
+        <FieldError id="subject" message={errors.subject} />
       </div>
 
       <div className="flex flex-col gap-1.5">
@@ -172,18 +241,33 @@ export default function ContactForm() {
           name="message"
           required
           rows={5}
-          className="px-4 py-2.5 bg-cream border border-line rounded-md text-sm font-sans text-ink placeholder:text-ink-3 focus:outline-none focus:border-green focus:ring-2 focus:ring-green-l transition resize-none"
+          maxLength={CONTACT_MESSAGE_MAX}
+          defaultValue={values.message}
+          {...a11y("message")}
+          className={`${inputClass} resize-none`}
           placeholder="Tell us about your interest or question…"
         />
+        <FieldError id="message" message={errors.message} />
       </div>
 
       <button
         type="submit"
-        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-green-d text-white rounded-pill font-sans font-semibold text-sm hover:bg-green-dd transition-colors shadow-sm self-start"
+        disabled={pending}
+        aria-disabled={pending}
+        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-green-d text-white rounded-pill font-sans font-semibold text-sm hover:bg-green-dd transition-colors shadow-sm self-start disabled:opacity-60 disabled:cursor-wait"
       >
-        Send message
+        {pending ? "Sending…" : "Send message"}
         <TbSend aria-hidden />
       </button>
     </form>
+  );
+}
+
+export default function ContactForm() {
+  // Remounting the inner form is how "Send another message" clears the
+  // action state back to its initial value.
+  const [formKey, setFormKey] = useState(0);
+  return (
+    <ContactFormInner key={formKey} onReset={() => setFormKey((k) => k + 1)} />
   );
 }

@@ -6,16 +6,17 @@ import DarkCTA from "@/components/home/DarkCTA";
 import HubImage from "@/components/hubs/HubImage";
 import { hubs } from "@/lib/hubs";
 import { TbMapPin, TbUser, TbArrowRight } from "react-icons/tb";
+import { withShareImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Our Hubs",
   description:
     "PHI's hubs are the powerhouses of the organisation — locally led teams in the DRC, Nigeria, and Kenya, each running its own projects rooted in its community.",
-  openGraph: {
+  openGraph: withShareImage({
     title: "Our Hubs | Passion of Hope International",
     description:
       "Locally led hubs across East and West Africa — each a powerhouse running its own community projects.",
-  },
+  }),
 };
 
 export default function HubsPage() {

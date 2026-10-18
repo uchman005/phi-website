@@ -4,16 +4,17 @@ import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import DarkCTA from "@/components/home/DarkCTA";
 import { TbNetwork, TbDeviceLaptop, TbUsersGroup, TbArrowRight, TbExternalLink  } from "react-icons/tb";
 import Link from "next/link";
+import { withShareImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "ChakulaBora Digital Network",
   description:
     "ChakulaBora is PHI's digital knowledge network — connecting hubs, clubs, farmers, and partners across Africa for real-time, reciprocal learning.",
-  openGraph: {
+  openGraph: withShareImage({
     title: "ChakulaBora Digital Network | Passion of Hope International",
     description:
       "PHI's digital knowledge network connecting hubs, clubs, and communities across Africa.",
-  },
+  }),
 };
 
 const features = [

@@ -9,16 +9,17 @@ import {
   TbUsers,
   TbNetwork,
 } from "react-icons/tb";
+import { withShareImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Partners",
   description:
     "PHI partners with academic institutions, local governments, civil society, and knowledge networks to amplify community-led development across Africa.",
-  openGraph: {
+  openGraph: withShareImage({
     title: "Partners | Passion of Hope International",
     description:
       "Academic, government, civil society, and knowledge partners amplifying PHI's community-led mission.",
-  },
+  }),
 };
 
 const categories = [

@@ -10,16 +10,17 @@ import {
   TbArrowRight,
 } from "react-icons/tb";
 import Link from "next/link";
+import { withShareImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Leverage the Power of Connection",
   description:
     "PHI takes advantage of existing community efforts, research, outreach, and events to promote sustainable development practices across Africa — rather than starting from zero.",
-  openGraph: {
+  openGraph: withShareImage({
     title: "Leverage the Power of Connection | Passion of Hope International",
     description:
       "Existing community efforts, research, outreach, and events — connected to promote sustainable development.",
-  },
+  }),
 };
 
 const pillars = [
