@@ -59,7 +59,12 @@ export function checkRateLimit(
 
 /** Best-effort client IP from standard proxy headers (Vercel, most CDNs set x-forwarded-for). */
 export function clientIp(request: Request): string {
-  const forwardedFor = request.headers.get("x-forwarded-for");
+  return clientIpFromHeaders(request.headers);
+}
+
+/** Same as `clientIp`, for Server Actions, which get headers via `headers()` rather than a Request. */
+export function clientIpFromHeaders(headers: Headers): string {
+  const forwardedFor = headers.get("x-forwarded-for");
   if (forwardedFor) return forwardedFor.split(",")[0].trim();
-  return request.headers.get("x-real-ip") ?? "unknown";
+  return headers.get("x-real-ip") ?? "unknown";
 }
