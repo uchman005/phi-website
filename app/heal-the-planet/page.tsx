@@ -4,16 +4,17 @@ import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import DarkCTA from "@/components/home/DarkCTA";
 import { TbLeaf, TbTree, TbDroplet, TbRecycle, TbArrowRight } from "react-icons/tb";
 import Link from "next/link";
+import { withShareImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Heal the Planet",
   description:
     "Ecosystem revival through agro-ecological farming, reforestation, soil restoration, and sustainable water management — returning land to its productive best.",
-  openGraph: {
+  openGraph: withShareImage({
     title: "Heal the Planet | Passion of Hope International",
     description:
       "Ecosystem revival — agro-ecology, reforestation, soil, and water — returning land to its best.",
-  },
+  }),
 };
 
 const practices = [

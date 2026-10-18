@@ -13,16 +13,17 @@ import {
   TbHome,
   TbPlant2,
 } from "react-icons/tb";
+import { withShareImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Impact",
   description:
     "PHI's impact — the areas we work across and the families behind the figures, from clean water and education to health and housing.",
-  openGraph: {
+  openGraph: withShareImage({
     title: "Impact | Passion of Hope International",
     description:
       "The areas we work across and the real stories of change behind every figure.",
-  },
+  }),
 };
 
 const metrics = [

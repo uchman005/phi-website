@@ -4,6 +4,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { withShareImage } from "@/lib/seo";
 
 // Production-only, regardless of what's in the local env — `bun run dev`
 // traffic should never land in real analytics. Same graceful-degradation
@@ -74,20 +75,12 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  openGraph: {
+  openGraph: withShareImage({
     type: "website",
     siteName: "Passion of Hope International",
     locale: "en_US",
     url: SITE_URL,
-    images: [
-      {
-        url: "/images/hero/hero-banner.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Passion of Hope International — community-led development in rural Africa",
-      },
-    ],
-  },
+  }),
   twitter: {
     card: "summary_large_image",
     site: "@PassionHopeIntl",

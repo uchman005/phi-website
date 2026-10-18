@@ -125,6 +125,12 @@ export default function HeroCarousel() {
       aria-label="Hero carousel"
       className="relative overflow-hidden bg-green-ddd min-h-[540px] lg:min-h-[600px]"
     >
+      {/* Slide headings rotate, so the page's single h1 is a stable,
+          visually hidden one for search engines and screen readers. */}
+      <h1 className="sr-only">
+        Passion of Hope International — community-led development in rural
+        Africa
+      </h1>
       <AnimatePresence custom={direction} mode="wait">
         <motion.div
           key={index}

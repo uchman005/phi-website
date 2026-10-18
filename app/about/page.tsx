@@ -11,16 +11,17 @@ import {
   TbPlant2,
   TbMapPin,
 } from "react-icons/tb";
+import { withShareImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "About Us",
   description:
     "Learn about Passion of Hope International — our story, the team behind the mission, and the values that drive community-centred development across rural Africa.",
-  openGraph: {
+  openGraph: withShareImage({
     title: "About Us | Passion of Hope International",
     description:
       "Our story, team, and the values that drive community-centred development across rural Africa.",
-  },
+  }),
 };
 
 const milestones = [

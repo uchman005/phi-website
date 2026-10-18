@@ -13,16 +13,17 @@ import {
   TbCoin,
   TbPlant2,
 } from "react-icons/tb";
+import { withShareImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "FEED Africa",
   description:
     "The Farmer Entrepreneurship and Ecosystem Development (FEED) Africa program empowers the next generation of agro-entrepreneurs — building food sovereignty in Nigeria and Kenya.",
-  openGraph: {
+  openGraph: withShareImage({
     title: "FEED Africa | Passion of Hope International",
     description:
       "Cultivating a sovereign and prosperous future — FEED Africa in Nigeria and Kenya.",
-  },
+  }),
 };
 
 const nigeriaPillars = [

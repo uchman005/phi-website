@@ -7,6 +7,7 @@ import DarkCTA from "@/components/home/DarkCTA";
 import HubImage from "@/components/hubs/HubImage";
 import { getHub, getHubParams } from "@/lib/hubs";
 import { TbMapPin, TbUser, TbArrowRight } from "react-icons/tb";
+import { pageTitle, withShareImage } from "@/lib/seo";
 
 interface HubPageProps {
   params: Promise<{ hub: string }>;
@@ -23,12 +24,12 @@ export async function generateMetadata({
   const hub = getHub(hubSlug);
   if (!hub) return {};
   return {
-    title: `${hub.shortName} — ${hub.name}`,
+    title: pageTitle(`${hub.shortName} — ${hub.name}`),
     description: hub.tagline,
-    openGraph: {
+    openGraph: withShareImage({
       title: `${hub.shortName} | Passion of Hope International`,
       description: hub.tagline,
-    },
+    }),
   };
 }
 

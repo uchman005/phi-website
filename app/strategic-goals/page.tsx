@@ -3,16 +3,17 @@ import PageHero from "@/components/ui/PageHero";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import DarkCTA from "@/components/home/DarkCTA";
 import { TbBrain, TbUsers, TbTool } from "react-icons/tb";
+import { withShareImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Strategic Goals",
   description:
     "PHI's three strategic goals — investing in knowledge systems, people in rural communities, and appropriate technologies — define the long arc of our work.",
-  openGraph: {
+  openGraph: withShareImage({
     title: "Strategic Goals | Passion of Hope International",
     description:
       "Three strategic goals defining the long arc of PHI's work in rural Africa.",
-  },
+  }),
 };
 
 const goals = [

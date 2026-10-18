@@ -3,16 +3,17 @@ import PageHero from "@/components/ui/PageHero";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import ContactForm from "@/components/contact/ContactForm";
 import { TbMapPin, TbMail, TbPhone } from "react-icons/tb";
+import { withShareImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Contact Us",
   description:
     "Get in touch with Passion of Hope International — for programme partnerships, media enquiries, volunteering, or to learn more about our work across rural Africa.",
-  openGraph: {
+  openGraph: withShareImage({
     title: "Contact Us | Passion of Hope International",
     description:
       "Reach PHI for partnerships, media, volunteering, or general enquiries.",
-  },
+  }),
 };
 
 const tiles = [

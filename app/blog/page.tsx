@@ -4,16 +4,17 @@ import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import DarkCTA from "@/components/home/DarkCTA";
 import BlogCard from "@/components/blog/BlogCard";
 import { blogPosts } from "@/lib/blog-posts";
+import { withShareImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Blog",
   description:
     "News, partnership announcements, and stories from Passion of Hope International's work across rural Africa.",
-  openGraph: {
+  openGraph: withShareImage({
     title: "Blog | Passion of Hope International",
     description:
       "News, partnership announcements, and stories from PHI's work across rural Africa.",
-  },
+  }),
 };
 
 export default function BlogIndexPage() {

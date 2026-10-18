@@ -4,16 +4,17 @@ import PageHero from "@/components/ui/PageHero";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import DarkCTA from "@/components/home/DarkCTA";
 import { TbHexagon, TbTrendingUp, TbLeaf } from "react-icons/tb";
+import { withShareImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Jiimarishe Enterprise",
   description:
     "Jiimarishe is PHI's flagship enterprise model — a community-owned apiculture cooperative that lifts household income fivefold while restoring ecosystems.",
-  openGraph: {
+  openGraph: withShareImage({
     title: "Jiimarishe Enterprise | Passion of Hope International",
     description:
       "A community-owned apiculture cooperative that raises income and restores ecosystems.",
-  },
+  }),
 };
 
 const outcomes = [

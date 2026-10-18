@@ -3,15 +3,16 @@ import Image from "next/image";
 import PageHero from "@/components/ui/PageHero";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import DarkCTA from "@/components/home/DarkCTA";
+import { withShareImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Photo Gallery",
   description:
     "Photos from PHI's projects across rural Africa — water access, agriculture, education, and community life.",
-  openGraph: {
+  openGraph: withShareImage({
     title: "Photo Gallery | Passion of Hope International",
     description: "Photos from PHI's projects across rural Africa.",
-  },
+  }),
 };
 
 const photos = [

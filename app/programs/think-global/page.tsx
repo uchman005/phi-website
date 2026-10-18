@@ -8,16 +8,17 @@ import {
   TbArrowRight,
 } from "react-icons/tb";
 import Link from "next/link";
+import { withShareImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Think Global",
   description:
     "Chakula Bora is PHI's knowledge network — connecting researchers, practitioners, and community leaders to accelerate learning and share innovations across Africa.",
-  openGraph: {
+  openGraph: withShareImage({
     title: "Think Global | Passion of Hope International",
     description:
       "Chakula Bora — the PHI knowledge network connecting innovators and communities across Africa.",
-  },
+  }),
 };
 
 const pillars = [

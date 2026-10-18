@@ -3,16 +3,17 @@ import PageHero from "@/components/ui/PageHero";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import DarkCTA from "@/components/home/DarkCTA";
 import TestimonialCard from "@/components/testimonials/TestimonialCard";
+import { withShareImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Testimonials & Endorsements",
   description:
     "Real stories from the communities PHI serves — and formal endorsements from partner organizations recognizing PHI's work in food security and education.",
-  openGraph: {
+  openGraph: withShareImage({
     title: "Testimonials & Endorsements | Passion of Hope International",
     description:
       "Real stories from the communities PHI serves across rural Africa.",
-  },
+  }),
 };
 
 const testimonials = [

@@ -2,16 +2,17 @@ import type { Metadata } from "next";
 import DonateClient from "@/components/donate/DonateClient";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import { resolveProjectId } from "@/lib/donation-projects";
+import { pageTitle, withShareImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Donate — Tax-Deductible Giving to Rural Africa",
+  title: pageTitle("Donate — Tax-Deductible Giving to Rural Africa"),
   description:
     "Make a secure, tax-deductible donation to Passion of Hope International, a US 501(c)(3) charity. Fund food security, clean cookstoves, school gardens, and women's enterprise in Kenya, Nigeria, and the DRC — 100% of your gift reaches the mission.",
-  openGraph: {
+  openGraph: withShareImage({
     title: "Donate | Passion of Hope International",
     description:
       "Secure, tax-deductible giving. 100% of your donation reaches communities in rural Africa.",
-  },
+  }),
 };
 
 const faqs = [

@@ -4,16 +4,17 @@ import PageHero from "@/components/ui/PageHero";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import DarkCTA from "@/components/home/DarkCTA";
 import { TbTool, TbFlask, TbClipboardData, TbUsersGroup } from "react-icons/tb";
+import { withShareImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Kilimo Bunifu Workshop",
   description:
     "Kilimo Bunifu is PHI's hands-on farming workshop — training smallholder farmers as scientists through agro-ecology, enterprise development, and community governance.",
-  openGraph: {
+  openGraph: withShareImage({
     title: "Kilimo Bunifu Workshop | Passion of Hope International",
     description:
       "Hands-on training that turns smallholder farmers into scientists across rural Africa.",
-  },
+  }),
 };
 
 const modules = [

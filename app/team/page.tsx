@@ -3,16 +3,17 @@ import PageHero from "@/components/ui/PageHero";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import DarkCTA from "@/components/home/DarkCTA";
 import TeamCard from "@/components/team/TeamCard";
+import { withShareImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Meet the Team",
   description:
     "Meet the leadership, hub leaders, staff, and board of directors behind Passion of Hope International's work across rural Africa.",
-  openGraph: {
+  openGraph: withShareImage({
     title: "Meet the Team | Passion of Hope International",
     description:
       "Leadership, hub leaders, staff, and board of directors behind PHI's mission.",
-  },
+  }),
 };
 
 interface TeamMember {
