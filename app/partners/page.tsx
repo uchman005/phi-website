@@ -60,10 +60,10 @@ const partners = [
   { name: "International Network on Appropriate Technology", logo: "/images/logos/partners/inat.png" },
   // { name: "Green Belt Movement, Kenya", logo: "/images/logos/partners/green-belt-movement.jpeg" },
   { name: "African Leadership University, Mauritius", logo: "/images/logos/partners/alu.png" },
-  { name: "Alchemy Inspiration, South Africa", logo: "/images/logos/partners/alchemy-inspiration.png" },
+  { name: "Alchemy Inspiration, South Africa", logo: "/images/logos/partners/alchemy.png" },
   { name: "DHA East Africa", logo: "/images/logos/partners/dha-east-africa.jpg" },
   { name: "WICCARE Africa", logo: "/images/logos/partners/wiccare-africa.jpg" },
-  { name: "Ever Green Foundation", logo: "/images/logos/partners/evergreen.jpeg" },
+  { name: "Ever Green Foundation", logo: "/images/logos/partners/evergreen.png" },
 ];
 
 const grantCategories = [
