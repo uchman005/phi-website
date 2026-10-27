@@ -63,6 +63,7 @@ const partners = [
   { name: "Alchemy Inspiration, South Africa", logo: "/images/logos/partners/alchemy-inspiration.png" },
   { name: "DHA East Africa", logo: "/images/logos/partners/dha-east-africa.jpg" },
   { name: "WICCARE Africa", logo: "/images/logos/partners/wiccare-africa.jpg" },
+  { name: "Ever Green Foundation", logo: "/images/logos/partners/evergreen.jpeg" },
 ];
 
 const grantCategories = [
