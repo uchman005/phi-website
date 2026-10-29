@@ -184,7 +184,7 @@ The files survive deploys. Copy them off the server regularly.
 
 **Email:** each Kilimo Bunifu III sign-up is also emailed to the addresses in `lib/site-facts.ts` → `notify.kilimoBunifu2026` (currently Juliet, Victor and Uchenna). Replying to that email goes straight to the person who signed up.
 - To change who receives them, edit that list.
-- Sending needs `ZEPTOMAIL_API_KEY` and `ZEPTOMAIL_FROM_ADDRESS` set on the server (see `.env.local.example`).
+- Sending needs the `SMTP_…` and `MAIL_FROM_ADDRESS` settings on the server (ZeptoMail values are in `.env.local.example`).
 - If an email ever fails, the sign-up is still in the file above, and the server log notes the failure.
 
 Contact-page messages are not emailed yet; they are only saved to the file.

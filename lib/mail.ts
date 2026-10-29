@@ -1,23 +1,23 @@
 // ---------------------------------------------------------------------------
-// Outgoing email via the ZeptoMail REST API (plain fetch, no SDK).
+// Outgoing email over SMTP with nodemailer.
 //
-// Environment (see .env.local.example):
-//   ZEPTOMAIL_API_KEY       Send Mail token from ZeptoMail → Mail Agents → SMTP/API.
-//                           Paste it with or without the "Zoho-enczapikey " prefix.
-//   ZEPTOMAIL_FROM_ADDRESS  A sender on a domain verified in ZeptoMail,
-//                           e.g. noreply@passionofhope.org.
-//   ZEPTOMAIL_FROM_NAME     Optional display name.
-//   ZEPTOMAIL_API_URL       Optional; defaults to the US data centre. Use
-//                           https://api.zeptomail.eu/v1.1/email (EU) or
-//                           https://api.zeptomail.in/v1.1/email (India) if your
-//                           ZeptoMail account lives there.
+// Environment (see .env.local.example). For ZeptoMail:
+//   SMTP_HOST          smtp.zeptomail.com   (EU: smtp.zeptomail.eu, India: smtp.zeptomail.in)
+//   SMTP_PORT          587 (STARTTLS, default) or 465 (TLS from the start)
+//   SMTP_USER          emailapikey
+//   SMTP_PASS          the Send Mail token from ZeptoMail → Mail Agents → SMTP/API
+//                      (a leading "Zoho-enczapikey " is stripped if pasted)
+//   MAIL_FROM_ADDRESS  a sender on a domain verified with the provider,
+//                      e.g. noreply@passionofhope.org
+//   MAIL_FROM_NAME     optional display name
+//   SMTP_REQUIRE_TLS   optional; "false" only for a local test server — by
+//                      default the connection must be encrypted
 //
-// When the key or sender isn't set, sending is skipped and logged, so local
-// development and builds work without credentials.
+// When host, credentials or sender aren't set, sending is skipped and
+// logged, so local development and builds work without credentials.
 // ---------------------------------------------------------------------------
 
-const DEFAULT_API_URL = "https://api.zeptomail.com/v1.1/email";
-const TIMEOUT_MS = 10_000;
+import nodemailer, { type Transporter } from "nodemailer";
 
 export interface MailMessage {
   to: string[];
@@ -29,51 +29,77 @@ export interface MailMessage {
 }
 
 export type MailResult =
-  | { ok: true }
+  | { ok: true; messageId?: string }
   | { ok: false; skipped: true; reason: string }
-  | { ok: false; skipped?: false; status?: number; error: string };
+  | { ok: false; skipped?: false; error: string };
 
-function authHeader(key: string): string {
-  const trimmed = key.trim();
-  return /^Zoho-enczapikey\s/i.test(trimmed) ? trimmed : `Zoho-enczapikey ${trimmed}`;
+interface SmtpConfig {
+  host: string;
+  port: number;
+  user: string;
+  pass: string;
+  from: { address: string; name: string };
+  requireTLS: boolean;
+}
+
+function readConfig(): SmtpConfig | null {
+  const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, MAIL_FROM_ADDRESS } = process.env;
+  if (!SMTP_HOST || !SMTP_USER || !SMTP_PASS || !MAIL_FROM_ADDRESS) return null;
+  return {
+    host: SMTP_HOST,
+    port: Number(SMTP_PORT) || 587,
+    user: SMTP_USER,
+    // ZeptoMail shows the token with an HTTP-API prefix; SMTP wants it bare.
+    pass: SMTP_PASS.trim().replace(/^Zoho-enczapikey\s+/i, ""),
+    from: { address: MAIL_FROM_ADDRESS, name: process.env.MAIL_FROM_NAME || "Passion of Hope International" },
+    requireTLS: process.env.SMTP_REQUIRE_TLS !== "false",
+  };
+}
+
+// One transporter per process, rebuilt only if the configuration changes.
+let cached: { key: string; transporter: Transporter } | undefined;
+
+function transporterFor(c: SmtpConfig): Transporter {
+  const key = JSON.stringify([c.host, c.port, c.user, c.pass, c.requireTLS]);
+  if (cached?.key !== key) {
+    const implicitTls = c.port === 465;
+    cached = {
+      key,
+      transporter: nodemailer.createTransport({
+        host: c.host,
+        port: c.port,
+        secure: implicitTls,
+        // On 587, refuse to send unless the server upgrades to TLS.
+        requireTLS: !implicitTls && c.requireTLS,
+        auth: { user: c.user, pass: c.pass },
+        connectionTimeout: 10_000,
+        greetingTimeout: 10_000,
+        socketTimeout: 15_000,
+      }),
+    };
+  }
+  return cached.transporter;
 }
 
 export async function sendMail(message: MailMessage): Promise<MailResult> {
-  const key = process.env.ZEPTOMAIL_API_KEY;
-  const fromAddress = process.env.ZEPTOMAIL_FROM_ADDRESS;
-  if (!key || !fromAddress) {
-    return { ok: false, skipped: true, reason: "ZEPTOMAIL_API_KEY or ZEPTOMAIL_FROM_ADDRESS not set" };
+  const config = readConfig();
+  if (!config) {
+    return { ok: false, skipped: true, reason: "SMTP_HOST, SMTP_USER, SMTP_PASS or MAIL_FROM_ADDRESS not set" };
   }
-
-  const body = {
-    from: {
-      address: fromAddress,
-      name: process.env.ZEPTOMAIL_FROM_NAME || "Passion of Hope International",
-    },
-    to: message.to.map((address) => ({ email_address: { address } })),
-    ...(message.replyTo ? { reply_to: [message.replyTo] } : {}),
-    subject: message.subject,
-    htmlbody: message.html,
-    textbody: message.text,
-  };
-
   try {
-    const res = await fetch(process.env.ZEPTOMAIL_API_URL || DEFAULT_API_URL, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: authHeader(key),
-      },
-      body: JSON.stringify(body),
-      signal: AbortSignal.timeout(TIMEOUT_MS),
+    const info = await transporterFor(config).sendMail({
+      from: config.from,
+      to: message.to,
+      replyTo: message.replyTo,
+      subject: message.subject,
+      html: message.html,
+      text: message.text,
     });
-    if (res.ok) return { ok: true };
-    // ZeptoMail explains failures (bad token, unverified sender…) in the body.
-    const detail = (await res.text()).slice(0, 500);
-    return { ok: false, status: res.status, error: detail };
+    return { ok: true, messageId: info.messageId };
   } catch (err) {
-    return { ok: false, error: String(err) };
+    // Includes the server's reply, e.g. "535 Authentication Failed".
+    const e = err as { message?: string; response?: string };
+    return { ok: false, error: (e.response || e.message || String(err)).slice(0, 500) };
   }
 }
 
