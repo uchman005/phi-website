@@ -35,7 +35,7 @@ credentials and how to register the PayPal webhook. In short:
 |---|---|
 | `NEXT_PUBLIC_SITE_URL` | Canonical URL used in SEO metadata, sitemap, structured data |
 | `NEXT_PUBLIC_GA_MEASUREMENT_ID` | Google Analytics 4 ID; production builds only, empty disables analytics |
-| `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `MAIL_FROM_ADDRESS` | Email Kilimo Bunifu III sign-ups to the team over SMTP with nodemailer (`lib/mail.ts`; ZeptoMail values in `.env.local.example`); unset = no email, sign-ups still saved |
+| `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `MAIL_FROM_ADDRESS` | Email Kilimo Bunifu III sign-ups to the team over SMTP with nodemailer (`lib/mail.ts`; Google SMTP set-up in `.env.local.example`); unset = no email, sign-ups still saved |
 | `SUBMISSIONS_DIR` | Where form submissions are saved as `<source>.jsonl` (default `data/submissions`, git-ignored) |
 | `NEXT_PUBLIC_PAYPAL_CLIENT_ID` | PayPal app Client ID (public) |
 | `PAYPAL_CLIENT_SECRET` | PayPal app Secret (server only — never commit or expose) |

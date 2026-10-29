@@ -184,7 +184,8 @@ The files survive deploys. Copy them off the server regularly.
 
 **Email:** each Kilimo Bunifu III sign-up is also emailed to the addresses in `lib/site-facts.ts` → `notify.kilimoBunifu2026` (currently Juliet, Victor and Uchenna). Replying to that email goes straight to the person who signed up.
 - To change who receives them, edit that list.
-- Sending needs the `SMTP_…` and `MAIL_FROM_ADDRESS` settings on the server (ZeptoMail values are in `.env.local.example`).
+- Mail is sent through Google SMTP. It needs the `SMTP_…` and `MAIL_FROM_ADDRESS` settings on the server, using a Google **App Password** rather than the account's normal password (steps in `.env.local.example`).
+- Google caps sending at about 500 emails a day for Gmail and 2,000 for Workspace, far above what the form needs.
 - If an email ever fails, the sign-up is still in the file above, and the server log notes the failure.
 
 Contact-page messages are not emailed yet; they are only saved to the file.

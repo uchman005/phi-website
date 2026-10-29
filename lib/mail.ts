@@ -1,14 +1,14 @@
 // ---------------------------------------------------------------------------
 // Outgoing email over SMTP with nodemailer.
 //
-// Environment (see .env.local.example). For ZeptoMail:
-//   SMTP_HOST          smtp.zeptomail.com   (EU: smtp.zeptomail.eu, India: smtp.zeptomail.in)
-//   SMTP_PORT          587 (STARTTLS, default) or 465 (TLS from the start)
-//   SMTP_USER          emailapikey
-//   SMTP_PASS          the Send Mail token from ZeptoMail → Mail Agents → SMTP/API
-//                      (a leading "Zoho-enczapikey " is stripped if pasted)
-//   MAIL_FROM_ADDRESS  a sender on a domain verified with the provider,
-//                      e.g. noreply@passionofhope.org
+// Environment (see .env.local.example). For Google (Gmail / Workspace):
+//   SMTP_HOST          smtp.gmail.com
+//   SMTP_PORT          465 (TLS from the start) or 587 (STARTTLS, default)
+//   SMTP_USER          the full Google address that sends, e.g. noreply@passionofhope.org
+//   SMTP_PASS          a 16-character App Password for that account (needs
+//                      2-Step Verification); spaces as Google displays them are fine
+//   MAIL_FROM_ADDRESS  SMTP_USER itself, or a "Send mail as" alias on that
+//                      account — Gmail rewrites any other From address
 //   MAIL_FROM_NAME     optional display name
 //   SMTP_REQUIRE_TLS   optional; "false" only for a local test server — by
 //                      default the connection must be encrypted
@@ -49,8 +49,9 @@ function readConfig(): SmtpConfig | null {
     host: SMTP_HOST,
     port: Number(SMTP_PORT) || 587,
     user: SMTP_USER,
-    // ZeptoMail shows the token with an HTTP-API prefix; SMTP wants it bare.
-    pass: SMTP_PASS.trim().replace(/^Zoho-enczapikey\s+/i, ""),
+    // Google shows App Passwords in groups ("abcd efgh ijkl mnop"); the
+    // password itself has no spaces.
+    pass: /(^|\.)gmail\.com$/i.test(SMTP_HOST) ? SMTP_PASS.replace(/\s+/g, "") : SMTP_PASS.trim(),
     from: { address: MAIL_FROM_ADDRESS, name: process.env.MAIL_FROM_NAME || "Passion of Hope International" },
     requireTLS: process.env.SMTP_REQUIRE_TLS !== "false",
   };
