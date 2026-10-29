@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { hubs } from "@/lib/hubs";
 import { blogPosts } from "@/lib/blog-posts";
+import { kilimoBunifuEditions } from "@/lib/kilimo-bunifu";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.passionofhope.org";
@@ -40,12 +41,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   ]);
 
+  const kilimoBunifuRoutes = kilimoBunifuEditions.map((edition) => ({
+    path: `/programs/kilimo-bunifu/${edition.slug}`,
+    priority: 0.7,
+  }));
+
   const blogRoutes = blogPosts.map((post) => ({
     path: `/blog/${post.slug}`,
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...hubRoutes, ...blogRoutes].map(
+  return [...staticRoutes, ...hubRoutes, ...kilimoBunifuRoutes, ...blogRoutes].map(
     ({ path, priority }) => ({
       url: `${SITE_URL}${path}`,
       lastModified,

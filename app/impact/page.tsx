@@ -116,10 +116,10 @@ const stories = [
   {
     quote:
       "It was one of the most meaningful and eye-opening experiences of my life. I plan to carry these ideas forward in my own work.",
-    name: "Juliet Wanjiru Njagi",
+    name: "Juliet Ngaji",
     role: "Communications & Media Student, Egerton University",
     location: "Kenya",
-    photo: "/images/people/testimonials/juliet-wanjiru-njagi.jpg",
+    photo: "/images/people/team/juliet-ngaji.jpg",
   },
 ];
 

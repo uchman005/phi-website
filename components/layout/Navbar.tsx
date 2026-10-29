@@ -35,7 +35,7 @@ const navItems: NavItem[] = [
     label: "Programs",
     dropdown: [
       { label: "ChakulaBora Digital Network", href: "/programs/chakula-bora" },
-      { label: "Kilimo Bunifu Workshop", href: "/programs/kilimo-bunifu" },
+      { label: "Kilimo Bunifu", href: "/programs/kilimo-bunifu" },
       { label: "FEED Africa", href: "/programs/feed-africa" },
       { label: "Jiimarishe Enterprise", href: "/programs/jiimarishe" },
     ],
