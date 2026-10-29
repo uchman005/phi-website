@@ -38,10 +38,10 @@ const navItems: NavItem[] = [
       { label: "Kilimo Bunifu", href: "/programs/kilimo-bunifu" },
       { label: "FEED Africa", href: "/programs/feed-africa" },
       { label: "Jiimarishe Enterprise", href: "/programs/jiimarishe" },
+      { label: "Think Global", href: "/programs/think-global" },
+      { label: "Our Hubs", href: "/programs/hubs" },
     ],
   },
-  { label: "Think Global", href: "/programs/think-global" },
-  { label: "Our Hubs", href: "/programs/hubs" },
   {
     label: "Impact",
     dropdown: [
