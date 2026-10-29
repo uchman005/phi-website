@@ -49,7 +49,8 @@ interface EventClockProps {
   dates: EventWindow;
   /** "tiles": full D·H·M·S countdown. "inline": one short phrase. */
   variant?: "tiles" | "inline";
-  tone?: "light" | "dark";
+  /** "inherit" takes the surrounding text colour (e.g. on the ochre banner). */
+  tone?: "light" | "dark" | "inherit";
   /** Shown while live, e.g. "Happening today — join online". */
   liveLabel?: string;
 }
@@ -68,7 +69,7 @@ export default function EventClock({
   if (variant === "inline") {
     return (
       <span
-        className={`font-mono text-xs ${dark ? "text-white/80" : "text-ink-3"}`}
+        className={`font-mono text-xs ${tone === "inherit" ? "" : dark ? "text-white/80" : "text-ink-3"}`}
       >
         {now ? relativeLabel(now, dates) : " "}
       </span>

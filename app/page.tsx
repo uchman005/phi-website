@@ -7,6 +7,12 @@ import OurWork from "@/components/home/OurWork";
 import FinancialQuote from "@/components/home/FinancialQuote";
 import Testimonials from "@/components/home/Testimonials";
 import DarkCTA from "@/components/home/DarkCTA";
+import LatestPosts from "@/components/blog/LatestPosts";
+import KB3Banner from "@/components/kilimo-bunifu/KB3Banner";
+
+// The Kilimo Bunifu banner is date-gated on the server; re-render hourly so it
+// switches to "outcomes" and later disappears without a redeploy.
+export const revalidate = 3600;
 import { withShareImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -26,6 +32,7 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
+      <KB3Banner />
       <HeroCarousel />
       <EquationBanner />
       <MissionVision />
@@ -33,6 +40,7 @@ export default function HomePage() {
       <OurWork />
       <FinancialQuote />
       <Testimonials />
+      <LatestPosts />
       <DarkCTA />
     </>
   );

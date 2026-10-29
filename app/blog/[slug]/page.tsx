@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
+import { TbArrowRight } from "react-icons/tb";
 import PageHero from "@/components/ui/PageHero";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import DarkCTA from "@/components/home/DarkCTA";
@@ -68,6 +70,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               block.type === "p" ? (
                 <RevealOnScroll key={i} delay={Math.min(i * 0.05, 0.3)}>
                   <p className="text-ink-2 leading-relaxed">{block.text}</p>
+                </RevealOnScroll>
+              ) : block.type === "link" ? (
+                <RevealOnScroll key={i} delay={Math.min(i * 0.05, 0.3)}>
+                  <Link
+                    href={block.href}
+                    className="inline-flex items-center gap-2 self-start rounded-pill bg-green-d px-6 py-3 font-sans text-sm font-semibold text-white transition-colors hover:bg-green-dd"
+                  >
+                    {block.label}
+                    <TbArrowRight aria-hidden />
+                  </Link>
                 </RevealOnScroll>
               ) : (
                 <RevealOnScroll key={i} delay={Math.min(i * 0.05, 0.3)}>

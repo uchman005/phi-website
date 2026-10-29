@@ -135,3 +135,16 @@ export function formatEventDates(w: EventWindow, month: "long" | "short" = "long
   if (sameMonth) return `${fmt(w.startDate, { day: "numeric" })}–${fmt(w.endDate, full)}`;
   return `${fmt(w.startDate, { day: "numeric", month })} – ${fmt(w.endDate, full)}`;
 }
+
+export type BannerPhase = "pre" | "post" | "hidden";
+
+/**
+ * Homepage banner state: promote the event up to and including its day,
+ * point to outcomes afterwards, and disappear `hideAfterDays` after it ends.
+ */
+export function bannerPhase(now: Date, w: EventWindow, hideAfterDays = 60): BannerPhase {
+  const { end } = eventBounds(w);
+  if (now < end) return "pre";
+  if (now.getTime() < end.getTime() + hideAfterDays * 86_400_000) return "post";
+  return "hidden";
+}

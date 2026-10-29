@@ -3,7 +3,7 @@ import PageHero from "@/components/ui/PageHero";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import DarkCTA from "@/components/home/DarkCTA";
 import BlogCard from "@/components/blog/BlogCard";
-import { blogPosts } from "@/lib/blog-posts";
+import { postsNewestFirst } from "@/lib/blog-posts";
 import { withShareImage } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -29,7 +29,7 @@ export default function BlogIndexPage() {
       <section className="bg-paper py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-[1200px] mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {blogPosts.map((post, i) => (
+            {postsNewestFirst().map((post, i) => (
               <RevealOnScroll key={post.slug} delay={i * 0.1}>
                 <BlogCard
                   href={`/blog/${post.slug}`}

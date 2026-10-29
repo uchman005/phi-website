@@ -3,8 +3,7 @@ import type { Metadata } from "next";
 import PageHero from "@/components/ui/PageHero";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import DarkCTA from "@/components/home/DarkCTA";
-import BlogCard from "@/components/blog/BlogCard";
-import { blogPosts } from "@/lib/blog-posts";
+import LatestPosts from "@/components/blog/LatestPosts";
 import {
   TbDroplet,
   TbHeart,
@@ -240,30 +239,7 @@ export default function ImpactPage() {
         </div>
       </section>
 
-      {/* Blog cards */}
-      <section className="bg-paper py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-[1200px] mx-auto">
-          <RevealOnScroll>
-            <h2 className="font-display text-2xl sm:text-3xl text-ink mb-10">
-              Latest from the field
-            </h2>
-          </RevealOnScroll>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {blogPosts.map((post, i) => (
-              <RevealOnScroll key={post.slug} delay={i * 0.1}>
-                <BlogCard
-                  href={`/blog/${post.slug}`}
-                  thumbnail={post.thumbnail}
-                  tag={post.tag}
-                  date={post.date}
-                  title={post.title}
-                  excerpt={post.excerpt}
-                />
-              </RevealOnScroll>
-            ))}
-          </div>
-        </div>
-      </section>
+      <LatestPosts />
 
       <DarkCTA
         headline="Your investment creates stories like these"
