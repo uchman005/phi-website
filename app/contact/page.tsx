@@ -4,6 +4,7 @@ import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import ContactForm from "@/components/contact/ContactForm";
 import { TbMapPin, TbMail, TbPhone } from "react-icons/tb";
 import { withShareImage } from "@/lib/seo";
+import { siteFacts } from "@/lib/site-facts";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -20,19 +21,19 @@ const tiles = [
   {
     icon: TbMapPin,
     title: "Headquarters",
-    lines: ["Passion of Hope International", "Maryland, USA"],
+    lines: [siteFacts.organisation.name, siteFacts.organisation.headquarters],
     accent: "bg-green-ll text-green-d",
   },
   {
     icon: TbMail,
     title: "Email",
-    lines: ["victor@passionofhope.org", "admin@passionofhope.org"],
+    lines: siteFacts.contact.emails,
     accent: "bg-terra-l text-terra-d",
   },
   {
     icon: TbPhone,
     title: "Phone",
-    lines: ["+1 443-708-1026", "Mon – Fri, 9am – 5pm EST"],
+    lines: [siteFacts.contact.phone, siteFacts.contact.hours],
     accent: "bg-ochre-l text-ochre-d",
   },
 ];
@@ -100,10 +101,10 @@ export default function ContactPage() {
                     your subject.
                   </p>
                   <a
-                    href="mailto:admin@passionofhope.org"
+                    href={`mailto:${siteFacts.contact.primaryEmail}`}
                     className="inline-flex items-center gap-2 text-sm font-sans font-semibold text-green-d hover:text-green-dd transition-colors"
                   >
-                    admin@passionofhope.org
+                    {siteFacts.contact.primaryEmail}
                   </a>
                 </div>
               </div>

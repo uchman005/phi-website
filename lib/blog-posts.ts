@@ -1,12 +1,16 @@
 export type BlogPostBlock =
   | { type: "p"; text: string }
-  | { type: "image"; src: string; alt: string };
+  | { type: "image"; src: string; alt: string }
+  | { type: "link"; href: string; label: string };
 
 export interface BlogPost {
   slug: string;
   title: string;
   excerpt: string;
+  /** Display date, e.g. "13 August 2026". */
   date: string;
+  /** Sort key (YYYY-MM-DD) — newest posts show first everywhere. */
+  isoDate: string;
   author: string;
   tag: string;
   thumbnail: string;
@@ -15,11 +19,59 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "kilimo-bunifu-iii-begins-nakuru",
+    title: "Kilimo Bunifu III begins: what young people told us in Nakuru",
+    excerpt:
+      "The first focus group of Kilimo Bunifu III heard young Africans describe a continent rich in assets but weak at turning them into locally owned value — and what they want instead.",
+    date: "August 13, 2026",
+    isoDate: "2026-08-13",
+    author: "Kilimo Bunifu III team",
+    tag: "Kilimo Bunifu",
+    thumbnail: "/images/kilimo-bunifu/2026/share.jpg",
+    // Source: KB3 First Focus Group Discussion Report (Nakuru, 13 Aug 2026).
+    body: [
+      {
+        type: "p",
+        text: "On 13 August 2026, young people and young professionals met in Nakuru, Kenya, for the first focus group discussion of Kilimo Bunifu III — Thee Next Gen Awakening: Africa 4.0. Facilitated by Deon Orina, it was the first listening point in a process that leads to a one-day hybrid workshop at the 12th International Conference on Appropriate Technology in Bulawayo, Zimbabwe, on 24 November.",
+      },
+      {
+        type: "p",
+        text: "The session was an open discussion rather than a presentation, built around four questions: how young Africans view Africa today; their biggest concerns and opportunities; why they might leave Africa and what would make them stay; and the kind of leadership they want.",
+      },
+      {
+        type: "p",
+        text: "Participants did not see Africa through a deficit lens. They described a continent rich in natural resources, human capital, culture, creative talent, agriculture and entrepreneurship — while questioning whether Africans have the systems, knowledge, capital and institutions to turn those assets into value that stays local.",
+      },
+      {
+        type: "p",
+        text: "Unemployment came up strongly, but not only as a grievance: several argued that it should push young people towards enterprise and innovation. They also raised a concern that young African start-ups can be sold to outside interests before they grow into locally owned businesses.",
+      },
+      {
+        type: "p",
+        text: "Migration, they said, is largely about opportunity, dignity and the value of labour — fair pay, professional recognition and functioning systems — rather than a rejection of Africa. Asked what they would do as presidents, they focused on transparency, accountability, the rule of law, tackling corruption, education and national debt.",
+      },
+      {
+        type: "p",
+        text: "Agriculture did not dominate the conversation. Where it came up, participants linked it to land, investment and food self-sufficiency — and suggested young people may engage more if it is presented as a modern, scalable, technology-enabled enterprise.",
+      },
+      {
+        type: "p",
+        text: "In short: young people see Africa as rich in assets but weak at turning them into locally owned value. They want accountable leadership, fair pay for African labour, a real voice in decisions — and agriculture presented as modern, scalable enterprise.",
+      },
+      {
+        type: "p",
+        text: "Kilimo Bunifu III is led by Program Lead Juliet Ngaji. The professionals' and leaders' conversations test these findings from other perspectives, and everything heard goes in front of policymakers on 24 November.",
+      },
+      { type: "link", href: "/programs/kilimo-bunifu/2026", label: "Kilimo Bunifu III — join the workshop" },
+    ],
+  },
+  {
     slug: "press-release",
     title: "Press Release: Maripha Farms Activates the FEED Programme",
     excerpt:
       "A partnership between the University of Ilorin, Maripha Empowerment Foundation, and PHI moves from planning to implementation, designating Maripha Farms a Research and Incubator Center for regenerative agriculture.",
     date: "November 14, 2025",
+    isoDate: "2025-11-14",
     author: "Brian Stephenson",
     tag: "Partnerships",
     thumbnail: "/images/blog/press-release-thumb.png",
@@ -55,6 +107,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "After losing her home to a storm, 75-year-old widow Syprina Auma partnered with PHI and the Kamser Seka Widows CBO to rebuild — gaining a safe home, clean water, and a kitchen garden.",
     date: "February 12, 2025",
+    isoDate: "2025-02-12",
     author: "Brian Stephenson",
     tag: "Impact Story",
     thumbnail: "/images/blog/syprina-journey-thumb.jpg",
@@ -90,6 +143,7 @@ export const blogPosts: BlogPost[] = [
     excerpt:
       "On August 23–24, 2024, PHI hosted the Ndhiwa B Healthy Day, providing free medical care, health education, and NHIF awareness to over 4,000 residents of rural western Kenya.",
     date: "August 14, 2024",
+    isoDate: "2024-08-14",
     author: "Brian Stephenson",
     tag: "Health",
     thumbnail: "/images/blog/medical-care-ndhiwa-thumb.jpg",
@@ -117,6 +171,15 @@ export const blogPosts: BlogPost[] = [
     ],
   },
 ];
+
+/** Every post, newest first. */
+export function postsNewestFirst(): BlogPost[] {
+  return [...blogPosts].sort((a, b) => b.isoDate.localeCompare(a.isoDate));
+}
+
+export function getLatestPosts(count = 3): BlogPost[] {
+  return postsNewestFirst().slice(0, count);
+}
 
 export function getBlogPost(slug: string): BlogPost | undefined {
   return blogPosts.find((post) => post.slug === slug);

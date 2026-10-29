@@ -3,8 +3,7 @@ import type { Metadata } from "next";
 import PageHero from "@/components/ui/PageHero";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import DarkCTA from "@/components/home/DarkCTA";
-import BlogCard from "@/components/blog/BlogCard";
-import { blogPosts } from "@/lib/blog-posts";
+import LatestPosts from "@/components/blog/LatestPosts";
 import {
   TbDroplet,
   TbHeart,
@@ -14,6 +13,8 @@ import {
   TbPlant2,
 } from "react-icons/tb";
 import { withShareImage } from "@/lib/seo";
+import { stat } from "@/lib/site-facts";
+import SourceNote from "@/components/ui/SourceNote";
 
 export const metadata: Metadata = {
   title: "Impact",
@@ -26,31 +27,12 @@ export const metadata: Metadata = {
   }),
 };
 
+// Values, sources and as-of dates live in lib/site-facts.ts.
 const metrics = [
-  {
-    value: "5×",
-    label: "Income increase",
-    sub: "Jiimarishe apiculture pilot",
-    accent: "bg-green-ll",
-  },
-  {
-    value: "4",
-    label: "Active hubs",
-    sub: "Across East & West Africa",
-    accent: "bg-terra-l",
-  },
-  {
-    value: "3",
-    label: "Countries",
-    sub: "Kenya · Nigeria · DRC",
-    accent: "bg-ochre-l",
-  },
-  {
-    value: "20+",
-    label: "Communities reached",
-    sub: "Direct programme beneficiaries",
-    accent: "bg-green-l",
-  },
+  { ...stat("jiimarisheIncome"), accent: "bg-green-ll" },
+  { ...stat("activeHubs"), accent: "bg-terra-l" },
+  { ...stat("countries"), accent: "bg-ochre-l" },
+  { ...stat("communitiesReached"), accent: "bg-green-l" },
 ];
 
 const areas = [
@@ -116,10 +98,10 @@ const stories = [
   {
     quote:
       "It was one of the most meaningful and eye-opening experiences of my life. I plan to carry these ideas forward in my own work.",
-    name: "Juliet Wanjiru Njagi",
+    name: "Juliet Ngaji",
     role: "Communications & Media Student, Egerton University",
     location: "Kenya",
-    photo: "/images/people/testimonials/juliet-wanjiru-njagi.jpg",
+    photo: "/images/people/team/juliet-ngaji.jpg",
   },
 ];
 
@@ -148,6 +130,7 @@ export default function ImpactPage() {
                   <div className="font-sans text-xs text-ink-2">
                     {m.sub}
                   </div>
+                  <SourceNote stat={m} className="mt-1" />
                 </div>
               </RevealOnScroll>
             ))}
@@ -240,30 +223,7 @@ export default function ImpactPage() {
         </div>
       </section>
 
-      {/* Blog cards */}
-      <section className="bg-paper py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-[1200px] mx-auto">
-          <RevealOnScroll>
-            <h2 className="font-display text-2xl sm:text-3xl text-ink mb-10">
-              Latest from the field
-            </h2>
-          </RevealOnScroll>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {blogPosts.map((post, i) => (
-              <RevealOnScroll key={post.slug} delay={i * 0.1}>
-                <BlogCard
-                  href={`/blog/${post.slug}`}
-                  thumbnail={post.thumbnail}
-                  tag={post.tag}
-                  date={post.date}
-                  title={post.title}
-                  excerpt={post.excerpt}
-                />
-              </RevealOnScroll>
-            ))}
-          </div>
-        </div>
-      </section>
+      <LatestPosts />
 
       <DarkCTA
         headline="Your investment creates stories like these"

@@ -42,7 +42,7 @@ const faqs = [
   },
   {
     q: "How do I donate from Europe?",
-    a: "Our secure PayPal checkout accepts international cards and PayPal balances in your local currency, converted to USD. Donors in East Africa can also give by mobile money via M-Changa.",
+    a: "Our secure PayPal checkout accepts international cards and PayPal balances in your local currency, converted to USD.",
   },
 ];
 

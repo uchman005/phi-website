@@ -54,9 +54,9 @@ const testimonials = [
   {
     quote:
       "It was one of the most meaningful and eye-opening experiences of my life.",
-    name: "Juliet Wanjiru Njagi",
+    name: "Juliet Ngaji",
     role: "Communications & Media Student, Egerton University",
-    photo: "/images/people/testimonials/juliet-wanjiru-njagi.jpg",
+    photo: "/images/people/team/juliet-ngaji.jpg",
     kind: "person" as const,
   },
   {

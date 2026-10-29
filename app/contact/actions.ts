@@ -10,6 +10,7 @@ import {
 import { checkRateLimit, clientIpFromHeaders } from "@/lib/rate-limit";
 import { saveSubmission } from "@/lib/submissions";
 import { notifyOps } from "@/lib/notify";
+import { siteFacts } from "@/lib/site-facts";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -60,7 +61,7 @@ export async function submitContact(
       errors: {},
       formError: `Too many messages from your connection. Please try again in ${Math.ceil(
         (limit.retryAfterSeconds ?? 600) / 60
-      )} minutes, or email admin@passionofhope.org.`,
+      )} minutes, or email ${siteFacts.contact.primaryEmail}.`,
       values,
     };
   }
@@ -76,7 +77,7 @@ export async function submitContact(
       status: "error",
       errors: {},
       formError:
-        "Sorry — your message couldn't be sent. Please email admin@passionofhope.org instead.",
+        `Sorry — your message couldn't be sent. Please email ${siteFacts.contact.primaryEmail} instead.`,
       values,
     };
   }

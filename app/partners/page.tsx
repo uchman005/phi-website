@@ -10,6 +10,10 @@ import {
   TbNetwork,
 } from "react-icons/tb";
 import { withShareImage } from "@/lib/seo";
+import { isNewPartner, partners } from "@/lib/partners";
+
+// "New" badges expire by date; re-render daily.
+export const revalidate = 86400;
 
 export const metadata: Metadata = {
   title: "Partners",
@@ -53,18 +57,6 @@ const categories = [
   },
 ];
 
-const partners = [
-  { name: "Organic Consumers Alliance", logo: "/images/logos/partners/organic-consumers-alliance.png" },
-  { name: "Running Water International, Kenya", logo: "/images/logos/partners/running-water-international.png" },
-  { name: "Songhaï Centre, Benin", logo: "/images/logos/partners/songhai-centre.png" },
-  { name: "International Network on Appropriate Technology", logo: "/images/logos/partners/inat.png" },
-  // { name: "Green Belt Movement, Kenya", logo: "/images/logos/partners/green-belt-movement.jpeg" },
-  { name: "African Leadership University, Mauritius", logo: "/images/logos/partners/alu.png" },
-  { name: "Alchemy Inspiration, South Africa", logo: "/images/logos/partners/alchemy.png" },
-  { name: "DHA East Africa", logo: "/images/logos/partners/dha-east-africa.jpg" },
-  { name: "WICCARE Africa", logo: "/images/logos/partners/wiccare-africa.jpg" },
-  { name: "Ever Green Foundation", logo: "/images/logos/partners/evergreen.png" },
-];
 
 const grantCategories = [
   {
@@ -85,6 +77,8 @@ const grantCategories = [
 ];
 
 export default function PartnersPage() {
+  const now = new Date();
+
   return (
     <>
       <PageHero
@@ -143,19 +137,38 @@ export default function PartnersPage() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
             {partners.map((partner, i) => (
               <RevealOnScroll key={partner.name} delay={(i % 4) * 0.07}>
-                <div className="group bg-paper rounded-xl border border-line p-6 flex flex-col items-center justify-center gap-4 min-h-[180px] h-full hover:border-green-l hover:shadow-md hover:-translate-y-1 transition-all duration-200">
-                  <div className="relative w-full h-24 sm:h-28">
-                    <Image
-                      src={partner.logo}
-                      alt={partner.name}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 22vw"
-                    />
-                  </div>
-                  <p className="font-sans text-xs text-ink-3 text-center leading-snug">
-                    {partner.name}
-                  </p>
+                <div className="group relative bg-paper rounded-xl border border-line p-6 flex flex-col items-center justify-center gap-4 min-h-[180px] h-full hover:border-green-l hover:shadow-md hover:-translate-y-1 transition-all duration-200">
+                  {isNewPartner(partner, now) && (
+                    <span className="absolute right-3 top-3 rounded-pill bg-ochre px-2.5 py-0.5 font-sans text-[11px] font-semibold text-green-ddd">
+                      New
+                    </span>
+                  )}
+                  {partner.logo ? (
+                    <div className="relative w-full h-24 sm:h-28">
+                      <Image
+                        src={partner.logo}
+                        alt={partner.name}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 22vw"
+                      />
+                    </div>
+                  ) : (
+                    // No logo yet: the name itself is the mark.
+                    <p className="font-display text-xl text-ink text-center leading-snug">
+                      {partner.name}
+                    </p>
+                  )}
+                  {partner.logo && (
+                    <p className="font-sans text-xs text-ink-3 text-center leading-snug">
+                      {partner.name}
+                    </p>
+                  )}
+                  {partner.blurb && (
+                    <p className="font-sans text-xs text-ink-2 text-center leading-snug">
+                      {partner.blurb}
+                    </p>
+                  )}
                 </div>
               </RevealOnScroll>
             ))}
