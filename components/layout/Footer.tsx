@@ -7,6 +7,7 @@ import {
   FaXTwitter,
 } from "react-icons/fa6";
 import type { IconType } from "react-icons";
+import { siteFacts, socialProfiles } from "@/lib/site-facts";
 
 const footerLinks = [
   {
@@ -43,18 +44,18 @@ const footerLinks = [
   },
 ];
 
-// Only real profile URLs belong here — an icon renders only when its href is
-// set. TODO(founder): supply the official LinkedIn / Facebook / YouTube / X URLs.
-const socialLinks: { label: string; href: string | null; icon: IconType }[] = [
-  { label: "LinkedIn", href: null, icon: FaLinkedin },
-  { label: "Facebook", href: null, icon: FaFacebook },
-  { label: "YouTube", href: null, icon: FaYoutube },
-  { label: "X (Twitter)", href: null, icon: FaXTwitter },
-];
+// Profile URLs live in lib/site-facts.ts; an icon shows only once its URL is set.
+const socialIcons: Record<"linkedin" | "facebook" | "youtube" | "x", { label: string; icon: IconType }> = {
+  linkedin: { label: "LinkedIn", icon: FaLinkedin },
+  facebook: { label: "Facebook", icon: FaFacebook },
+  youtube: { label: "YouTube", icon: FaYoutube },
+  x: { label: "X (Twitter)", icon: FaXTwitter },
+};
 
-const activeSocialLinks = socialLinks.filter(
-  (link): link is typeof link & { href: string } => Boolean(link.href)
-);
+const activeSocialLinks = socialProfiles().map(({ network, url }) => ({
+  ...socialIcons[network],
+  href: url,
+}));
 
 export default function Footer() {
   return (
@@ -137,7 +138,7 @@ export default function Footer() {
             All rights reserved.
           </p>
           <p className="text-xs text-white/70 font-sans text-center sm:text-right">
-            Registered 501(c)(3) non-profit · EIN: 30-1116311
+            Registered 501(c)(3) non-profit · EIN: {siteFacts.organisation.ein}
           </p>
         </div>
       </div>

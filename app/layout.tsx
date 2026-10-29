@@ -4,6 +4,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { siteFacts, socialProfiles } from "@/lib/site-facts";
 import { withShareImage } from "@/lib/seo";
 
 // Production-only, regardless of what's in the local env — `bun run dev`
@@ -83,7 +84,7 @@ export const metadata: Metadata = {
   }),
   twitter: {
     card: "summary_large_image",
-    site: "@PassionHopeIntl",
+    ...(siteFacts.social.xHandle ? { site: siteFacts.social.xHandle } : {}),
   },
 };
 
@@ -100,13 +101,14 @@ const orgSchema = {
     "A US 501(c)(3) nonprofit catalyzing appropriate and sustainable development in rural Africa — food sovereignty, clean energy, women's empowerment, and community-owned change in Kenya, Nigeria, and the DRC.",
   nonprofitStatus: "Nonprofit501c3",
   // EIN as listed on PHI's Candid (GuideStar) profile.
-  taxID: "30-1116311",
+  taxID: siteFacts.organisation.ein,
   areaServed: ["Kenya", "Nigeria", "Democratic Republic of the Congo"],
   address: {
     "@type": "PostalAddress",
     addressCountry: "US",
   },
-  sameAs: ["https://twitter.com/PassionHopeIntl"],
+  // Only confirmed profile URLs (lib/site-facts.ts).
+  sameAs: socialProfiles().map((p) => p.url),
   potentialAction: {
     "@type": "DonateAction",
     target: `${SITE_URL}/donate`,

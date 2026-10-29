@@ -14,6 +14,7 @@ import {
 import { checkRateLimit, clientIpFromHeaders } from "@/lib/rate-limit";
 import { saveSubmission } from "@/lib/submissions";
 import { notifyOps } from "@/lib/notify";
+import { siteFacts } from "@/lib/site-facts";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 // Country code plus digits, allowing spaces, dashes and brackets.
@@ -97,7 +98,7 @@ export async function submitKb3(
       errors: {},
       formError: `Too many sign-ups from your connection. Please try again in ${Math.ceil(
         (limit.retryAfterSeconds ?? 600) / 60
-      )} minutes, or email admin@passionofhope.org.`,
+      )} minutes, or email ${siteFacts.contact.primaryEmail}.`,
       values,
     };
   }
@@ -112,7 +113,7 @@ export async function submitKb3(
     return {
       status: "error",
       errors: {},
-      formError: "Sorry — we couldn't save your details. Please email admin@passionofhope.org instead.",
+      formError: `Sorry — we couldn't save your details. Please email ${siteFacts.contact.primaryEmail} instead.`,
       values,
     };
   }

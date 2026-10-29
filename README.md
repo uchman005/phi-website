@@ -47,24 +47,23 @@ a "payments being set up" notice instead of live buttons.
 
 ## Editing content
 
-Most of the site's real-world content lives in a handful of typed config
-files under `lib/`, not scattered across page components. Edit these first:
+Step-by-step instructions with copy-paste templates are in
+**[docs/HOW-TO-UPDATE.md](docs/HOW-TO-UPDATE.md)**. Content lives in typed
+files under `lib/`, not in page components:
 
-- **`lib/hubs.ts`** — every hub (DRC, Nigeria, Kenya), their leaders, and
-  every project under them (base image, gallery, description). Drives
-  `/programs/hubs`, `/programs/hubs/[hub]`, and `/programs/hubs/[hub]/[project]`
-  automatically — new hubs/projects need no page code, just a new entry here.
-  Leave an image's `src` unset to render a labelled placeholder instead of a
-  broken image.
-- **`lib/donation-projects.ts`** — the donation categories shown on `/donate`
-  and validated server-side by the PayPal API routes. This is the single
-  source of truth for project names/ids — the server never trusts a project
-  name sent by the client, only the id, which it resolves from this file.
-- **`lib/blog-posts.ts`** — blog posts shown on `/blog` and `/blog/[slug]`.
+- **`lib/blog-posts.ts`** — news posts (newest shown automatically).
+- **`lib/partners.ts`** — partners, with a 90-day "New" badge.
+- **`lib/team.ts`** — everyone on `/team`.
+- **`lib/kilimo-bunifu.ts`** — every Kilimo Bunifu edition; drives the series
+  hub, one page per edition, the countdowns and the homepage banner.
+- **`lib/site-facts.ts`** — EIN, social links, contact details and headline
+  stats (each with a source and as-of date).
+- **`lib/hubs.ts`** — hubs and their projects (`/programs/hubs/...`).
+- **`lib/donation-projects.ts`** — donation categories, validated server-side
+  by the PayPal routes.
 
-Team members (`app/team/page.tsx`), testimonials (`app/testimonials/page.tsx`),
-and most standalone pages (`app/about`, `app/impact`, `app/partners`, etc.)
-still hold their content directly in the page file.
+A claims audit of the current copy is in
+[docs/content-audit-2026-10.md](docs/content-audit-2026-10.md).
 
 ## Form submissions
 

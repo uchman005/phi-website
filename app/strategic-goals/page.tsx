@@ -4,6 +4,8 @@ import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import DarkCTA from "@/components/home/DarkCTA";
 import { TbBrain, TbUsers, TbTool } from "react-icons/tb";
 import { withShareImage } from "@/lib/seo";
+import { stat } from "@/lib/site-facts";
+import SourceNote from "@/components/ui/SourceNote";
 
 export const metadata: Metadata = {
   title: "Strategic Goals",
@@ -61,25 +63,11 @@ const goals = [
   },
 ];
 
+// Values, sources and as-of dates live in lib/site-facts.ts.
 const metrics = [
-  {
-    value: "3",
-    label: "Knowledge hubs",
-    sub: "Across East & West Africa",
-    accent: "bg-green-ll",
-  },
-  {
-    value: "20+",
-    label: "Communities reached",
-    sub: "Direct programme beneficiaries",
-    accent: "bg-terra-l",
-  },
-  {
-    value: "5×",
-    label: "Income increase",
-    sub: "Jiimarishe pilot results",
-    accent: "bg-ochre-l",
-  },
+  { ...stat("knowledgeHubs"), accent: "bg-green-ll" },
+  { ...stat("communitiesReached"), accent: "bg-terra-l" },
+  { ...stat("jiimarisheIncome"), accent: "bg-ochre-l" },
 ];
 
 export default function StrategicGoalsPage() {
@@ -161,6 +149,7 @@ export default function StrategicGoalsPage() {
                     {m.label}
                   </div>
                   <div className="font-sans text-xs text-ink-2">{m.sub}</div>
+                  <SourceNote stat={m} className="mt-2" />
                 </div>
               </RevealOnScroll>
             ))}
