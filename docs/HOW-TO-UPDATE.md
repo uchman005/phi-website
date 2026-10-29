@@ -180,4 +180,11 @@ tail -n 20 data/submissions/contact.jsonl              # latest 20 messages
 wc -l data/submissions/kilimo-bunifu-2026.jsonl        # how many sign-ups
 ```
 
-The files survive deploys. Copy them off the server regularly. Nobody is emailed when a message arrives. Adding email alerts is a small change in `lib/notify.ts` once an email provider is chosen.
+The files survive deploys. Copy them off the server regularly.
+
+**Email:** each Kilimo Bunifu III sign-up is also emailed to the addresses in `lib/site-facts.ts` → `notify.kilimoBunifu2026` (currently Juliet, Victor and Uchenna). Replying to that email goes straight to the person who signed up.
+- To change who receives them, edit that list.
+- Sending needs `ZEPTOMAIL_API_KEY` and `ZEPTOMAIL_FROM_ADDRESS` set on the server (see `.env.local.example`).
+- If an email ever fails, the sign-up is still in the file above, and the server log notes the failure.
+
+Contact-page messages are not emailed yet; they are only saved to the file.

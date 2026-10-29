@@ -37,6 +37,15 @@ export const siteFacts = {
     hours: "Mon – Fri, 9am – 5pm EST",
   },
 
+  /** Who is emailed when a form is submitted (sending is set up in lib/mail.ts). */
+  notify: {
+    kilimoBunifu2026: [
+      "juliet@passionofhope.org",
+      "victor@passionofhope.org",
+      "uchenna@passionofhope.org",
+    ],
+  },
+
   /**
    * Full profile URLs only. An icon appears in the footer only when its URL
    * is set. TODO(founder): supply the official profile URLs.

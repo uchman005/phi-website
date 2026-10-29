@@ -1,6 +1,7 @@
 "use server";
 
 import { headers } from "next/headers";
+import { after } from "next/server";
 import {
   KB3_ANSWER_MAX,
   KB3_SOURCE,
@@ -15,6 +16,7 @@ import { checkRateLimit, clientIpFromHeaders } from "@/lib/rate-limit";
 import { saveSubmission } from "@/lib/submissions";
 import { notifyOps } from "@/lib/notify";
 import { siteFacts } from "@/lib/site-facts";
+import { fieldsEmail, sendMail } from "@/lib/mail";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 // Country code plus digits, allowing spaces, dashes and brackets.
@@ -118,7 +120,56 @@ export async function submitKb3(
     };
   }
 
-  await notifyOps("New Kilimo Bunifu III sign-up", { email: values.email, wants });
+  // Email the team after the response is sent, so a slow or failed send
+  // never delays or loses a sign-up (it's already saved above).
+  after(() => emailSignup(values));
+
   // Echo back only what the success message needs.
   return { status: "success", errors: {}, values: { wants } };
+}
+
+const yesNo = (v: boolean | undefined) => (v ? "Yes" : "No");
+
+async function emailSignup(values: Kb3Values): Promise<void> {
+  // Subject lines must be a single line.
+  const oneLine = (s: string | undefined) => (s ?? "").replace(/[\r\n]+/g, " ").trim();
+  const { html, text } = fieldsEmail(
+    "New Kilimo Bunifu III sign-up",
+    [
+      ["Name", values.name],
+      ["Email", values.email],
+      ["Country", values.country],
+      ["Organisation", values.organisation],
+      ["WhatsApp", values.whatsapp],
+      ["I am a", values.role],
+      ["I want to", values.wants?.map((w) => kb3Wants[w]).join(", ")],
+      ["Registered for 12th ICAT", values.icatRegistered === "yes" ? "Yes" : values.icatRegistered === "not-yet" ? "Not yet" : undefined],
+      ["Would speak about", values.speakTopic],
+      ["Bio / LinkedIn", values.speakBio],
+      ["Support offered", values.supportTypes?.join(", ")],
+      ["What would make them build their future in Africa", values.answer],
+      ["May contact about the workshop", yesNo(values.consentContact)],
+      ["May quote answer anonymously", yesNo(values.consentQuote)],
+    ],
+    "Sent by the Kilimo Bunifu III form on passionofhope.org. Reply to this email to reach the person directly. All sign-ups are also saved on the server in data/submissions/kilimo-bunifu-2026.jsonl."
+  );
+
+  const result = await sendMail({
+    to: siteFacts.notify.kilimoBunifu2026,
+    subject: `New Kilimo Bunifu III sign-up: ${oneLine(values.name)} (${oneLine(values.country)})`,
+    html,
+    text,
+    replyTo: values.email ? { address: values.email, name: oneLine(values.name) } : undefined,
+  });
+
+  if (result.ok) {
+    await notifyOps("New Kilimo Bunifu III sign-up emailed", { email: values.email });
+  } else {
+    await notifyOps(
+      "skipped" in result && result.skipped
+        ? "Kilimo Bunifu III sign-up saved but not emailed (email not configured)"
+        : "Kilimo Bunifu III sign-up saved but the email failed",
+      { email: values.email, ...result }
+    );
+  }
 }
