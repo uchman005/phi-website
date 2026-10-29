@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { TbArrowRight, TbClock, TbMapPin } from "react-icons/tb";
@@ -7,6 +6,7 @@ import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import DarkCTA from "@/components/home/DarkCTA";
 import EventClock from "@/components/kilimo-bunifu/EventClock";
 import EditionCard from "@/components/kilimo-bunifu/EditionCard";
+import ImageCarousel, { type CarouselSlide } from "@/components/kilimo-bunifu/ImageCarousel";
 import { Avatar } from "@/components/kilimo-bunifu/PersonCard";
 import { editionHref, featuredEdition, kilimoBunifuEditions } from "@/lib/kilimo-bunifu";
 import { eventPhase, formatEventDates } from "@/lib/event-time";
@@ -16,6 +16,19 @@ import { withShareImage } from "@/lib/seo";
 export const revalidate = 3600;
 
 const featured = featuredEdition();
+
+const IMG = "/images/kilimo-bunifu";
+
+// Drawn from the editions' own material; the full KB I collage leads.
+const carouselSlides: CarouselSlide[] = [
+  { src: `${IMG}/2020/collage.jpg`, alt: "Collage from Kilimo Bunifu I: the welcome slide, panelists, Zoom sessions, breakaway-room boards and each team's outcomes", caption: "Kilimo Bunifu I, 2020 — the session at a glance", href: "/programs/kilimo-bunifu/2020" },
+  { src: `${IMG}/2020/cards/session.jpg`, alt: "Zoom gallery of Kilimo Bunifu I participants, many waving", caption: "Kilimo Bunifu I — participants on the call", href: "/programs/kilimo-bunifu/2020" },
+  { src: `${IMG}/2020/cards/insights-room-2.jpg`, alt: "Sticky-note board titled Breakaway Room 2: Insights from the morning", caption: "Kilimo Bunifu I — Breakaway Room 2's insights", href: "/programs/kilimo-bunifu/2020" },
+  { src: `${IMG}/2020/cards/team-jabali.jpg`, alt: "Slide: Who we are? Jabali — firm foundation and strong rock; slogan: strong and lasting partnerships", caption: "Kilimo Bunifu I — team Jabali names itself", href: "/programs/kilimo-bunifu/2020" },
+  { src: `${IMG}/2020/cards/million-belay-talk.jpg`, alt: "Title slide: Adapting agriculture to change in Africa — the path to agroecology, Million Belay (PhD)", caption: "Kilimo Bunifu I — Dr. Million Belay's talk", href: "/programs/kilimo-bunifu/2020" },
+  { src: `${IMG}/2022/sahel-map.jpg`, alt: "Map of the Sahel belt across West Africa, shaded by dryland zone", caption: "Kilimo Bunifu II, 2022 — food, land and peace in the Sahel", href: "/programs/kilimo-bunifu/2022" },
+  { src: `${IMG}/2026/flyer-cover.jpg`, alt: "Kilimo Bunifu III flyer: Passion of Hope International launches Thee Next Gen Awakening – Africa 4.0, youth agency towards sovereignty in Africa", caption: "Kilimo Bunifu III, 2026 — Thee Next Gen Awakening", href: "/programs/kilimo-bunifu/2026" },
+];
 
 export const metadata: Metadata = {
   title: "Kilimo Bunifu",
@@ -73,20 +86,7 @@ export default function KilimoBunifuPage() {
             </div>
           </RevealOnScroll>
           <RevealOnScroll delay={0.1}>
-            <figure>
-              <div className="relative aspect-[1446/1030] overflow-hidden rounded-xl">
-                <Image
-                  src="/images/kilimo-bunifu/2020/cards/welcome.jpg"
-                  alt="Opening slide of the first Kilimo Bunifu: Welcome to Kilimo Bunifu, hosted by Passion of Hope, facilitated by Alchemy Inspiration"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-              </div>
-              <figcaption className="mt-2 font-sans text-xs text-ink-3">
-                The opening slide of Kilimo Bunifu I, November 2020.
-              </figcaption>
-            </figure>
+            <ImageCarousel slides={carouselSlides} label="Moments from Kilimo Bunifu" />
           </RevealOnScroll>
         </div>
       </section>

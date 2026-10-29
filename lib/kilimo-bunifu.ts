@@ -145,10 +145,10 @@ export const kilimoBunifuEditions: KilimoBunifuEdition[] = [
     format: "Online · two days",
     icat: { edition: "9th ICAT" },
     image: {
-      src: `${IMG}/2020/cards/welcome.jpg`,
-      alt: "Opening slide: Welcome to Kilimo Bunifu — hosted by Passion of Hope, facilitated by Alchemy Inspiration, 23–24 Nov 2020",
-      width: 1446,
-      height: 1030,
+      src: `${IMG}/2020/collage.jpg`,
+      alt: "Collage from Kilimo Bunifu I: the welcome slide, panelists, Zoom sessions, breakaway-room boards and each team's outcomes",
+      width: 2000,
+      height: 1363,
     },
     summary: [
       "The first Kilimo Bunifu ran online over two days as part of the 9th International Conference on Appropriate Technology. About 27 people took part — farmers, researchers, financiers, economists, extension workers and policymakers.",
