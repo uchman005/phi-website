@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type ChangeEvent } from "react";
-import { TbCheck, TbExternalLink } from "react-icons/tb";
+import { TbCheck } from "react-icons/tb";
 import {
   donationProjects as projects,
   MIN_DONATION_AMOUNT,
@@ -238,27 +238,6 @@ export default function DonateForm({
           </div>
         </div>
       </fieldset>
-
-      {/* Other ways to give */}
-      <div className="border-t border-line pt-8 flex flex-col gap-4">
-        <h3 className="font-sans font-semibold text-sm text-ink">
-          Other ways to give
-        </h3>
-        <div className="bg-cream rounded-lg p-5 border border-line flex items-start gap-4">
-          <div className="w-10 h-10 rounded-lg bg-green-ll flex items-center justify-center shrink-0">
-            <TbExternalLink className="text-green-d text-lg" aria-hidden />
-          </div>
-          <div>
-            <h4 className="font-sans font-semibold text-sm text-ink mb-1">
-              M-Changa (Mobile giving)
-            </h4>
-            <p className="text-xs text-ink-2 leading-relaxed">
-              Donate via M-Changa for mobile money and Mpesa options available
-              across East Africa.
-            </p>
-          </div>
-        </div>
-      </div>
     </div>
   );
 }

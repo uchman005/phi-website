@@ -45,6 +45,7 @@ These are the items a donor or partner would most likely notice.
 | Homepage | "Farmer Education" card retitled **Adopt-a-School** | The copy describes schools for children. **Confirm the programme name.** |
 | /programs/kilimo-bunifu | "Farmer as scientist / field workshop" content removed | None of the Kilimo Bunifu sources describe it |
 | Everywhere | "Juliet Wanjiru Njagi" → **Juliet Ngaji** | Your decision |
+| /donate | M-Changa removed (the "Other ways to give" box and the FAQ mention) | The box had no link or fundraiser ID; your decision |
 | Nav | "Think Global" and "Our Hubs" moved into the Programs menu | Their breadcrumbs and the footer already treat them as programs (see §4 Think Global) |
 
 ---
@@ -95,7 +96,6 @@ These are the items a donor or partner would most likely notice.
 | /donate FAQ | "the minimum gift is $100" | Money | Yes (code: `MIN_DONATION_AMOUNT`) | — | keep |
 | /donate projects | FEED Africa: "from the Ndhiwa Mother Farm in Kenya to the **Maripha Institute** in Nigeria" | Names, places | Partly | FEED page says "Farmer Entrepreneur Institute at Maripha Farms"; press release says "Research and Incubator Center" | rewrite: one name |
 | /donate projects | Jiimarishe: "Apiculture enterprise raising incomes in Kendu Bay, Kenya — now scaling into DRC communities" | Place, claim | No | Gilgil (homepage); "East Africa" / "East and West Africa" | rewrite (§1.4) |
-| /donate | "Donors in East Africa can also give by mobile money via M-Changa" (FAQ and the "Other ways to give" box) | Payment method | No | The box has **no link or fundraiser ID**, so donors can't act on it | **rewrite**: add the M-Changa link/ID, or remove until there is one |
 
 ### About `/about`
 
