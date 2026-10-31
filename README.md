@@ -53,7 +53,7 @@ Step-by-step instructions with copy-paste templates are in
 files under `lib/`, not in page components:
 
 - **`lib/blog-posts.ts`** — news posts (newest shown automatically).
-- **`lib/partners.ts`** — partners, with a 90-day "New" badge.
+- **`lib/partners.ts`** — partners.
 - **`lib/team.ts`** — everyone on `/team`.
 - **`lib/kilimo-bunifu.ts`** — every Kilimo Bunifu edition; drives the series
   hub, one page per edition, the countdowns and the homepage banner.
