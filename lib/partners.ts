@@ -46,6 +46,20 @@ export const partners: Partner[] = [
     blurb: "Participating university for Kilimo Bunifu III.",
     addedOn: "2026-10-29",
   },
+  // Logos for these two are square originals padded onto 16:9 canvases so the
+  // card's crop doesn't cut them off.
+  {
+    // TODO(founder): the logo reads "Ateker Perennial Cash Crop Cooperative
+    // Union" — confirm which name to show.
+    name: "Ateker Perennial Cash Crop Farmers Union",
+    logo: "/images/logos/partners/ateker-perennial-cash-crop-union.png",
+    addedOn: "2026-10-31",
+  },
+  {
+    name: "Einos SACCO",
+    logo: "/images/logos/partners/einos-sacco.png",
+    addedOn: "2026-10-31",
+  },
 ];
 
 export function isNewPartner(p: Partner, now: Date): boolean {
