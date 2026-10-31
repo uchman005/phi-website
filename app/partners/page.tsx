@@ -10,10 +10,7 @@ import {
   TbNetwork,
 } from "react-icons/tb";
 import { withShareImage } from "@/lib/seo";
-import { isNewPartner, partners } from "@/lib/partners";
-
-// "New" badges expire by date; re-render daily.
-export const revalidate = 86400;
+import { partners } from "@/lib/partners";
 
 export const metadata: Metadata = {
   title: "Partners",
@@ -77,8 +74,6 @@ const grantCategories = [
 ];
 
 export default function PartnersPage() {
-  const now = new Date();
-
   return (
     <>
       <PageHero
@@ -137,12 +132,7 @@ export default function PartnersPage() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
             {partners.map((partner, i) => (
               <RevealOnScroll key={partner.name} delay={(i % 4) * 0.07}>
-                <div className="group relative bg-paper rounded-xl border border-line p-6 flex flex-col items-center justify-center gap-4 min-h-[180px] h-full hover:border-green-l hover:shadow-md hover:-translate-y-1 transition-all duration-200">
-                  {isNewPartner(partner, now) && (
-                    <span className="absolute right-3 top-3 rounded-pill bg-ochre px-2.5 py-0.5 font-sans text-[11px] font-semibold text-green-ddd">
-                      New
-                    </span>
-                  )}
+                <div className="group bg-paper rounded-xl border border-line p-6 flex flex-col items-center justify-center gap-4 min-h-[180px] h-full hover:border-green-l hover:shadow-md hover:-translate-y-1 transition-all duration-200">
                   {partner.logo ? (
                     <div className="relative w-full h-24 sm:h-28">
                       <Image

@@ -55,14 +55,13 @@ The homepage and Impact page show the 3 newest posts automatically, sorted by `i
 
 **File:** `lib/partners.ts`. Add an entry to the `partners` list.
 
-A partner shows a **"New"** badge for 90 days after `addedOn`. Without a logo, the name is shown on its own, which is fine until a logo arrives.
+Without a logo, the name is shown on its own, which is fine until a logo arrives.
 
 ```ts
   {
     name: "Organisation Name, Country",
     logo: "/images/logos/partners/organisation-name.png",   // optional
     blurb: "One line on the relationship.",                  // optional
-    addedOn: "2026-10-29",                                   // today's date
   },
 ```
 
