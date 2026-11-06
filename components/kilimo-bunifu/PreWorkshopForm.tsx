@@ -2,7 +2,7 @@
 
 import { startTransition, useActionState, useEffect, useRef, useState, type FormEvent } from "react";
 import { TbCheck, TbSend } from "react-icons/tb";
-import PhoneInput, { type Country } from "react-phone-number-input";
+import PhoneInput from "react-phone-number-input";
 // Bundled flags: the default ones load from another site, which our CSP blocks.
 import flags from "react-phone-number-input/flags";
 import "react-phone-number-input/style.css";
@@ -36,7 +36,6 @@ export default function PreWorkshopForm() {
   const { errors, values } = state;
   const formErrorRef = useRef<HTMLParagraphElement>(null);
   const [phone, setPhone] = useState<string | undefined>(undefined);
-  const [country, setCountry] = useState<Country | undefined>(undefined);
 
   useEffect(() => {
     if (state.status !== "error") return;
@@ -111,12 +110,10 @@ export default function PreWorkshopForm() {
         <PhoneInput
           id="pre-phone"
           international
-          // Pasting +234… works until a country is set; then the code is locked,
-          // so backspacing can't turn the rest of the number into another country's.
-          countryCallingCodeEditable={!country}
-          onCountryChange={setCountry}
+          defaultCountry="NG"
+          // Locked so backspacing can't turn the number into another country's.
+          countryCallingCodeEditable={false}
           flags={flags}
-          placeholder="Select your country first"
           value={phone}
           onChange={setPhone}
           autoComplete="tel"
@@ -127,7 +124,7 @@ export default function PreWorkshopForm() {
         {/* The visible field can hold a partly formatted number; this holds the full one. */}
         <input type="hidden" name="phone" value={phone ?? ""} />
         <p id="pre-phone-hint" className="text-xs text-ink-3">
-          Select your country from the menu, then enter your number. The country code is added for you.
+          Nigeria is selected. If your number is from another country, change it in the menu first.
         </p>
         {errors.phone && <p id="pre-phone-error" className="text-xs text-terra-d">{errors.phone}</p>}
       </div>
