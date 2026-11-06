@@ -428,3 +428,25 @@ export function featuredEdition(): KilimoBunifuEdition {
 export function editionHref(e: Pick<KilimoBunifuEdition, "slug">): string {
   return `/programs/kilimo-bunifu/${e.slug}`;
 }
+
+/**
+ * The virtual pre-conference workshop that opens Kilimo Bunifu III.
+ * Source: "Pre workshop flyer" (Nov 2026). The flyer gives no start time or
+ * platform, so neither is shown; joining details go to registrants directly.
+ */
+export const preConferenceWorkshop = {
+  href: "/programs/kilimo-bunifu/pre-conference-workshop",
+  dates: { startDate: "2026-11-14", endDate: "2026-11-14", timeZone: "Africa/Harare" } satisfies EventWindow,
+  flyer: {
+    src: `${IMG}/2026/pre-workshop-flyer.jpg`,
+    alt: "Flyer: Passion of Hope International launches Thee Next Gen Awakening – Africa 4.0 as a prologue and epilogue of the 12th International Conference on Appropriate Technology. Virtual, November 14, 2026. Kilimo Bunifu III: conversations on sovereignty, with an emphasis on food systems.",
+    width: 1200,
+    height: 1800,
+  },
+  share: {
+    src: `${IMG}/2026/pre-workshop-share.jpg`,
+    alt: "Pre-conference workshop: Thee Next Gen Awakening – Africa 4.0. Virtual, November 14, 2026. Kilimo Bunifu III.",
+    width: 1200,
+    height: 630,
+  },
+};

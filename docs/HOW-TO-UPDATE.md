@@ -171,6 +171,7 @@ Both forms save each submission as one line in a file on the server:
 |---|---|
 | Contact page | `data/submissions/contact.jsonl` |
 | Kilimo Bunifu III join form | `data/submissions/kilimo-bunifu-2026.jsonl` |
+| Pre-conference workshop (14 Nov) | `data/submissions/kilimo-bunifu-2026-pre-conference.jsonl` |
 
 Log in to the server, go to the app folder and run:
 
@@ -181,7 +182,7 @@ wc -l data/submissions/kilimo-bunifu-2026.jsonl        # how many sign-ups
 
 The files survive deploys. Copy them off the server regularly.
 
-**Email:** each Kilimo Bunifu III sign-up is also emailed to the addresses in `lib/site-facts.ts` → `notify.kilimoBunifu2026` (currently Juliet, Victor and Uchenna). Replying to that email goes straight to the person who signed up.
+**Email:** each Kilimo Bunifu III sign-up and pre-conference workshop registration is also emailed to the addresses in `lib/site-facts.ts` → `notify.kilimoBunifu2026` (currently Juliet, Victor and Uchenna). Replying to that email goes straight to the person who signed up.
 - To change who receives them, edit that list.
 - Mail is sent through Google SMTP. It needs the `SMTP_…` and `MAIL_FROM_ADDRESS` settings on the server, using a Google **App Password** rather than the account's normal password (steps in `.env.local.example`).
 - Google caps sending at about 500 emails a day for Gmail and 2,000 for Workspace, far above what the form needs.

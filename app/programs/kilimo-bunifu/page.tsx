@@ -6,6 +6,7 @@ import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import DarkCTA from "@/components/home/DarkCTA";
 import EventClock from "@/components/kilimo-bunifu/EventClock";
 import EditionCard from "@/components/kilimo-bunifu/EditionCard";
+import PreWorkshopCallout from "@/components/kilimo-bunifu/PreWorkshopCallout";
 import ImageCarousel, { type CarouselSlide } from "@/components/kilimo-bunifu/ImageCarousel";
 import { Avatar } from "@/components/kilimo-bunifu/PersonCard";
 import { editionHref, featuredEdition, kilimoBunifuEditions } from "@/lib/kilimo-bunifu";
@@ -56,6 +57,8 @@ export default function KilimoBunifuPage() {
         headline="Kilimo Bunifu — innovative agriculture"
         sub="Open workshops on sustainable farming, food sovereignty and Africa feeding itself on its own terms."
       />
+
+      <PreWorkshopCallout />
 
       {/* What it is */}
       <section className="bg-paper px-4 py-16 sm:px-6 lg:px-8">
