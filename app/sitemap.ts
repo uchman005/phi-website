@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/programs/feed-africa", priority: 0.8 },
     { path: "/programs/chakula-bora", priority: 0.7 },
     { path: "/programs/kilimo-bunifu", priority: 0.7 },
+    { path: "/programs/kilimo-bunifu/pre-conference-workshop", priority: 0.8 },
     { path: "/programs/jiimarishe", priority: 0.7 },
     { path: "/programs/think-global", priority: 0.7 },
     { path: "/heal-the-planet", priority: 0.7 },

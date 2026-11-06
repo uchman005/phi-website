@@ -16,6 +16,7 @@ import DarkCTA from "@/components/home/DarkCTA";
 import EventClock from "@/components/kilimo-bunifu/EventClock";
 import PersonCard from "@/components/kilimo-bunifu/PersonCard";
 import EngagementForm from "@/components/kilimo-bunifu/EngagementForm";
+import PreWorkshopCallout from "@/components/kilimo-bunifu/PreWorkshopCallout";
 import {
   editionHref,
   editionsNewestFirst,
@@ -207,6 +208,8 @@ export default async function EditionPage({ params }: EditionPageProps) {
           </div>
         </div>
       </section>
+
+      {e.registration && <PreWorkshopCallout />}
 
       {/* KB III: the provocation */}
       {e.quote && e.intro && (
