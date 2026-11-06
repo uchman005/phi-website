@@ -1,7 +1,11 @@
 "use client";
 
-import { useActionState, useEffect, useRef } from "react";
+import { startTransition, useActionState, useEffect, useRef, useState, type FormEvent } from "react";
 import { TbCheck, TbSend } from "react-icons/tb";
+import PhoneInput from "react-phone-number-input";
+// Bundled flags: the default ones load from another site, which our CSP blocks.
+import flags from "react-phone-number-input/flags";
+import "react-phone-number-input/style.css";
 import { registerPreWorkshop } from "@/app/programs/kilimo-bunifu/pre-conference-workshop/actions";
 import {
   initialPreWorkshopState,
@@ -13,6 +17,10 @@ const inputClass =
   "w-full px-4 py-2.5 bg-cream border border-line rounded-md text-sm font-sans text-ink placeholder:text-ink-3 focus:outline-none focus:border-green focus:ring-2 focus:ring-green-l transition aria-[invalid=true]:border-terra-d";
 
 const labelClass = "font-sans text-sm font-medium text-ink";
+
+// Boxes the library's country menu so it matches the text fields.
+const phoneClass =
+  "gap-1 [--PhoneInput-color--focus:var(--color-green)] [&_.PhoneInputCountry]:self-stretch [&_.PhoneInputCountry]:rounded-md [&_.PhoneInputCountry]:border [&_.PhoneInputCountry]:border-line [&_.PhoneInputCountry]:bg-cream [&_.PhoneInputCountry]:px-3 [&_.PhoneInputCountry:focus-within]:border-green";
 
 function Required() {
   return (
@@ -27,6 +35,7 @@ export default function PreWorkshopForm() {
   const [state, formAction, pending] = useActionState(registerPreWorkshop, initialPreWorkshopState);
   const { errors, values } = state;
   const formErrorRef = useRef<HTMLParagraphElement>(null);
+  const [phone, setPhone] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     if (state.status !== "error") return;
@@ -50,13 +59,21 @@ export default function PreWorkshopForm() {
     );
   }
 
+  // Submit by hand: React resets a form after its action runs, and that would
+  // jump the country menu to the first country after a failed attempt.
+  const submit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    startTransition(() => formAction(formData));
+  };
+
   const a11y = (field: PreWorkshopField, hint?: string) => ({
     "aria-invalid": errors[field] ? true : undefined,
     "aria-describedby": [errors[field] ? `pre-${field}-error` : "", hint ?? ""].filter(Boolean).join(" ") || undefined,
   });
 
   return (
-    <form action={formAction} noValidate className="flex flex-col gap-5 rounded-lg border border-line bg-paper p-5 sm:p-8">
+    <form action={formAction} onSubmit={submit} noValidate className="flex flex-col gap-5 rounded-lg border border-line bg-paper p-5 sm:p-8">
       <div>
         <h3 className="font-display text-2xl text-ink">Register for 14 November</h3>
         <p className="mt-1 text-sm text-ink-3">
@@ -90,19 +107,24 @@ export default function PreWorkshopForm() {
 
       <div className="flex flex-col gap-1.5">
         <label htmlFor="pre-phone" className={labelClass}>Phone, with country code<Required /></label>
-        <input
+        <PhoneInput
           id="pre-phone"
-          name="phone"
-          type="tel"
-          inputMode="tel"
+          international
+          defaultCountry="NG"
+          // Locked so backspacing can't turn the number into another country's.
+          countryCallingCodeEditable={false}
+          flags={flags}
+          value={phone}
+          onChange={setPhone}
           autoComplete="tel"
-          placeholder="+254 712 345 678"
-          defaultValue={values.phone}
           {...a11y("phone", "pre-phone-hint")}
-          className={inputClass}
+          className={phoneClass}
+          numberInputProps={{ className: inputClass }}
         />
+        {/* The visible field can hold a partly formatted number; this holds the full one. */}
+        <input type="hidden" name="phone" value={phone ?? ""} />
         <p id="pre-phone-hint" className="text-xs text-ink-3">
-          Start with + and your country code, e.g. +254 for Kenya, +234 for Nigeria, +263 for Zimbabwe.
+          Nigeria is selected. If your number is from another country, change it in the menu first.
         </p>
         {errors.phone && <p id="pre-phone-error" className="text-xs text-terra-d">{errors.phone}</p>}
       </div>
