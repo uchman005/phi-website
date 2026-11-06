@@ -2,11 +2,10 @@
 
 import { headers } from "next/headers";
 import { after } from "next/server";
-import {
-  PRE_WORKSHOP_SOURCE,
-  isInternationalPhone,
-  type PreWorkshopFormState,
-} from "@/lib/pre-workshop-form";
+// The "max" rules check each country's real number ranges. They're large, so
+// they stay here on the server rather than going to the browser.
+import { parsePhoneNumberFromString } from "libphonenumber-js/max";
+import { PRE_WORKSHOP_SOURCE, type PreWorkshopFormState } from "@/lib/pre-workshop-form";
 import { preConferenceWorkshop } from "@/lib/kilimo-bunifu";
 import { eventPhase } from "@/lib/event-time";
 import { checkRateLimit, clientIpFromHeaders } from "@/lib/rate-limit";
@@ -51,13 +50,17 @@ export async function registerPreWorkshop(
   if (!values.name) errors.name = "Enter your name.";
   if (!values.email) errors.email = "Enter your email address.";
   else if (!EMAIL_RE.test(values.email)) errors.email = "Enter an email address like name@domain.com.";
-  if (!values.phone) errors.phone = "Enter your phone number with its country code.";
-  else if (!isInternationalPhone(values.phone))
-    errors.phone = "Start with + and your country code, e.g. +254 712 345 678.";
+  const phone = parsePhoneNumberFromString(values.phone);
+  if (!values.phone) errors.phone = "Select your country and enter your phone number.";
+  else if (!phone) errors.phone = "Select your country, then enter your phone number.";
+  else if (!phone.isValid()) errors.phone = "That number isn't valid for the selected country. Check it and try again.";
 
   if (Object.keys(errors).length > 0) {
     return { status: "error", errors, values };
   }
+
+  // Always stored and emailed in one format: +254712345678.
+  if (phone) values.phone = phone.number;
 
   const ip = clientIpFromHeaders(await headers());
   const limit = checkRateLimit(`pre-workshop:${ip}`, 5, 10 * 60 * 1000);

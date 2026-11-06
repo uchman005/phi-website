@@ -19,11 +19,3 @@ export const initialPreWorkshopState: PreWorkshopFormState = {
   errors: {},
   values: {},
 };
-
-/**
- * International format: + then country code and number, 8–15 digits in all
- * (E.164). Spaces, dashes and brackets are allowed while typing.
- */
-export function isInternationalPhone(phone: string): boolean {
-  return /^\+[1-9]\d{7,14}$/.test(phone.replace(/[\s()-]/g, ""));
-}
