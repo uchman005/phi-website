@@ -96,7 +96,7 @@ export const teamSections: { heading: string; members: TeamMember[] }[] = [
       {
         name: "Simeon Ehui, Ph.D.",
         role: "Regional Director, Continental Africa, CGIAR; Director General, IITA (Nigeria)",
-        photo: "/images/people/team/simeon-ehui.jpg",
+        photo: "/images/people/team/simeon-ehui-2026.jpg",
       },
       {
         name: "Dr. Sarah Olembo",
