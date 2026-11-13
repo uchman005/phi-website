@@ -104,7 +104,7 @@ export async function sendMail(message: MailMessage): Promise<MailResult> {
   }
 }
 
-const escapeHtml = (s: string) =>
+export const escapeHtml = (s: string) =>
   s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
 /**
