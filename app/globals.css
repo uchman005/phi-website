@@ -57,3 +57,29 @@ body {
   background-color: #D7F0E5;
   color: #0A4636;
 }
+
+/* Gentle motion for the 404 and error illustrations (components/ui/FieldScene.tsx).
+   Used with motion-safe: so it stops for people who ask for reduced motion. */
+@theme {
+  --animate-sway: phi-sway 5s ease-in-out infinite;
+  --animate-drift: phi-drift 10s ease-in-out infinite;
+  --animate-glow: phi-glow 4.5s ease-in-out infinite;
+  --animate-float: phi-float 7s ease-in-out infinite;
+
+  @keyframes phi-sway {
+    0%, 100% { transform: rotate(-2.5deg); }
+    50% { transform: rotate(2.5deg); }
+  }
+  @keyframes phi-drift {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(16px); }
+  }
+  @keyframes phi-glow {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.55; transform: scale(1.1); }
+  }
+  @keyframes phi-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+}
