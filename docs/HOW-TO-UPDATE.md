@@ -182,25 +182,22 @@ wc -l data/submissions/kilimo-bunifu-2026.jsonl        # how many sign-ups
 
 The files survive deploys. Copy them off the server regularly.
 
-**Download a form's submissions as a spreadsheet (CSV).** In the app folder on the server:
+**Download a form's submissions as a spreadsheet (CSV), temporary.** Open `https://www.passionofhope.org/api/submissions/<file name>` in a browser, using the file name from the table above without `.jsonl`. For example:
 
-```bash
-bun scripts/export-submissions.ts kilimo-bunifu-2026-pre-conference
-# → data/submissions/kilimo-bunifu-2026-pre-conference.csv
-```
+`https://www.passionofhope.org/api/submissions/kilimo-bunifu-2026-pre-conference`
 
-Or download it to your own computer in one step:
+The browser asks you to sign in:
+- **Username:** `phi`
+- **Password:** kept by the site admin. It isn't stored in this repo.
 
-```bash
-ssh <user>@<server> 'cd <app folder> && bun scripts/export-submissions.ts kilimo-bunifu-2026-pre-conference --stdout' > pre-conference-registrations.csv
-```
-
-Use the file name from the table above, without `.jsonl`. The script also lists:
+A **Notes** column flags rows to check:
 - people who registered more than once
 - phone numbers that don't check out
 - entries that look like tests
 
-All rows stay in the CSV; nothing is removed. Phone numbers start with `+`. In Excel, open the file with **Data → From Text/CSV** and set the Phone column to *Text*, or Excel drops the `+`.
+Nothing is removed. Phone numbers start with `+`. In Excel, open the file with **Data → From Text/CSV** and set the Phone column to *Text*, or Excel drops the `+`.
+
+This endpoint is temporary. Once the data is downloaded, delete `app/api/submissions/` and `lib/submissions-csv.ts` and deploy.
 
 **Close the pre-conference workshop form early:** set `registrationOpen: false` under `preConferenceWorkshop` in `lib/kilimo-bunifu.ts` and deploy (`true` reopens it). It also closes by itself once 14 November is over. While it's closed:
 - the page says registration has closed
