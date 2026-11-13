@@ -6,8 +6,7 @@ import { after } from "next/server";
 // they stay here on the server rather than going to the browser.
 import { parsePhoneNumberFromString } from "libphonenumber-js/max";
 import { PRE_WORKSHOP_SOURCE, type PreWorkshopFormState } from "@/lib/pre-workshop-form";
-import { preConferenceWorkshop } from "@/lib/kilimo-bunifu";
-import { eventPhase } from "@/lib/event-time";
+import { preWorkshopRegistrationOpen } from "@/lib/kilimo-bunifu";
 import { checkRateLimit, clientIpFromHeaders } from "@/lib/rate-limit";
 import { saveSubmission } from "@/lib/submissions";
 import { notifyOps } from "@/lib/notify";
@@ -37,7 +36,8 @@ export async function registerPreWorkshop(
     return { status: "success", errors: {}, values: {} };
   }
 
-  if (eventPhase(new Date(), preConferenceWorkshop.dates) === "past") {
+  // Checked here too, so a page left open from before the close can't register.
+  if (!preWorkshopRegistrationOpen()) {
     return {
       status: "error",
       errors: {},

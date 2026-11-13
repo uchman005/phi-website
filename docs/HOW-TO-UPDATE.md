@@ -182,6 +182,31 @@ wc -l data/submissions/kilimo-bunifu-2026.jsonl        # how many sign-ups
 
 The files survive deploys. Copy them off the server regularly.
 
+**Download a form's submissions as a spreadsheet (CSV).** In the app folder on the server:
+
+```bash
+bun scripts/export-submissions.ts kilimo-bunifu-2026-pre-conference
+# → data/submissions/kilimo-bunifu-2026-pre-conference.csv
+```
+
+Or download it to your own computer in one step:
+
+```bash
+ssh <user>@<server> 'cd <app folder> && bun scripts/export-submissions.ts kilimo-bunifu-2026-pre-conference --stdout' > pre-conference-registrations.csv
+```
+
+Use the file name from the table above, without `.jsonl`. The script also lists:
+- people who registered more than once
+- phone numbers that don't check out
+- entries that look like tests
+
+All rows stay in the CSV; nothing is removed. Phone numbers start with `+`. In Excel, open the file with **Data → From Text/CSV** and set the Phone column to *Text*, or Excel drops the `+`.
+
+**Close the pre-conference workshop form early:** set `registrationOpen: false` under `preConferenceWorkshop` in `lib/kilimo-bunifu.ts` and deploy (`true` reopens it). It also closes by itself once 14 November is over. While it's closed:
+- the page says registration has closed
+- the "Register for 14 November" strip on the Kilimo Bunifu pages disappears
+- the server turns away any registration sent from a page that was left open
+
 **Email:** each Kilimo Bunifu III sign-up and pre-conference workshop registration is also emailed to the addresses in `lib/site-facts.ts` → `notify.kilimoBunifu2026` (currently Juliet, Victor and Uchenna). Replying to that email goes straight to the person who signed up.
 - To change who receives them, edit that list.
 - Mail is sent through Google SMTP. It needs the `SMTP_…` and `MAIL_FROM_ADDRESS` settings on the server, using a Google **App Password** rather than the account's normal password (steps in `.env.local.example`).

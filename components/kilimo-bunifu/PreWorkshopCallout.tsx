@@ -1,11 +1,10 @@
 import Link from "next/link";
 import { TbArrowRight } from "react-icons/tb";
-import { preConferenceWorkshop } from "@/lib/kilimo-bunifu";
-import { eventPhase } from "@/lib/event-time";
+import { preConferenceWorkshop, preWorkshopRegistrationOpen } from "@/lib/kilimo-bunifu";
 
-/** Strip pointing to the pre-conference workshop; disappears once it's over. */
+/** Strip inviting people to register; disappears once registration closes. */
 export default function PreWorkshopCallout() {
-  if (eventPhase(new Date(), preConferenceWorkshop.dates) === "past") return null;
+  if (!preWorkshopRegistrationOpen()) return null;
 
   return (
     <aside aria-label="Pre-conference workshop" className="bg-ochre px-4 py-4 sm:px-6 lg:px-8">

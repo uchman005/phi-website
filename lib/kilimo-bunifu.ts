@@ -12,7 +12,7 @@
 // Anything not in those sources is left null and hidden — never guessed.
 // ---------------------------------------------------------------------------
 
-import type { EventWindow } from "@/lib/event-time";
+import { eventPhase, type EventWindow } from "@/lib/event-time";
 
 export interface Person {
   name: string;
@@ -436,6 +436,11 @@ export function editionHref(e: Pick<KilimoBunifuEdition, "slug">): string {
  */
 export const preConferenceWorkshop = {
   href: "/programs/kilimo-bunifu/pre-conference-workshop",
+  /**
+   * Set to false to stop taking registrations early (closed 13 Nov 2026).
+   * The form also closes by itself once the event is over.
+   */
+  registrationOpen: false,
   dates: { startDate: "2026-11-14", endDate: "2026-11-14", timeZone: "Africa/Harare" } satisfies EventWindow,
   flyer: {
     src: `${IMG}/2026/pre-workshop-flyer.jpg`,
@@ -450,3 +455,8 @@ export const preConferenceWorkshop = {
     height: 630,
   },
 };
+
+/** Whether the pre-conference workshop form is taking registrations right now. */
+export function preWorkshopRegistrationOpen(now: Date = new Date()): boolean {
+  return preConferenceWorkshop.registrationOpen && eventPhase(now, preConferenceWorkshop.dates) !== "past";
+}

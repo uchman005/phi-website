@@ -5,17 +5,22 @@ import { TbArrowRight, TbClock, TbInfoCircle, TbWorld } from "react-icons/tb";
 import RevealOnScroll from "@/components/ui/RevealOnScroll";
 import EventClock from "@/components/kilimo-bunifu/EventClock";
 import PreWorkshopForm from "@/components/kilimo-bunifu/PreWorkshopForm";
-import { editionHref, featuredEdition, preConferenceWorkshop as workshop } from "@/lib/kilimo-bunifu";
+import {
+  editionHref,
+  featuredEdition,
+  preConferenceWorkshop as workshop,
+  preWorkshopRegistrationOpen,
+} from "@/lib/kilimo-bunifu";
 import { eventPhase } from "@/lib/event-time";
 import { siteFacts } from "@/lib/site-facts";
 import { withShareImage } from "@/lib/seo";
 
-// Registration closes after the event; re-render hourly so it does so on time.
+// Registration also closes by itself after the event; re-render hourly so it does so on time.
 export const revalidate = 3600;
 
 const TITLE = "Pre-Conference Workshop, 14 November 2026 — Kilimo Bunifu III";
 const DESCRIPTION =
-  "Register for the virtual pre-conference workshop on 14 November 2026: Thee Next Gen Awakening – Africa 4.0. Conversations on sovereignty, with an emphasis on food systems.";
+  "The virtual pre-conference workshop on 14 November 2026: Thee Next Gen Awakening – Africa 4.0. Conversations on sovereignty, with an emphasis on food systems.";
 
 const shareImage = {
   url: workshop.share.src,
@@ -58,7 +63,9 @@ const eventSchema = {
 };
 
 export default function PreConferenceWorkshopPage() {
-  const open = eventPhase(new Date(), workshop.dates) !== "past";
+  const now = new Date();
+  const open = preWorkshopRegistrationOpen(now);
+  const over = eventPhase(now, workshop.dates) === "past";
   const main = featuredEdition();
 
   return (
@@ -176,7 +183,9 @@ export default function PreConferenceWorkshopPage() {
             <div className="rounded-lg border border-line bg-paper p-8">
               <h3 className="font-display text-2xl text-ink">Registration has closed</h3>
               <p className="mt-2 text-ink-2">
-                The pre-conference workshop took place on 14 November 2026.
+                {over
+                  ? "The pre-conference workshop took place on 14 November 2026."
+                  : "Registration for the pre-conference workshop on 14 November is now closed. If you registered, the joining details will come to your email."}
               </p>
             </div>
           )}
