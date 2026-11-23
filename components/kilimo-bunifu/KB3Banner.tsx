@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { TbArrowRight } from "react-icons/tb";
 import EventClock from "@/components/kilimo-bunifu/EventClock";
-import { editionHref, featuredEdition } from "@/lib/kilimo-bunifu";
+import { editionHref, featuredEdition, signupsOpen } from "@/lib/kilimo-bunifu";
 import { bannerPhase, formatEventDates } from "@/lib/event-time";
 
 /**
@@ -15,7 +15,8 @@ export default function KB3Banner() {
   if (phase === "hidden") return null;
 
   const pre = phase === "pre";
-  const href = `${editionHref(edition)}${pre ? "#join" : "#afterwards"}`;
+  const open = signupsOpen(edition);
+  const href = `${editionHref(edition)}${pre ? (open ? "#join" : "") : "#afterwards"}`;
   // "24 Nov" and "Bulawayo", derived from the edition data.
   const day = formatEventDates(edition.dates, "short").replace(/\s\d{4}$/, "");
   const city = edition.icat.place?.split(",")[0];
@@ -42,7 +43,7 @@ export default function KB3Banner() {
           href={href}
           className="inline-flex items-center gap-1.5 font-semibold underline underline-offset-2 hover:no-underline"
         >
-          {pre ? "Join the workshop" : "See what was committed"}
+          {pre ? (open ? "Join the workshop" : "About the workshop") : "See what was committed"}
           <TbArrowRight aria-hidden />
         </Link>
       </div>

@@ -23,6 +23,7 @@ import {
   getEdition,
   kilimoBunifuEditions,
   type Fgd,
+  signupsOpen,
   type KilimoBunifuEdition,
 } from "@/lib/kilimo-bunifu";
 import { eventPhase, formatEventDates } from "@/lib/event-time";
@@ -117,6 +118,7 @@ export default async function EditionPage({ params }: EditionPageProps) {
 
   const phase = eventPhase(new Date(), e.dates);
   const isUpcoming = phase !== "past";
+  const open = signupsOpen(e);
   const ordered = editionsNewestFirst();
   const i = ordered.findIndex((x) => x.slug === e.slug);
   const newer = ordered[i - 1];
@@ -175,10 +177,10 @@ export default async function EditionPage({ params }: EditionPageProps) {
             {e.registration && (
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
-                  href={isUpcoming ? "#join" : "#afterwards"}
+                  href={isUpcoming ? (open ? "#join" : "#the-day") : "#afterwards"}
                   className="inline-flex items-center gap-2 rounded-pill bg-ochre px-6 py-3 font-sans text-sm font-semibold text-green-ddd shadow-sm transition-colors hover:bg-ochre-l"
                 >
-                  {isUpcoming ? "Join the workshop" : "See outcomes"}
+                  {isUpcoming ? (open ? "Join the workshop" : "See the day") : "See outcomes"}
                   <TbArrowRight aria-hidden />
                 </Link>
                 <Link
@@ -411,7 +413,7 @@ export default async function EditionPage({ params }: EditionPageProps) {
 
       {/* KB III: the day */}
       {e.daySteps && (
-        <section className="bg-green-ll px-4 py-16 sm:px-6 lg:px-8">
+        <section id="the-day" className="scroll-mt-24 bg-green-ll px-4 py-16 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-[1200px]">
             <SectionHeading kicker={formatEventDates(e.dates)} title="The day" />
             <ol className="mt-10 grid grid-cols-1 gap-0 md:grid-cols-5 md:gap-4">
@@ -604,10 +606,12 @@ export default async function EditionPage({ params }: EditionPageProps) {
             <div>
               <SectionHeading
                 kicker={isUpcoming ? "Join us" : "Keep going"}
-                title={isUpcoming ? "Join the workshop" : "Join the December study groups"}
+                title={isUpcoming ? (open ? "Join the workshop" : "See you on the day") : "Join the December study groups"}
                 sub={
                   isUpcoming
-                    ? "Come to Bulawayo, join online, speak, partner — or just stay in the loop."
+                    ? open
+                      ? "Come to Bulawayo, join online, speak, partner — or just stay in the loop."
+                      : "The workshop runs in Bulawayo and online."
                     : "The workshop was a benchmark, not the end. Tell us how you want to stay involved."
                 }
               />
@@ -621,7 +625,18 @@ export default async function EditionPage({ params }: EditionPageProps) {
                 </a>
               )}
             </div>
-            <EngagementForm phase={isUpcoming ? "pre" : "post"} />
+            {open ? (
+              <EngagementForm phase={isUpcoming ? "pre" : "post"} />
+            ) : (
+              <div className="self-start rounded-lg border border-line bg-cream p-8">
+                <h3 className="font-display text-2xl text-ink">Registration has closed</h3>
+                <p className="mt-2 text-ink-2">
+                  {isUpcoming
+                    ? "Thank you to everyone who signed up. If you registered, the joining details will come to your email."
+                    : "Sign-ups are closed. Thank you to everyone who took part."}
+                </p>
+              </div>
+            )}
           </div>
         </section>
       )}

@@ -13,6 +13,7 @@ import {
   type Kb3Want,
 } from "@/lib/kb3-form";
 import { checkRateLimit, clientIpFromHeaders } from "@/lib/rate-limit";
+import { getEdition, signupsOpen } from "@/lib/kilimo-bunifu";
 import { saveSubmission } from "@/lib/submissions";
 import { notifyOps } from "@/lib/notify";
 import { siteFacts } from "@/lib/site-facts";
@@ -58,6 +59,12 @@ export async function submitKb3(
   // Honeypot: pretend success so bots get no signal.
   if (text(formData, "website")) {
     return { status: "success", errors: {}, values: {} };
+  }
+
+  // Checked here too, so a page left open from before the close can't sign up.
+  const kb3 = getEdition("2026");
+  if (!kb3 || !signupsOpen(kb3)) {
+    return { status: "error", errors: {}, formError: "Sign-ups for Kilimo Bunifu III have closed.", values };
   }
 
   const errors: Kb3FormState["errors"] = {};

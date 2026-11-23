@@ -9,7 +9,7 @@ import EditionCard from "@/components/kilimo-bunifu/EditionCard";
 import PreWorkshopCallout from "@/components/kilimo-bunifu/PreWorkshopCallout";
 import ImageCarousel, { type CarouselSlide } from "@/components/kilimo-bunifu/ImageCarousel";
 import { Avatar } from "@/components/kilimo-bunifu/PersonCard";
-import { editionHref, featuredEdition, kilimoBunifuEditions } from "@/lib/kilimo-bunifu";
+import { editionHref, featuredEdition, kilimoBunifuEditions, signupsOpen } from "@/lib/kilimo-bunifu";
 import { eventPhase, formatEventDates } from "@/lib/event-time";
 import { withShareImage } from "@/lib/seo";
 
@@ -133,10 +133,10 @@ export default function KilimoBunifuPage() {
               )}
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
-                  href={`${editionHref(featured)}${upcoming && featured.registration ? "#join" : ""}`}
+                  href={`${editionHref(featured)}${upcoming && signupsOpen(featured) ? "#join" : ""}`}
                   className="inline-flex items-center gap-2 rounded-pill bg-ochre px-6 py-3 font-sans text-sm font-semibold text-green-ddd transition-colors hover:bg-ochre-l"
                 >
-                  {upcoming && featured.registration ? "Join the workshop" : "See outcomes"}
+                  {upcoming ? (signupsOpen(featured) ? "Join the workshop" : "About the workshop") : "See outcomes"}
                   <TbArrowRight aria-hidden />
                 </Link>
                 <Link

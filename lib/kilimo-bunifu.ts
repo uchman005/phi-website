@@ -131,6 +131,8 @@ export interface KilimoBunifuEdition {
   livestream: string | null;
   /** Show the engagement form on this edition's page. */
   registration?: boolean;
+  /** Set to false to close the engagement form (the page says so instead). */
+  registrationOpen?: boolean;
 }
 
 const IMG = "/images/kilimo-bunifu";
@@ -406,8 +408,15 @@ export const kilimoBunifuEditions: KilimoBunifuEdition[] = [
     // TODO(founder): livestream platform, once chosen.
     livestream: null,
     registration: true,
+    // Closed 23 Nov 2026, the day before the workshop. true reopens it.
+    registrationOpen: false,
   },
 ];
+
+/** Whether this edition's engagement form is taking sign-ups. */
+export function signupsOpen(e: KilimoBunifuEdition): boolean {
+  return Boolean(e.registration) && e.registrationOpen !== false;
+}
 
 export function getEdition(slug: string): KilimoBunifuEdition | undefined {
   return kilimoBunifuEditions.find((e) => e.slug === slug);
