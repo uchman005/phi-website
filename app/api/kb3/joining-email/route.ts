@@ -16,7 +16,8 @@ import { isWorkshopDay, joiningEmail } from "@/lib/kb3-joining-email";
 export const runtime = "nodejs";
 
 const TEST_TO = "uchenna@passionofhope.org";
-const LOG_SOURCE = "kilimo-bunifu-2026-joining-email";
+// A fresh log for the Teams re-send, so everyone emailed the Zoom link gets this one too.
+const LOG_SOURCE = "kilimo-bunifu-2026-joining-email-teams";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 /** Gap between emails, to stay well inside Gmail's sending limits. */
 const GAP_MS = 1500;
